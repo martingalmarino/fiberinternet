@@ -212,15 +212,21 @@ class TelecomComparison {
 
     renderTable() {
         const tbody = document.getElementById('table-body');
-        if (!tbody) return;
+        const mobileCardsContainer = document.getElementById('mobile-cards-container');
+        
+        if (!tbody || !mobileCardsContainer) return;
 
-        // Clear existing rows
+        // Clear existing rows and cards
         tbody.innerHTML = '';
+        mobileCardsContainer.innerHTML = '';
 
-        // Render each provider row
+        // Render each provider row and card
         this.filteredData.forEach(provider => {
             const row = this.createTableRow(provider);
             tbody.appendChild(row);
+            
+            const card = this.createMobileCard(provider);
+            mobileCardsContainer.appendChild(card);
         });
 
         // Update results count
@@ -252,6 +258,47 @@ class TelecomComparison {
         `;
 
         return row;
+    }
+
+    createMobileCard(provider) {
+        const card = document.createElement('div');
+        card.className = 'mobile-card';
+        
+        card.innerHTML = `
+            <div class="mobile-card-header">
+                <div class="mobile-card-logo">${provider.provider.charAt(0)}</div>
+                <div class="mobile-card-info">
+                    <h3>${provider.provider}</h3>
+                    <p>${this.getCleanPlanName(provider.plan, provider.provider)}</p>
+                </div>
+                <div class="mobile-card-price">
+                    <p class="price">${provider.price} kr.</p>
+                    <p class="period">per måned</p>
+                </div>
+            </div>
+            <div class="mobile-card-body">
+                <div class="mobile-card-details">
+                    <div class="mobile-card-detail">
+                        <span class="mobile-card-detail-label">Hastighed</span>
+                        <span class="mobile-card-detail-value">${provider.speed} Mbit/s</span>
+                    </div>
+                    <div class="mobile-card-detail">
+                        <span class="mobile-card-detail-label">Kontrakt</span>
+                        <span class="mobile-card-detail-value">${provider.contractLength} måneder</span>
+                    </div>
+                </div>
+                ${provider.promotion ? `
+                    <div class="mobile-card-promotion">
+                        <p class="promotion-text">🎁 ${provider.promotion}</p>
+                    </div>
+                ` : ''}
+                <button class="mobile-card-action" onclick="handleProviderClick(${provider.id}, '${provider.provider}', '${provider.plan}', ${provider.price})">
+                    Vælg Tilbud
+                </button>
+            </div>
+        `;
+        
+        return card;
     }
 
     updateSortButtons() {

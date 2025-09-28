@@ -304,6 +304,24 @@ body {
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
 
+/* Hide table on mobile, show cards instead */
+@media (max-width: 768px) {
+    .table-responsive {
+        display: none;
+    }
+    
+    .mobile-cards-container {
+        display: block;
+    }
+}
+
+/* Hide cards on desktop, show table */
+@media (min-width: 769px) {
+    .mobile-cards-container {
+        display: none;
+    }
+}
+
 /* Scroll indicators */
 .table-responsive::before {
     content: "← Swipe to see more →";
@@ -1675,4 +1693,215 @@ body {
         width: 100%;
         padding: 14px 24px;
     }
+}
+
+/* Mobile Cards Container */
+.mobile-cards-container {
+    display: none; /* Hidden by default, shown on mobile */
+}
+
+.mobile-card {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin-bottom: 16px;
+    overflow: hidden;
+    border: 1px solid #e5e7eb;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.mobile-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.mobile-card-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 20px;
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.mobile-card-logo {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #00A86B 0%, #00C978 100%);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: white;
+    flex-shrink: 0;
+    box-shadow: 0 2px 8px rgba(0, 168, 107, 0.3);
+}
+
+.mobile-card-info h3 {
+    margin: 0 0 4px 0;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #1f2937;
+}
+
+.mobile-card-info p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #6b7280;
+    font-weight: 500;
+}
+
+.mobile-card-price {
+    margin-left: auto;
+    text-align: right;
+}
+
+.mobile-card-price .price {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #00A86B;
+    margin: 0;
+}
+
+.mobile-card-price .period {
+    font-size: 0.8rem;
+    color: #6b7280;
+    margin: 0;
+}
+
+.mobile-card-body {
+    padding: 20px;
+}
+
+.mobile-card-details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.mobile-card-detail {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.mobile-card-detail-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.mobile-card-detail-value {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1f2937;
+}
+
+.mobile-card-promotion {
+    background: linear-gradient(135deg, rgba(0, 168, 107, 0.1) 0%, rgba(0, 201, 120, 0.1) 100%);
+    border: 1px solid rgba(0, 168, 107, 0.2);
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.mobile-card-promotion .promotion-text {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #00A86B;
+    margin: 0;
+}
+
+.mobile-card-action {
+    width: 100%;
+    background: linear-gradient(135deg, #00A86B 0%, #00C978 100%);
+    color: white;
+    border: none;
+    padding: 16px 24px;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 168, 107, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.mobile-card-action::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.6s ease;
+}
+
+.mobile-card-action:hover::before {
+    left: 100%;
+}
+
+.mobile-card-action:hover {
+    background: linear-gradient(135deg, #008F5A 0%, #00A86B 100%);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 168, 107, 0.3);
+}
+
+.mobile-card-action:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 168, 107, 0.2);
+}
+
+/* Mobile cards responsive adjustments */
+@media (max-width: 480px) {
+    .mobile-card-header {
+        padding: 16px;
+        gap: 10px;
+    }
+    
+    .mobile-card-logo {
+        width: 44px;
+        height: 44px;
+        font-size: 1.1rem;
+    }
+    
+    .mobile-card-info h3 {
+        font-size: 1rem;
+    }
+    
+    .mobile-card-info p {
+        font-size: 0.85rem;
+    }
+    
+    .mobile-card-price .price {
+        font-size: 1.2rem;
+    }
+    
+    .mobile-card-body {
+        padding: 16px;
+    }
+    
+    .mobile-card-details {
+        gap: 12px;
+        margin-bottom: 16px;
+    }
+    
+    .mobile-card-action {
+        padding: 14px 20px;
+        font-size: 0.95rem;
+    }
+}
+
+/* No promotion styling */
+.mobile-card-no-promotion {
+    display: none;
 }
