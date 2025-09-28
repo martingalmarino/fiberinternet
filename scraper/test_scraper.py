@@ -26,7 +26,10 @@ def test_provider_scrapers():
         ('fibia', 'Fibia'),
         ('norlys', 'Norlys'),
         ('energi_fyn', 'Energi Fyn'),
-        ('seas_nve', 'SEAS-NVE')
+        ('seas_nve', 'SEAS-NVE'),
+        ('fastspeed', 'Fastspeed'),
+        ('ewii_fiber', 'Ewii Fiber'),
+        ('hiper_pro', 'Hiper Pro')
     ]
     
     results = {}

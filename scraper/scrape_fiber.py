@@ -29,6 +29,9 @@ from fibia import scrape_fibia
 from norlys import scrape_norlys
 from energi_fyn import scrape_energi_fyn
 from seas_nve import scrape_seas_nve
+from fastspeed import scrape_fastspeed
+from ewii_fiber import scrape_ewii_fiber
+from hiper_pro import scrape_hiper_pro
 
 # Configure logging
 logging.basicConfig(
@@ -106,6 +109,21 @@ PROVIDERS = [
     {
         'name': 'SEAS-NVE',
         'scraper': scrape_seas_nve,
+        'enabled': True
+    },
+    {
+        'name': 'Fastspeed',
+        'scraper': scrape_fastspeed,
+        'enabled': True
+    },
+    {
+        'name': 'Ewii Fiber',
+        'scraper': scrape_ewii_fiber,
+        'enabled': True
+    },
+    {
+        'name': 'Hiper Pro',
+        'scraper': scrape_hiper_pro,
         'enabled': True
     }
 ]

@@ -117,21 +117,33 @@ The scraper outputs a JSON file with the following structure:
 
 ## 🏢 Supported Providers
 
-| Provider | Status | URL |
-|----------|--------|-----|
-| Hiper | ✅ Active | https://www.hiper.dk |
-| YouSee | ✅ Active | https://www.yousee.dk |
-| Telia | ✅ Active | https://www.telia.dk |
-| Stofa | ✅ Active | https://www.stofa.dk |
-| Telenor | ✅ Active | https://www.telenor.dk |
-| Waoo | ✅ Active | https://www.waoo.dk |
-| Kviknet | ✅ Active | https://www.kviknet.dk |
-| CBB | ✅ Active | https://www.cbb.dk |
-| Altibox | ⚠️ Disabled | https://www.altibox.dk |
-| Fibia | ⚠️ Disabled | https://www.fibia.dk |
-| Norlys | ✅ Active | https://www.norlys.dk |
-| Energi Fyn | ✅ Active | https://www.energi-fyn.dk |
-| SEAS-NVE | ✅ Active | https://www.seas-nve.dk |
+### Operadores Nacionales
+| Provider | Status | URL | Coverage |
+|----------|--------|-----|----------|
+| Hiper | ✅ Active | https://www.hiper.dk | Nacional |
+| YouSee | ✅ Active | https://www.yousee.dk | Nacional |
+| Telia | ✅ Active | https://www.telia.dk | Nacional |
+| Stofa | ✅ Active | https://www.stofa.dk | Nacional |
+| Telenor | ✅ Active | https://www.telenor.dk | Nacional |
+| Waoo | ✅ Active | https://www.waoo.dk | Nacional |
+| Kviknet | ✅ Active | https://www.kviknet.dk | Nacional |
+| CBB | ✅ Active | https://www.cbb.dk | Nacional |
+
+### Operadores Regionales
+| Provider | Status | URL | Coverage |
+|----------|--------|-----|----------|
+| Norlys | ✅ Active | https://www.norlys.dk | Jutlandia y Sjælland |
+| Energi Fyn | ✅ Active | https://www.energi-fyn.dk | Fyn |
+| SEAS-NVE | ✅ Active | https://www.seas-nve.dk | Regional |
+| Altibox | ⚠️ Disabled | https://www.altibox.dk | Regional |
+| Fibia | ⚠️ Disabled | https://www.fibia.dk | Regional |
+
+### Operadores Especializados
+| Provider | Status | URL | Specialization |
+|----------|--------|-----|----------------|
+| Fastspeed | ✅ Active | https://www.fastspeed.dk | Nacional |
+| Ewii Fiber | ✅ Active | https://www.ewii.dk | Nacional |
+| Hiper Pro | ✅ Active | https://www.hiper.dk/erhverv | Business |
 
 ## 🔧 Configuration
 
