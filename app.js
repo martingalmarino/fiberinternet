@@ -16,6 +16,7 @@ class TelecomComparison {
         // Initialize the application
         this.setupEventListeners();
         this.setupFAQ();
+        this.setupMobileScrollEnhancements();
         await this.loadComparisonData();
     }
 
@@ -339,6 +340,109 @@ class TelecomComparison {
                 <p><i class="fas fa-clock"></i> Data opdateret: ${formattedDate}</p>
             </div>
         `;
+    }
+    
+    setupMobileScrollEnhancements() {
+        const tableResponsive = document.querySelector('.table-responsive');
+        if (!tableResponsive) return;
+        
+        let scrollIndicator = null;
+        let isScrolling = false;
+        
+        // Create scroll progress indicator
+        const createScrollIndicator = () => {
+            if (scrollIndicator) return;
+            
+            scrollIndicator = document.createElement('div');
+            scrollIndicator.className = 'scroll-progress';
+            scrollIndicator.innerHTML = `
+                <div class="scroll-progress-bar"></div>
+                <span class="scroll-progress-text">Scroll to see more</span>
+            `;
+            
+            tableResponsive.parentNode.insertBefore(scrollIndicator, tableResponsive);
+        };
+        
+        // Update scroll progress
+        const updateScrollProgress = () => {
+            if (!scrollIndicator) return;
+            
+            const scrollLeft = tableResponsive.scrollLeft;
+            const maxScroll = tableResponsive.scrollWidth - tableResponsive.clientWidth;
+            const progress = Math.min(scrollLeft / maxScroll, 1);
+            
+            const progressBar = scrollIndicator.querySelector('.scroll-progress-bar');
+            const progressText = scrollIndicator.querySelector('.scroll-progress-text');
+            
+            if (progressBar) {
+                progressBar.style.width = `${progress * 100}%`;
+            }
+            
+            if (progressText) {
+                if (progress > 0.9) {
+                    progressText.textContent = 'All options visible';
+                } else if (progress > 0.5) {
+                    progressText.textContent = 'Keep scrolling →';
+                } else {
+                    progressText.textContent = 'Scroll to see more →';
+                }
+            }
+            
+            // Hide indicator when fully scrolled
+            scrollIndicator.style.opacity = progress > 0.95 ? '0.3' : '1';
+        };
+        
+        // Hide scroll indicator after scrolling stops
+        const hideScrollIndicator = () => {
+            if (scrollIndicator) {
+                setTimeout(() => {
+                    if (scrollIndicator) {
+                        scrollIndicator.style.opacity = '0';
+                        setTimeout(() => {
+                            if (scrollIndicator && scrollIndicator.parentNode) {
+                                scrollIndicator.parentNode.removeChild(scrollIndicator);
+                                scrollIndicator = null;
+                            }
+                        }, 300);
+                    }
+                }, 2000);
+            }
+        };
+        
+        // Event listeners
+        tableResponsive.addEventListener('scroll', () => {
+            isScrolling = true;
+            createScrollIndicator();
+            updateScrollProgress();
+            
+            clearTimeout(tableResponsive.scrollTimeout);
+            tableResponsive.scrollTimeout = setTimeout(() => {
+                isScrolling = false;
+                hideScrollIndicator();
+            }, 1500);
+        });
+        
+        // Touch events for better mobile experience
+        let startX = 0;
+        let startY = 0;
+        
+        tableResponsive.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+            startY = e.touches[0].clientY;
+        });
+        
+        tableResponsive.addEventListener('touchmove', (e) => {
+            const deltaX = Math.abs(e.touches[0].clientX - startX);
+            const deltaY = Math.abs(e.touches[0].clientY - startY);
+            
+            // If horizontal scroll is more prominent, prevent vertical scroll
+            if (deltaX > deltaY && deltaX > 10) {
+                e.preventDefault();
+            }
+        });
+        
+        // Add smooth scroll behavior
+        tableResponsive.style.scrollBehavior = 'smooth';
     }
 }
 
