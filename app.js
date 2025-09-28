@@ -278,6 +278,14 @@ class TelecomComparison {
         });
         
         console.log('Provider dropdown populated with', providers.length, 'options');
+        
+        // Add event listener for provider dropdown
+        providerSelect.addEventListener('change', function() {
+            console.log('Provider changed to:', this.value);
+            updateCalculatorOptions();
+        });
+        
+        console.log('Event listener added to provider dropdown');
     }
 
     createTableRow(provider) {
@@ -626,29 +634,46 @@ function populateCalculatorDropdowns() {
 }
 
 function updateCalculatorOptions() {
-    if (!window.app || !window.app.data) return;
+    console.log('updateCalculatorOptions called');
+    
+    if (!window.app || !window.app.data) {
+        console.error('App or data not available');
+        return;
+    }
     
     const providerSelect = document.getElementById('calculator-provider');
     const speedSelect = document.getElementById('calculator-speed');
     const contractSelect = document.getElementById('calculator-contract');
     
-    if (!providerSelect || !speedSelect || !contractSelect) return;
+    if (!providerSelect || !speedSelect || !contractSelect) {
+        console.error('Calculator elements not found');
+        return;
+    }
     
     const selectedProvider = providerSelect.value;
+    console.log('Selected provider:', selectedProvider);
     
     // Clear speed and contract dropdowns
     speedSelect.innerHTML = '<option value="">Vælg først en udbyder</option>';
     contractSelect.innerHTML = '<option value="">Vælg først hastighed</option>';
     
-    if (!selectedProvider) return;
+    if (!selectedProvider) {
+        console.log('No provider selected, clearing dropdowns');
+        return;
+    }
     
     // Filter data for selected provider
     const providerData = window.app.data.filter(item => item.provider === selectedProvider);
+    console.log('Provider data found:', providerData.length, 'plans');
     
-    if (providerData.length === 0) return;
+    if (providerData.length === 0) {
+        console.log('No data found for provider:', selectedProvider);
+        return;
+    }
     
     // Get unique speeds for this provider
     const speeds = [...new Set(providerData.map(item => item.speed))].sort((a, b) => a - b);
+    console.log('Available speeds for', selectedProvider, ':', speeds);
     
     // Populate speed dropdown
     speedSelect.innerHTML = '<option value="">Vælg hastighed</option>';
@@ -659,34 +684,58 @@ function updateCalculatorOptions() {
         speedSelect.appendChild(option);
     });
     
+    console.log('Speed dropdown populated with', speeds.length, 'options');
+    
     // Remove existing event listeners and add new one
-    speedSelect.removeEventListener('change', speedSelect._changeHandler);
+    if (speedSelect._changeHandler) {
+        speedSelect.removeEventListener('change', speedSelect._changeHandler);
+    }
     speedSelect._changeHandler = function() {
+        console.log('Speed changed to:', this.value);
         updateContractOptions(selectedProvider, this.value);
     };
     speedSelect.addEventListener('change', speedSelect._changeHandler);
+    
+    console.log('Event listener added to speed dropdown');
 }
 
 function updateContractOptions(provider, speed) {
-    if (!window.app || !window.app.data) return;
+    console.log('updateContractOptions called with:', { provider, speed });
+    
+    if (!window.app || !window.app.data) {
+        console.error('App or data not available');
+        return;
+    }
     
     const contractSelect = document.getElementById('calculator-contract');
-    if (!contractSelect) return;
+    if (!contractSelect) {
+        console.error('Contract select element not found');
+        return;
+    }
     
     // Clear contract dropdown
     contractSelect.innerHTML = '<option value="">Vælg først hastighed</option>';
     
-    if (!provider || !speed) return;
+    if (!provider || !speed) {
+        console.log('Missing provider or speed parameters');
+        return;
+    }
     
     // Filter data for selected provider and speed
     const filteredData = window.app.data.filter(item => 
         item.provider === provider && item.speed === parseInt(speed)
     );
     
-    if (filteredData.length === 0) return;
+    console.log('Filtered data for', provider, speed + 'Mbit/s:', filteredData.length, 'plans');
+    
+    if (filteredData.length === 0) {
+        console.log('No plans found for this provider and speed combination');
+        return;
+    }
     
     // Get unique contract lengths for this provider and speed
     const contracts = [...new Set(filteredData.map(item => item.contractLength))].sort((a, b) => a - b);
+    console.log('Available contract lengths:', contracts);
     
     // Populate contract dropdown
     contractSelect.innerHTML = '<option value="">Vælg kontraktlængde</option>';
@@ -696,6 +745,8 @@ function updateContractOptions(provider, speed) {
         option.textContent = `${contract} måneder`;
         contractSelect.appendChild(option);
     });
+    
+    console.log('Contract dropdown populated with', contracts.length, 'options');
 }
 
 function calculateFiberPrice() {
