@@ -304,21 +304,24 @@ body {
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
 
-/* Hide table on mobile, show cards instead */
+/* Responsive behavior */
 @media (max-width: 768px) {
     .table-responsive {
-        display: none;
+        display: none !important;
     }
     
     .mobile-cards-container {
-        display: block;
+        display: block !important;
     }
 }
 
-/* Hide cards on desktop, show table */
 @media (min-width: 769px) {
     .mobile-cards-container {
-        display: none;
+        display: none !important;
+    }
+    
+    .table-responsive {
+        display: block !important;
     }
 }
 
@@ -1698,6 +1701,15 @@ body {
 /* Mobile Cards Container */
 .mobile-cards-container {
     display: none; /* Hidden by default, shown on mobile */
+}
+
+/* Force show mobile cards on mobile devices */
+@media (max-width: 768px) {
+    .mobile-cards-container {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
 }
 
 .mobile-card {

@@ -214,20 +214,32 @@ class TelecomComparison {
         const tbody = document.getElementById('table-body');
         const mobileCardsContainer = document.getElementById('mobile-cards-container');
         
-        if (!tbody || !mobileCardsContainer) return;
+        console.log('renderTable called');
+        console.log('tbody:', tbody);
+        console.log('mobileCardsContainer:', mobileCardsContainer);
+        console.log('filteredData length:', this.filteredData.length);
+        
+        if (!tbody || !mobileCardsContainer) {
+            console.error('Missing elements:', { tbody, mobileCardsContainer });
+            return;
+        }
 
         // Clear existing rows and cards
         tbody.innerHTML = '';
         mobileCardsContainer.innerHTML = '';
 
         // Render each provider row and card
-        this.filteredData.forEach(provider => {
+        this.filteredData.forEach((provider, index) => {
+            console.log(`Creating row and card for provider ${index}:`, provider);
+            
             const row = this.createTableRow(provider);
             tbody.appendChild(row);
             
             const card = this.createMobileCard(provider);
             mobileCardsContainer.appendChild(card);
         });
+
+        console.log('Mobile cards container children:', mobileCardsContainer.children.length);
 
         // Update results count
         this.updateResultsCount();
