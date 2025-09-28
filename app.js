@@ -245,7 +245,7 @@ class TelecomComparison {
                 ${provider.promotion ? `<span class="promotion-badge" title="${provider.promotion}">${provider.promotion}</span>` : '-'}
             </td>
             <td class="action-cell">
-                <button class="action-btn" onclick="handleProviderClick(${provider.id})">
+                <button class="action-btn" onclick="handleProviderClick(${provider.id}, '${provider.provider}', '${provider.plan}', ${provider.price})" data-provider="${provider.provider}" data-plan="${provider.plan}" data-price="${provider.price}">
                     Vælg Tilbud
                 </button>
             </td>
@@ -462,11 +462,155 @@ function showSpeedTest() {
     alert('Hastighedstest funktionalitet kommer snart!');
 }
 
-function handleProviderClick(providerId) {
-    // Placeholder for provider selection functionality
+function handleProviderClick(providerId, providerName, planName, price) {
+    // Enhanced provider selection with tracking and confirmation
     const provider = app.filteredData.find(p => p.id === providerId);
-    if (provider) {
-        alert(`Vælger ${provider.provider} - ${provider.plan} til ${provider.price} kr./md.`);
+    if (!provider) {
+        console.error('Provider not found:', providerId);
+        return;
+    }
+
+    // Track the click for analytics
+    trackProviderClick(providerId, providerName, planName, price);
+    
+    // Show confirmation modal before redirect
+    showProviderConfirmation(provider);
+}
+
+function trackProviderClick(providerId, providerName, planName, price) {
+    // Analytics tracking
+    const clickData = {
+        provider_id: providerId,
+        provider_name: providerName,
+        plan_name: planName,
+        price: price,
+        timestamp: new Date().toISOString(),
+        user_agent: navigator.userAgent,
+        screen_resolution: `${screen.width}x${screen.height}`,
+        referrer: document.referrer
+    };
+    
+    // Log for analytics (in production, send to your analytics service)
+    console.log('Provider click tracked:', clickData);
+    
+    // Send to analytics service (Google Analytics, Mixpanel, etc.)
+    if (typeof gtag !== 'undefined') {
+        gtag('event', 'provider_click', {
+            'provider_name': providerName,
+            'plan_name': planName,
+            'price': price,
+            'provider_id': providerId
+        });
+    }
+    
+    // Store in localStorage for conversion tracking
+    try {
+        const existingClicks = JSON.parse(localStorage.getItem('provider_clicks') || '[]');
+        existingClicks.push(clickData);
+        localStorage.setItem('provider_clicks', JSON.stringify(existingClicks.slice(-50))); // Keep last 50 clicks
+    } catch (e) {
+        console.warn('Could not store click data:', e);
+    }
+}
+
+function showProviderConfirmation(provider) {
+    // Create confirmation modal
+    const modal = document.createElement('div');
+    modal.className = 'provider-modal';
+    modal.innerHTML = `
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Bekræft valg af ${provider.provider}</h3>
+                <button class="modal-close" onclick="closeProviderModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="provider-summary">
+                    <div class="provider-logo-large">${provider.provider.charAt(0)}</div>
+                    <div class="provider-details">
+                        <h4>${provider.provider}</h4>
+                        <p class="plan-name">${provider.plan}</p>
+                        <p class="price-highlight">${provider.price} kr./md.</p>
+                        <p class="contract-info">Bindingstid: ${provider.contractLength} måneder</p>
+                        ${provider.promotion ? `<p class="promotion-info">${provider.promotion}</p>` : ''}
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <button class="btn-secondary" onclick="closeProviderModal()">Annuller</button>
+                    <button class="btn-primary" onclick="redirectToProvider('${provider.provider}', ${provider.id})">
+                        Fortsæt til ${provider.provider}
+                    </button>
+                </div>
+                <div class="modal-footer">
+                    <p><small>Du vil blive omdirigeret til ${provider.provider}'s officielle hjemmeside</small></p>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    document.body.appendChild(modal);
+    document.body.style.overflow = 'hidden';
+    
+    // Close modal on overlay click
+    modal.querySelector('.modal-overlay').addEventListener('click', closeProviderModal);
+    
+    // Close modal on Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeProviderModal();
+        }
+    });
+}
+
+function closeProviderModal() {
+    const modal = document.querySelector('.provider-modal');
+    if (modal) {
+        modal.remove();
+        document.body.style.overflow = '';
+    }
+}
+
+function redirectToProvider(providerName, providerId) {
+    // Map of provider URLs (you can expand this)
+    const providerUrls = {
+        'TDC': 'https://www.yousee.dk/privat/internet/fiber',
+        'YouSee': 'https://www.yousee.dk/privat/internet/fiber',
+        'Telenor': 'https://www.telenor.dk/privat/internet/fiber',
+        'Telia': 'https://www.telia.dk/privat/internet/fiber',
+        'Stofa': 'https://www.stofa.dk/privat/internet/fiber',
+        'Hiper': 'https://www.hiper.dk/internet/fiber-internet',
+        'Waoo': 'https://www.waoo.dk/internet/fiber',
+        'Kviknet': 'https://www.kviknet.dk/internet/fiber',
+        'CBB': 'https://www.cbb.dk/internet/fiber',
+        'Fastspeed': 'https://www.fastspeed.dk/internet/fiber',
+        'Ewii Fiber': 'https://www.ewii.dk/privat/internet/fiber',
+        'Hiper Pro': 'https://www.hiper.dk/erhverv/internet/fiber',
+        'Norlys': 'https://www.norlys.dk/internet/fiber',
+        'Altibox': 'https://www.altibox.dk/internet/fiber'
+    };
+    
+    const url = providerUrls[providerName] || `https://www.${providerName.toLowerCase().replace(/\s+/g, '')}.dk`;
+    
+    // Track redirect
+    trackProviderRedirect(providerId, providerName, url);
+    
+    // Close modal and redirect
+    closeProviderModal();
+    
+    // Open in new tab to keep user on comparison site
+    window.open(url, '_blank', 'noopener,noreferrer');
+}
+
+function trackProviderRedirect(providerId, providerName, url) {
+    console.log('Redirecting to:', providerName, url);
+    
+    // Track redirect event
+    if (typeof gtag !== 'undefined') {
+        gtag('event', 'provider_redirect', {
+            'provider_name': providerName,
+            'provider_id': providerId,
+            'redirect_url': url
+        });
     }
 }
 
