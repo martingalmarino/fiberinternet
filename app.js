@@ -18,7 +18,6 @@ class TelecomComparison {
         this.setupFAQ();
         this.setupMobileScrollEnhancements();
         await this.loadComparisonData();
-        this.initializeCalculator();
     }
 
     setupEventListeners() {
@@ -235,6 +234,50 @@ class TelecomComparison {
 
         // Update results count
         this.updateResultsCount();
+        
+        // Initialize calculator after data is loaded
+        this.initializeCalculator();
+    }
+
+    initializeCalculator() {
+        // Initialize calculator dropdowns with loaded data
+        this.populateCalculatorDropdowns();
+    }
+
+    populateCalculatorDropdowns() {
+        console.log('populateCalculatorDropdowns called');
+        console.log('Data length:', this.data ? this.data.length : 'No data');
+        
+        const providerSelect = document.getElementById('calculator-provider');
+        const speedSelect = document.getElementById('calculator-speed');
+        const contractSelect = document.getElementById('calculator-contract');
+        
+        console.log('Elements found:', { providerSelect, speedSelect, contractSelect });
+        
+        if (!providerSelect || !speedSelect || !contractSelect) {
+            console.error('Calculator elements not found');
+            return;
+        }
+        
+        if (!this.data || this.data.length === 0) {
+            console.error('No data available for calculator');
+            return;
+        }
+        
+        // Get unique providers
+        const providers = [...new Set(this.data.map(item => item.provider))].sort();
+        console.log('Unique providers:', providers);
+        
+        // Clear and populate provider dropdown
+        providerSelect.innerHTML = '<option value="">Vælg en udbyder</option>';
+        providers.forEach(provider => {
+            const option = document.createElement('option');
+            option.value = provider;
+            option.textContent = provider;
+            providerSelect.appendChild(option);
+        });
+        
+        console.log('Provider dropdown populated with', providers.length, 'options');
     }
 
     createTableRow(provider) {
@@ -575,26 +618,11 @@ function initializeCalculator() {
     }
 }
 
+// Global function wrapper for HTML onclick
 function populateCalculatorDropdowns() {
-    if (!window.app || !window.app.data) return;
-    
-    const providerSelect = document.getElementById('calculator-provider');
-    const speedSelect = document.getElementById('calculator-speed');
-    const contractSelect = document.getElementById('calculator-contract');
-    
-    if (!providerSelect || !speedSelect || !contractSelect) return;
-    
-    // Get unique providers
-    const providers = [...new Set(window.app.data.map(item => item.provider))].sort();
-    
-    // Clear and populate provider dropdown
-    providerSelect.innerHTML = '<option value="">Vælg en udbyder</option>';
-    providers.forEach(provider => {
-        const option = document.createElement('option');
-        option.value = provider;
-        option.textContent = provider;
-        providerSelect.appendChild(option);
-    });
+    if (window.app) {
+        window.app.populateCalculatorDropdowns();
+    }
 }
 
 function updateCalculatorOptions() {
@@ -631,10 +659,12 @@ function updateCalculatorOptions() {
         speedSelect.appendChild(option);
     });
     
-    // Update contract options when speed is selected
-    speedSelect.addEventListener('change', function() {
+    // Remove existing event listeners and add new one
+    speedSelect.removeEventListener('change', speedSelect._changeHandler);
+    speedSelect._changeHandler = function() {
         updateContractOptions(selectedProvider, this.value);
-    });
+    };
+    speedSelect.addEventListener('change', speedSelect._changeHandler);
 }
 
 function updateContractOptions(provider, speed) {
