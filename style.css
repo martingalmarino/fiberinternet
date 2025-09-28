@@ -1954,3 +1954,301 @@ body {
 .mobile-card-no-promotion {
     display: none;
 }
+
+/* Fiber Internet Price Calculator */
+.calculator-section {
+    background-color: #F8FAFC;
+    padding: 80px 0;
+}
+
+.calculator-card {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.calculator-form {
+    padding: 40px;
+}
+
+.calculator-inputs {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 24px;
+    margin-bottom: 32px;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.input-group label {
+    font-weight: 600;
+    color: #374151;
+    font-size: 0.9rem;
+}
+
+.input-group select {
+    padding: 12px 16px;
+    border: 2px solid #e5e7eb;
+    border-radius: 8px;
+    font-size: 1rem;
+    background: white;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.input-group select:focus {
+    outline: none;
+    border-color: #00A86B;
+    box-shadow: 0 0 0 3px rgba(0, 168, 107, 0.1);
+}
+
+.input-group select:hover {
+    border-color: #d1d5db;
+}
+
+.checkbox-group {
+    grid-column: 1 / -1;
+    margin-top: 8px;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    font-weight: 500;
+    color: #374151;
+}
+
+.checkbox-label input[type="checkbox"] {
+    display: none;
+}
+
+.checkmark {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #e5e7eb;
+    border-radius: 4px;
+    position: relative;
+    transition: all 0.2s ease;
+}
+
+.checkbox-label input[type="checkbox"]:checked + .checkmark {
+    background: #00A86B;
+    border-color: #00A86B;
+}
+
+.checkbox-label input[type="checkbox"]:checked + .checkmark::after {
+    content: '';
+    position: absolute;
+    left: 6px;
+    top: 2px;
+    width: 6px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.calculator-actions {
+    display: flex;
+    justify-content: center;
+    margin-top: 24px;
+}
+
+.calculator-btn {
+    padding: 16px 32px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 200px;
+    justify-content: center;
+}
+
+.calculator-btn i {
+    font-size: 1rem;
+}
+
+.calculator-results {
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    border-top: 1px solid #e5e7eb;
+    padding: 40px;
+}
+
+.results-header {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.results-header h3 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1f2937;
+}
+
+.results-content {
+    display: grid;
+    gap: 16px;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.result-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    transition: all 0.2s ease;
+}
+
+.result-item:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.result-label {
+    font-weight: 600;
+    color: #6b7280;
+    font-size: 0.9rem;
+}
+
+.result-value {
+    font-weight: 700;
+    color: #1f2937;
+    font-size: 1.1rem;
+}
+
+.result-total {
+    color: #00A86B;
+    font-size: 1.3rem;
+}
+
+.result-promotion {
+    color: #00A86B;
+    font-style: italic;
+}
+
+.result-savings {
+    color: #10b981;
+    font-weight: 700;
+}
+
+.promotion-item {
+    background: linear-gradient(135deg, rgba(0, 168, 107, 0.1) 0%, rgba(0, 201, 120, 0.1) 100%);
+    border: 1px solid rgba(0, 168, 107, 0.2);
+}
+
+.savings-item {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(34, 197, 94, 0.1) 100%);
+    border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.results-footer {
+    margin-top: 32px;
+    text-align: center;
+}
+
+.disclaimer {
+    margin: 0;
+    font-size: 0.85rem;
+    color: #6b7280;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.disclaimer i {
+    color: #00A86B;
+}
+
+/* Mobile Calculator Responsive */
+@media (max-width: 768px) {
+    .calculator-section {
+        padding: 40px 0;
+    }
+    
+    .calculator-form {
+        padding: 24px;
+    }
+    
+    .calculator-inputs {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .calculator-actions {
+        margin-top: 20px;
+    }
+    
+    .calculator-btn {
+        width: 100%;
+        min-width: auto;
+    }
+    
+    .calculator-results {
+        padding: 24px;
+    }
+    
+    .results-header h3 {
+        font-size: 1.3rem;
+    }
+    
+    .result-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        padding: 16px;
+    }
+    
+    .result-label {
+        font-size: 0.85rem;
+    }
+    
+    .result-value {
+        font-size: 1rem;
+    }
+    
+    .result-total {
+        font-size: 1.2rem;
+    }
+    
+    .disclaimer {
+        font-size: 0.8rem;
+        flex-direction: column;
+        gap: 4px;
+    }
+}
+
+@media (max-width: 480px) {
+    .calculator-form {
+        padding: 20px;
+    }
+    
+    .calculator-results {
+        padding: 20px;
+    }
+    
+    .input-group select {
+        padding: 10px 14px;
+        font-size: 0.9rem;
+    }
+    
+    .calculator-btn {
+        padding: 14px 24px;
+        font-size: 1rem;
+    }
+}

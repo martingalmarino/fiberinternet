@@ -18,6 +18,7 @@ class TelecomComparison {
         this.setupFAQ();
         this.setupMobileScrollEnhancements();
         await this.loadComparisonData();
+        this.initializeCalculator();
     }
 
     setupEventListeners() {
@@ -564,6 +565,200 @@ function scrollToComparison() {
 function showSpeedTest() {
     // Placeholder for speed test functionality
     alert('Hastighedstest funktionalitet kommer snart!');
+}
+
+// Calculator Functions
+function initializeCalculator() {
+    // This will be called after data is loaded
+    if (window.app && window.app.data) {
+        populateCalculatorDropdowns();
+    }
+}
+
+function populateCalculatorDropdowns() {
+    if (!window.app || !window.app.data) return;
+    
+    const providerSelect = document.getElementById('calculator-provider');
+    const speedSelect = document.getElementById('calculator-speed');
+    const contractSelect = document.getElementById('calculator-contract');
+    
+    if (!providerSelect || !speedSelect || !contractSelect) return;
+    
+    // Get unique providers
+    const providers = [...new Set(window.app.data.map(item => item.provider))].sort();
+    
+    // Clear and populate provider dropdown
+    providerSelect.innerHTML = '<option value="">Vælg en udbyder</option>';
+    providers.forEach(provider => {
+        const option = document.createElement('option');
+        option.value = provider;
+        option.textContent = provider;
+        providerSelect.appendChild(option);
+    });
+}
+
+function updateCalculatorOptions() {
+    if (!window.app || !window.app.data) return;
+    
+    const providerSelect = document.getElementById('calculator-provider');
+    const speedSelect = document.getElementById('calculator-speed');
+    const contractSelect = document.getElementById('calculator-contract');
+    
+    if (!providerSelect || !speedSelect || !contractSelect) return;
+    
+    const selectedProvider = providerSelect.value;
+    
+    // Clear speed and contract dropdowns
+    speedSelect.innerHTML = '<option value="">Vælg først en udbyder</option>';
+    contractSelect.innerHTML = '<option value="">Vælg først hastighed</option>';
+    
+    if (!selectedProvider) return;
+    
+    // Filter data for selected provider
+    const providerData = window.app.data.filter(item => item.provider === selectedProvider);
+    
+    if (providerData.length === 0) return;
+    
+    // Get unique speeds for this provider
+    const speeds = [...new Set(providerData.map(item => item.speed))].sort((a, b) => a - b);
+    
+    // Populate speed dropdown
+    speedSelect.innerHTML = '<option value="">Vælg hastighed</option>';
+    speeds.forEach(speed => {
+        const option = document.createElement('option');
+        option.value = speed;
+        option.textContent = `${speed} Mbit/s`;
+        speedSelect.appendChild(option);
+    });
+    
+    // Update contract options when speed is selected
+    speedSelect.addEventListener('change', function() {
+        updateContractOptions(selectedProvider, this.value);
+    });
+}
+
+function updateContractOptions(provider, speed) {
+    if (!window.app || !window.app.data) return;
+    
+    const contractSelect = document.getElementById('calculator-contract');
+    if (!contractSelect) return;
+    
+    // Clear contract dropdown
+    contractSelect.innerHTML = '<option value="">Vælg først hastighed</option>';
+    
+    if (!provider || !speed) return;
+    
+    // Filter data for selected provider and speed
+    const filteredData = window.app.data.filter(item => 
+        item.provider === provider && item.speed === parseInt(speed)
+    );
+    
+    if (filteredData.length === 0) return;
+    
+    // Get unique contract lengths for this provider and speed
+    const contracts = [...new Set(filteredData.map(item => item.contractLength))].sort((a, b) => a - b);
+    
+    // Populate contract dropdown
+    contractSelect.innerHTML = '<option value="">Vælg kontraktlængde</option>';
+    contracts.forEach(contract => {
+        const option = document.createElement('option');
+        option.value = contract;
+        option.textContent = `${contract} måneder`;
+        contractSelect.appendChild(option);
+    });
+}
+
+function calculateFiberPrice() {
+    if (!window.app || !window.app.data) return;
+    
+    const providerSelect = document.getElementById('calculator-provider');
+    const speedSelect = document.getElementById('calculator-speed');
+    const contractSelect = document.getElementById('calculator-contract');
+    const promotionsCheckbox = document.getElementById('calculator-promotions');
+    const resultsDiv = document.getElementById('calculator-results');
+    
+    if (!providerSelect || !speedSelect || !contractSelect || !promotionsCheckbox || !resultsDiv) return;
+    
+    const selectedProvider = providerSelect.value;
+    const selectedSpeed = parseInt(speedSelect.value);
+    const selectedContract = parseInt(contractSelect.value);
+    const includePromotions = promotionsCheckbox.checked;
+    
+    // Validate inputs
+    if (!selectedProvider || !selectedSpeed || !selectedContract) {
+        alert('Vælg venligst alle felter for at beregne prisen.');
+        return;
+    }
+    
+    // Find matching plan
+    const matchingPlan = window.app.data.find(item => 
+        item.provider === selectedProvider &&
+        item.speed === selectedSpeed &&
+        item.contractLength === selectedContract
+    );
+    
+    if (!matchingPlan) {
+        alert('Ingen data for dette valg. Prøv at vælge en anden kombination.');
+        return;
+    }
+    
+    // Calculate prices
+    const monthlyPrice = matchingPlan.price;
+    const totalMonths = selectedContract;
+    let totalCost = monthlyPrice * totalMonths;
+    let savings = 0;
+    let promotionText = '';
+    
+    // Apply promotions if enabled
+    if (includePromotions && matchingPlan.promotion) {
+        const promotion = matchingPlan.promotion.toLowerCase();
+        
+        if (promotion.includes('første måned gratis') || promotion.includes('first month free')) {
+            // First month free
+            savings = monthlyPrice;
+            totalCost -= savings;
+            promotionText = matchingPlan.promotion;
+        } else if (promotion.includes('kr. rabat første') || promotion.includes('kr. discount first')) {
+            // Extract discount amount and months from promotion text
+            const discountMatch = promotion.match(/(\d+)\s*kr\.?\s*rabat\s*første\s*(\d+)\s*måneder?/i);
+            if (discountMatch) {
+                const discountAmount = parseInt(discountMatch[1]);
+                const discountMonths = parseInt(discountMatch[2]);
+                savings = Math.min(discountAmount * discountMonths, totalCost);
+                totalCost -= savings;
+                promotionText = matchingPlan.promotion;
+            }
+        } else if (promotion.includes('gratis') || promotion.includes('free')) {
+            // Generic free promotion
+            promotionText = matchingPlan.promotion;
+        }
+    }
+    
+    // Display results
+    document.getElementById('result-monthly').textContent = `${monthlyPrice} kr./md.`;
+    document.getElementById('result-total').textContent = `${totalCost} kr.`;
+    
+    // Show/hide promotion info
+    const promotionItem = document.getElementById('result-promotion');
+    const savingsItem = document.getElementById('result-savings');
+    
+    if (promotionText) {
+        document.getElementById('result-promotion-text').textContent = promotionText;
+        promotionItem.style.display = 'flex';
+    } else {
+        promotionItem.style.display = 'none';
+    }
+    
+    if (savings > 0) {
+        document.getElementById('result-savings-text').textContent = `${savings} kr.`;
+        savingsItem.style.display = 'flex';
+    } else {
+        savingsItem.style.display = 'none';
+    }
+    
+    // Show results
+    resultsDiv.style.display = 'block';
+    resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
 
 function handleProviderClick(providerId, providerName, planName, price) {

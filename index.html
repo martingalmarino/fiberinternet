@@ -158,6 +158,91 @@
             </div>
         </section>
 
+        <!-- Fiber Internet Price Calculator -->
+        <section id="calculator" class="calculator-section">
+            <div class="container">
+                <h2 class="section-title">Fiber Internet Prisberegner</h2>
+                <p class="section-description">Beregn din samlede omkostning for fiber internet baseret på din valgte udbyder, hastighed og kontraktlængde</p>
+                
+                <div class="calculator-card">
+                    <div class="calculator-form">
+                        <div class="calculator-inputs">
+                            <div class="input-group">
+                                <label for="calculator-provider">Vælg Udbyder:</label>
+                                <select id="calculator-provider" onchange="updateCalculatorOptions()">
+                                    <option value="">Vælg en udbyder</option>
+                                </select>
+                            </div>
+                            
+                            <div class="input-group">
+                                <label for="calculator-speed">Hastighed (Mbit/s):</label>
+                                <select id="calculator-speed" onchange="updateCalculatorOptions()">
+                                    <option value="">Vælg først en udbyder</option>
+                                </select>
+                            </div>
+                            
+                            <div class="input-group">
+                                <label for="calculator-contract">Kontraktlængde (måneder):</label>
+                                <select id="calculator-contract">
+                                    <option value="">Vælg først hastighed</option>
+                                </select>
+                            </div>
+                            
+                            <div class="input-group checkbox-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="calculator-promotions" checked>
+                                    <span class="checkmark"></span>
+                                    Inkluder kampagner og tilbud
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="calculator-actions">
+                            <button class="btn btn-primary calculator-btn" onclick="calculateFiberPrice()">
+                                <i class="fas fa-calculator"></i>
+                                Beregn Pris
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="calculator-results" id="calculator-results" style="display: none;">
+                        <div class="results-header">
+                            <h3>Din Prisberegning</h3>
+                        </div>
+                        
+                        <div class="results-content">
+                            <div class="result-item">
+                                <span class="result-label">Månedlig Pris:</span>
+                                <span class="result-value" id="result-monthly">-</span>
+                            </div>
+                            
+                            <div class="result-item">
+                                <span class="result-label">Samlet Pris (kontraktperioden):</span>
+                                <span class="result-value result-total" id="result-total">-</span>
+                            </div>
+                            
+                            <div class="result-item promotion-item" id="result-promotion" style="display: none;">
+                                <span class="result-label">Kampagne:</span>
+                                <span class="result-value result-promotion" id="result-promotion-text">-</span>
+                            </div>
+                            
+                            <div class="result-item savings-item" id="result-savings" style="display: none;">
+                                <span class="result-label">Du sparer:</span>
+                                <span class="result-value result-savings" id="result-savings-text">-</span>
+                            </div>
+                        </div>
+                        
+                        <div class="results-footer">
+                            <p class="disclaimer">
+                                <i class="fas fa-info-circle"></i>
+                                Priser er vejledende og kan variere. Kontakt udbyderen for aktuelle priser og vilkår.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- SEO Editorial Content -->
         <section class="seo-content">
             <div class="container">
