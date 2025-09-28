@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telecom & Home Digital DK - Sammenlign Fiber Internet</title>
+    <meta name="description" content="Sammenlign de bedste fiber internet tilbud i Danmark. Find den perfekte internetforbindelse til dit hjem med vores nemme sammenligningstool.">
+    <meta name="keywords" content="fiber internet, sammenlign internet, danmark, internet tilbud, fiberforbindelse">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- JSON-LD Schema for FAQ -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Hvad er forskellen mellem fiber og almindeligt internet?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Fiber internet bruger lyssignaler gennem glasfiberkabler, hvilket giver langt højere hastigheder og mere stabil forbindelse end traditionelle kobberkabler. Fiber kan levere hastigheder op til 1000 Mbit/s eller højere, mens almindeligt internet typisk topper ved 100-200 Mbit/s."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Hvor lang tid tager det at få fiber internet installeret?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Installationstiden varierer afhængigt af udbyderen og dit område. Typisk tager det 1-3 uger fra bestilling til installation. Hvis der allerede er fiber i din vej, kan installationen være hurtigere. Nogle udbydere tilbyder installation samme dag eller inden for få dage."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Er der bindingstid på fiber internet abonnementer?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "De fleste udbydere tilbyder abonnementer med 12 eller 24 måneders bindingstid. Længere bindingstid giver typisk lavere månedlig pris. Nogle udbydere tilbyder også fleksible abonnementer uden bindingstid, men til en højere pris."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Kan jeg få fiber internet i mit område?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Fiber internet er tilgængeligt i de fleste større byer og mange mindre byer i Danmark. Du kan tjekke tilgængeligheden ved at indtaste dit postnummer på udbyderens hjemmeside eller bruge vores dækningstjek. Dækningen udvides løbende til nye områder."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Hvad koster installation af fiber internet?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "De fleste udbydere tilbyder gratis installation som del af abonnementet, især hvis der allerede er fiber i området. Hvis der skal lægges nye kabler, kan der være en installationsbetaling på 500-2000 kr. Tjek altid de aktuelle tilbud, da mange udbydere har kampagner med gratis installation."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Hvilken hastighed har jeg brug for?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "For almindelig brug (surfning, e-mail, streaming) er 100-200 Mbit/s ofte tilstrækkeligt. For gaming, 4K streaming eller hvis flere personer bruger internettet samtidigt, anbefales 500 Mbit/s eller højere. Vores hastighedsberegner kan hjælpe dig med at finde den rigtige hastighed."
+          }
+        }
+      ]
+    }
+    </script>
+</head>
+<body>
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">Find Danmarks Bedste Fiber Internet</h1>
+            <p class="hero-subtitle">Sammenlign priser og hastigheder fra alle store udbydere og spar penge på din internetforbindelse</p>
+            <div class="hero-buttons">
+                <button class="btn btn-primary" onclick="scrollToComparison()">Sammenlign Nu</button>
+                <button class="btn btn-secondary" onclick="showSpeedTest()">Test Din Hastighed</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <section class="comparison-section">
+            <div class="container">
+                <h2 class="section-title">Fiber Internet Sammenligning</h2>
+                <p class="section-description">Se alle tilgængelige fiber internet tilbud i Danmark og find det bedste til dig</p>
+                
+                <!-- Loading State -->
+                <div id="loading" class="loading">
+                    <div class="spinner"></div>
+                    <p>Indlæser tilbud...</p>
+                </div>
+
+                <!-- Comparison Table -->
+                <div id="comparison-container" class="comparison-container" style="display: none;">
+                    <div class="table-controls">
+                        <div class="filter-controls">
+                            <label for="speed-filter">Minimum hastighed:</label>
+                            <select id="speed-filter">
+                                <option value="all">Alle hastigheder</option>
+                                <option value="100">100+ Mbit/s</option>
+                                <option value="200">200+ Mbit/s</option>
+                                <option value="500">500+ Mbit/s</option>
+                                <option value="1000">1000+ Mbit/s</option>
+                            </select>
+                        </div>
+                        <div class="sort-controls">
+                            <span>Sorter efter:</span>
+                            <div class="sort-buttons-container">
+                                <button class="sort-btn active" data-sort="price">Pris</button>
+                                <button class="sort-btn" data-sort="speed">Hastighed</button>
+                                <button class="sort-btn" data-sort="contract">Kontrakt</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <div class="table-wrapper">
+                            <table id="comparison-table" class="comparison-table">
+                                <thead>
+                                    <tr>
+                                        <th class="sortable" data-sort="provider">Udbydere</th>
+                                        <th class="sortable" data-sort="speed">Hastighed</th>
+                                        <th class="sortable" data-sort="price">Månedlig Pris</th>
+                                        <th class="sortable" data-sort="contract">Kontrakt</th>
+                                        <th>Tilbud</th>
+                                        <th>Handling</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="table-body">
+                                    <!-- Data will be populated by JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Error State -->
+                <div id="error-state" class="error-state" style="display: none;">
+                    <p>Der opstod en fejl ved indlæsning af data. Prøv igen senere.</p>
+                    <button class="btn btn-primary" onclick="loadComparisonData()">Prøv Igen</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEO Editorial Content -->
+        <section class="seo-content">
+            <div class="container">
+                <h2>Sådan Vælger Du Det Bedste Fiber Internet i Danmark</h2>
+                <p>
+                    Fiber internet er den hurtigste og mest stabile måde at komme online på.
+                    I Danmark tilbyder flere store udbydere forskellige hastigheder og priser.
+                    Det kan være svært at finde den løsning, der passer bedst til både dit behov
+                    og din økonomi – derfor gør vores sammenligning det nemt at se priser,
+                    hastigheder og bindingstider ét sted.
+                </p>
+
+                <h3>Hvad Påvirker Prisen på Fiber Internet?</h3>
+                <ul>
+                    <li><strong>Hastighed (Mbit/s):</strong> Jo højere hastighed, jo højere pris – men også bedre oplevelse ved streaming og gaming.</li>
+                    <li><strong>Bindingstid:</strong> Abonnementer med længere bindingstid kan ofte tilbyde lavere månedlig pris.</li>
+                    <li><strong>Kampagnetilbud:</strong> Mange udbydere tilbyder rabat de første måneder eller gratis oprettelse.</li>
+                    <li><strong>Udbyderens netværk:</strong> Lokale og landsdækkende udbydere kan have forskellige priser alt efter område.</li>
+                </ul>
+
+                <h3>Fiber Internet efter Postnummer</h3>
+                <p>
+                    Dækningen og hastigheden kan variere afhængigt af, hvor i landet du bor.
+                    Brug vores værktøj til at tjekke tilgængelighed og priser i dit område –
+                    det sikrer, at du får det bedste tilbud for netop dit postnummer.
+                </p>
+
+                <h3>Kom I Gang med at Sammenligne Nu</h3>
+                <p>
+                    Med vores opdaterede 2025-data kan du nemt finde den bedste fiberløsning
+                    på få minutter. Klik på <strong>"Vælg Tilbud"</strong> for at komme direkte
+                    til udbyderens side og afslutte bestillingen.
+                </p>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="faq-section">
+            <div class="container">
+                <h2 class="section-title">Ofte Stillede Spørgsmål om Fiber Internet</h2>
+                <div class="faq-container">
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false">
+                            <span>Hvad er forskellen mellem fiber og almindeligt internet?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Fiber internet bruger lyssignaler gennem glasfiberkabler, hvilket giver langt højere hastigheder og mere stabil forbindelse end traditionelle kobberkabler. Fiber kan levere hastigheder op til 1000 Mbit/s eller højere, mens almindeligt internet typisk topper ved 100-200 Mbit/s.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false">
+                            <span>Hvor lang tid tager det at få fiber internet installeret?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Installationstiden varierer afhængigt af udbyderen og dit område. Typisk tager det 1-3 uger fra bestilling til installation. Hvis der allerede er fiber i din vej, kan installationen være hurtigere. Nogle udbydere tilbyder installation samme dag eller inden for få dage.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false">
+                            <span>Er der bindingstid på fiber internet abonnementer?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>De fleste udbydere tilbyder abonnementer med 12 eller 24 måneders bindingstid. Længere bindingstid giver typisk lavere månedlig pris. Nogle udbydere tilbyder også fleksible abonnementer uden bindingstid, men til en højere pris.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false">
+                            <span>Kan jeg få fiber internet i mit område?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Fiber internet er tilgængeligt i de fleste større byer og mange mindre byer i Danmark. Du kan tjekke tilgængeligheden ved at indtaste dit postnummer på udbyderens hjemmeside eller bruge vores dækningstjek. Dækningen udvides løbende til nye områder.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false">
+                            <span>Hvad koster installation af fiber internet?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>De fleste udbydere tilbyder gratis installation som del af abonnementet, især hvis der allerede er fiber i området. Hvis der skal lægges nye kabler, kan der være en installationsbetaling på 500-2000 kr. Tjek altid de aktuelle tilbud, da mange udbydere har kampagner med gratis installation.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false">
+                            <span>Hvilken hastighed har jeg brug for?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>For almindelig brug (surfning, e-mail, streaming) er 100-200 Mbit/s ofte tilstrækkeligt. For gaming, 4K streaming eller hvis flere personer bruger internettet samtidigt, anbefales 500 Mbit/s eller højere. Vores hastighedsberegner kan hjælpe dig med at finde den rigtige hastighed.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features-section">
+            <div class="container">
+                <h2 class="section-title">Hvorfor Vælge Os?</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-bolt"></i></div>
+                        <h3>Hurtig Sammenligning</h3>
+                        <p>Find de bedste tilbud på få sekunder med vores nemme sammenligningstool</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-piggy-bank"></i></div>
+                        <h3>Spar Penge</h3>
+                        <p>Vi hjælper dig med at finde de billigste tilbud og sparer dig for dyre abonnementer</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-search"></i></div>
+                        <h3>Transparente Priser</h3>
+                        <p>Alle priser inkluderer skatter og gebyrer - ingen skjulte omkostninger</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Telecom & Home Digital DK</h3>
+                    <p>Danmarks mest pålidelige platform til sammenligning af telekommunikationstjenester</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Produkter</h4>
+                    <ul>
+                        <li><a href="#">Fiber Internet</a></li>
+                        <li><a href="#">Mobilabonnement</a></li>
+                        <li><a href="#">TV Pakker</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Værktøjer</h4>
+                    <ul>
+                        <li><a href="#">Hastighedstest</a></li>
+                        <li><a href="#">Familiepakke Calculator</a></li>
+                        <li><a href="#">Dækning efter Postnummer</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Telecom & Home Digital DK. Alle rettigheder forbeholdes.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
