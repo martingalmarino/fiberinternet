@@ -128,5 +128,70 @@
     "features": ["Gratis installation", "Premium support", "Fleksibel betaling"],
     "rating": 4.3,
     "description": "Hurtig fiber internet med mulighed for opgradering"
+  },
+  {
+    "id": 11,
+    "provider": "Fastspeed",
+    "logo": "fastspeed-logo.png",
+    "plan": "Fastspeed Fiber 800",
+    "speed": 800,
+    "price": 549,
+    "contractLength": 12,
+    "promotion": "Gratis installation og hurtig oprettelse",
+    "features": ["Gratis installation", "24/7 support", "Hurtig oprettelse", "Premium router"],
+    "rating": 4.2,
+    "description": "Hurtig og pålidelig fiber internet med fremragende service"
+  },
+  {
+    "id": 12,
+    "provider": "Ewii Fiber",
+    "logo": "ewii-logo.png",
+    "plan": "Ewii Fiber 350",
+    "speed": 350,
+    "price": 389,
+    "contractLength": 12,
+    "promotion": "Gratis installation og lokalt selskab",
+    "features": ["Gratis installation", "24/7 support", "Lokalt selskab", "Personlig service"],
+    "rating": 4.3,
+    "description": "Fiber internet fra lokalt selskab med personlig tilgang"
+  },
+  {
+    "id": 13,
+    "provider": "Hiper Pro",
+    "logo": "hiper-pro-logo.png",
+    "plan": "Hiper Pro Business 1000",
+    "speed": 1000,
+    "price": 799,
+    "contractLength": 24,
+    "promotion": "Gratis installation og setup",
+    "features": ["Gratis installation", "24/7 business support", "SLA garanti", "Dedicated support", "Business router"],
+    "rating": 4.4,
+    "description": "Professionel fiber internet løsning til erhverv med SLA garanti"
+  },
+  {
+    "id": 14,
+    "provider": "Norlys",
+    "logo": "norlys-logo.png",
+    "plan": "Norlys Fiber 450",
+    "speed": 450,
+    "price": 459,
+    "contractLength": 12,
+    "promotion": "Gratis installation",
+    "features": ["Gratis installation", "Lokalt selskab", "Grøn energi"],
+    "rating": 4.2,
+    "description": "Fiber internet fra Norlys med fokus på bæredygtighed"
+  },
+  {
+    "id": 15,
+    "provider": "Altibox",
+    "logo": "altibox-logo.png",
+    "plan": "Altibox Fiber 200",
+    "speed": 200,
+    "price": 369,
+    "contractLength": 12,
+    "promotion": "Gratis installation og Altibox TV",
+    "features": ["Gratis installation", "Altibox TV", "Regional dækning"],
+    "rating": 4.1,
+    "description": "Fiber internet med Altibox TV pakke inkluderet"
   }
 ]
