@@ -1,0 +1,51 @@
+2025-09-28 19:45:25,090 - INFO - Starting fiber internet scraper...
+2025-09-28 19:45:25,090 - INFO - Scraping Hiper...
+2025-09-28 19:45:26,377 - ERROR - Error scraping Hiper: 404 Client Error: Not Found for url: https://www.hiper.dk/internet/fiber-internet
+2025-09-28 19:45:26,380 - INFO - Scraped 0 plans from Hiper
+2025-09-28 19:45:26,380 - INFO - Scraping YouSee...
+2025-09-28 19:45:28,704 - ERROR - Error scraping YouSee: 404 Client Error: Not Found for url: https://www.yousee.dk/privat/internet/fiber
+2025-09-28 19:45:28,707 - INFO - Scraped 0 plans from YouSee
+2025-09-28 19:45:28,707 - INFO - Scraping Telia...
+2025-09-28 19:45:32,953 - ERROR - Error scraping Telia: 404 Client Error: File not found for url: https://www.telia.dk/privat/abonnementer/bredbaand/fiber/
+2025-09-28 19:45:32,954 - INFO - Scraped 0 plans from Telia
+2025-09-28 19:45:32,954 - INFO - Scraping Stofa...
+2025-09-28 19:45:37,187 - INFO - Scraped 0 plans from Stofa
+2025-09-28 19:45:37,189 - INFO - Scraped 0 plans from Stofa
+2025-09-28 19:45:37,189 - INFO - Scraping Telenor...
+2025-09-28 19:45:40,448 - ERROR - Error scraping Telenor: 404 Client Error: Not Found for url: https://www.telenor.dk/shop/internet/fiber/
+2025-09-28 19:45:40,448 - INFO - Scraped 0 plans from Telenor
+2025-09-28 19:45:40,448 - INFO - Scraping Waoo...
+2025-09-28 19:46:11,404 - ERROR - Error scraping Waoo: HTTPSConnectionPool(host='www.waoo.dk', port=443): Max retries exceeded with url: /internet/fiber (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x106384b80>, 'Connection to www.waoo.dk timed out. (connect timeout=30)'))
+2025-09-28 19:46:11,405 - INFO - Scraped 0 plans from Waoo
+2025-09-28 19:46:11,405 - INFO - Scraping Kviknet...
+2025-09-28 19:46:12,650 - ERROR - Error scraping Kviknet: 404 Client Error: Not Found for url: https://www.kviknet.dk/internet/fiber
+2025-09-28 19:46:12,653 - INFO - Scraped 0 plans from Kviknet
+2025-09-28 19:46:12,653 - INFO - Scraping CBB...
+2025-09-28 19:46:21,472 - INFO - Scraped 0 plans from CBB
+2025-09-28 19:46:21,472 - INFO - Scraped 0 plans from CBB
+2025-09-28 19:46:21,472 - INFO - Skipping Altibox (disabled)
+2025-09-28 19:46:21,472 - INFO - Skipping Fibia (disabled)
+2025-09-28 19:46:21,472 - INFO - Scraping Norlys...
+2025-09-28 19:46:22,893 - ERROR - Error scraping Norlys: 404 Client Error: Not Found for url: https://norlys.dk/internet/fiber/
+2025-09-28 19:46:22,895 - INFO - Scraped 0 plans from Norlys
+2025-09-28 19:46:22,895 - INFO - Scraping Energi Fyn...
+2025-09-28 19:46:24,783 - WARNING - Certificate did not match expected hostname: www.energi-fyn.dk. Certificate: {'subject': ((('commonName', '*.dandomain.dk'),),), 'issuer': ((('countryName', 'GB'),), (('stateOrProvinceName', 'Greater Manchester'),), (('localityName', 'Salford'),), (('organizationName', 'Sectigo Limited'),), (('commonName', 'Sectigo RSA Domain Validation Secure Server CA'),)), 'version': 3, 'serialNumber': 'CFC24BF905112BFB1C88C53D4023A3E8', 'notBefore': 'Jan 13 00:00:00 2025 GMT', 'notAfter': 'Jan 13 23:59:59 2026 GMT', 'subjectAltName': (('DNS', '*.dandomain.dk'), ('DNS', 'dandomain.dk')), 'OCSP': ('http://ocsp.sectigo.com',), 'caIssuers': ('http://crt.sectigo.com/SectigoRSADomainValidationSecureServerCA.crt',)}
+2025-09-28 19:46:24,784 - ERROR - Error scraping Energi Fyn: HTTPSConnectionPool(host='www.energi-fyn.dk', port=443): Max retries exceeded with url: /internet/fiber (Caused by SSLError(CertificateError("hostname 'www.energi-fyn.dk' doesn't match either of '*.dandomain.dk', 'dandomain.dk'")))
+2025-09-28 19:46:24,784 - INFO - Scraped 0 plans from Energi Fyn
+2025-09-28 19:46:24,784 - INFO - Scraping SEAS-NVE...
+2025-09-28 19:46:26,831 - WARNING - Certificate did not match expected hostname: www.seas-nve.dk. Certificate: {'subject': ((('commonName', '*.de-2.platformsh.site'),),), 'issuer': ((('countryName', 'US'),), (('organizationName', "Let's Encrypt"),), (('commonName', 'R10'),)), 'version': 3, 'serialNumber': '0675E7601B0C7F213CC050120D1862B0D28C', 'notBefore': 'Jul  8 00:06:38 2025 GMT', 'notAfter': 'Oct  6 00:06:37 2025 GMT', 'subjectAltName': (('DNS', '*.de-2.platformsh.site'), ('DNS', 'admin.de-2.platform.sh'), ('DNS', 'de-2.platform.sh')), 'caIssuers': ('http://r10.i.lencr.org/',), 'crlDistributionPoints': ('http://r10.c.lencr.org/13.crl',)}
+2025-09-28 19:46:26,832 - ERROR - Error scraping SEAS-NVE: HTTPSConnectionPool(host='www.seas-nve.dk', port=443): Max retries exceeded with url: /internet/fiber (Caused by SSLError(CertificateError("hostname 'www.seas-nve.dk' doesn't match either of '*.de-2.platformsh.site', 'admin.de-2.platform.sh', 'de-2.platform.sh'")))
+2025-09-28 19:46:26,832 - INFO - Scraped 0 plans from SEAS-NVE
+2025-09-28 19:46:26,833 - INFO - Scraping Fastspeed...
+2025-09-28 19:46:37,254 - ERROR - Error scraping Fastspeed: 404 Client Error: Not Found for url: https://fastspeed.dk/internet/fiber
+2025-09-28 19:46:37,260 - INFO - Scraped 0 plans from Fastspeed
+2025-09-28 19:46:37,261 - INFO - Scraping Ewii Fiber...
+2025-09-28 19:46:41,863 - INFO - Scraped 0 plans from Ewii Fiber
+2025-09-28 19:46:41,863 - INFO - Scraped 0 plans from Ewii Fiber
+2025-09-28 19:46:41,863 - INFO - Scraping Hiper Pro...
+2025-09-28 19:46:42,930 - ERROR - Error scraping Hiper Pro: 404 Client Error: Not Found for url: https://www.hiper.dk/erhverv/internet/fiber
+2025-09-28 19:46:42,933 - INFO - Scraped 0 plans from Hiper Pro
+2025-09-28 19:46:42,936 - INFO - Saved 0 plans to data/fiber.json
+2025-09-28 19:46:42,937 - INFO - Saved 0 plans to scraper/data/fiber.json
+2025-09-28 19:46:42,937 - INFO - Scraping completed. Total plans: 0
+2025-09-28 19:46:42,938 - INFO - Provider summary:
