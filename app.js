@@ -621,28 +621,43 @@ function closeProviderModal() {
 }
 
 function redirectToProvider(providerName, providerId) {
-    // Map of provider URLs (you can expand this)
+    // Map of provider URLs - all pointing to main company pages to avoid 404s
     const providerUrls = {
-        'TDC': 'https://www.yousee.dk/privat/internet/fiber',
-        'YouSee': 'https://www.yousee.dk/privat/internet/fiber',
-        'Telenor': 'https://www.telenor.dk/privat/internet/fiber',
-        'Telia': 'https://www.telia.dk/privat/internet/fiber',
-        'Stofa': 'https://www.stofa.dk/privat/internet/fiber',
-        'Hiper': 'https://www.hiper.dk/internet/fiber-internet',
-        'Waoo': 'https://www.waoo.dk/internet/fiber',
-        'Kviknet': 'https://www.kviknet.dk/internet/fiber',
-        'CBB': 'https://www.cbb.dk/internet/fiber',
-        'Fastspeed': 'https://www.fastspeed.dk/internet/fiber',
-        'Ewii Fiber': 'https://www.ewii.dk/privat/internet/fiber',
-        'Hiper Pro': 'https://www.hiper.dk/erhverv/internet/fiber',
-        'Norlys': 'https://www.norlys.dk/internet/fiber',
-        'Altibox': 'https://www.altibox.dk/internet/fiber'
+        'TDC': 'https://www.yousee.dk',
+        'YouSee': 'https://www.yousee.dk',
+        'Telenor': 'https://www.telenor.dk',
+        'Telia': 'https://www.telia.dk',
+        'Stofa': 'https://www.stofa.dk',
+        'Hiper': 'https://www.hiper.dk',
+        'Waoo': 'https://www.waoo.dk',
+        'Kviknet': 'https://www.kviknet.dk',
+        'CBB': 'https://www.cbb.dk',
+        'Fastspeed': 'https://www.fastspeed.dk',
+        'Ewii Fiber': 'https://www.ewii.dk',
+        'Hiper Pro': 'https://www.hiper.dk',
+        'Norlys': 'https://www.norlys.dk',
+        'Altibox': 'https://www.altibox.dk',
+        'Fiberby': 'https://www.fiberby.dk',
+        'Fullrate': 'https://www.fullrate.dk',
+        'Energi Fyn': 'https://www.energifyn.dk',
+        'SEAS-NVE': 'https://www.seas-nve.dk',
+        'Fibia': 'https://www.fibia.dk'
     };
     
-    const url = providerUrls[providerName] || `https://www.${providerName.toLowerCase().replace(/\s+/g, '')}.dk`;
+    // Get URL or create fallback
+    let url = providerUrls[providerName];
+    
+    if (!url) {
+        // Create fallback URL by cleaning provider name
+        const cleanName = providerName.toLowerCase()
+            .replace(/\s+/g, '')
+            .replace(/[^a-z0-9]/g, '');
+        url = `https://www.${cleanName}.dk`;
+    }
     
     // Track redirect
-    trackProviderRedirect(providerId, providerName, url);
+    const isFallbackUrl = !providerUrls[providerName];
+    trackProviderRedirect(providerId, providerName, url, isFallbackUrl);
     
     // Close modal and redirect
     closeProviderModal();
@@ -651,15 +666,16 @@ function redirectToProvider(providerName, providerId) {
     window.open(url, '_blank', 'noopener,noreferrer');
 }
 
-function trackProviderRedirect(providerId, providerName, url) {
-    console.log('Redirecting to:', providerName, url);
+function trackProviderRedirect(providerId, providerName, url, isFallbackUrl = false) {
+    console.log('Redirecting to:', providerName, url, isFallbackUrl ? '(fallback URL)' : '(direct URL)');
     
     // Track redirect event
     if (typeof gtag !== 'undefined') {
         gtag('event', 'provider_redirect', {
             'provider_name': providerName,
             'provider_id': providerId,
-            'redirect_url': url
+            'redirect_url': url,
+            'is_fallback_url': isFallbackUrl
         });
     }
 }
