@@ -111,7 +111,18 @@ class TelecomComparison {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
 
-            this.data = await response.json();
+            const rawData = await response.json();
+            
+            // Handle both array format and object format with metadata
+            if (Array.isArray(rawData)) {
+                this.data = rawData;
+            } else if (rawData.plans) {
+                this.data = rawData.plans;
+                this.updateLastUpdatedDisplay(rawData.last_updated);
+            } else {
+                this.data = rawData;
+            }
+            
             this.filteredData = [...this.data];
 
             // Render the table
@@ -292,6 +303,42 @@ class TelecomComparison {
         }
         
         return cleanPlan;
+    }
+    
+    updateLastUpdatedDisplay(lastUpdated) {
+        if (!lastUpdated) return;
+        
+        // Find or create the last updated display element
+        let lastUpdatedElement = document.getElementById('last-updated');
+        if (!lastUpdatedElement) {
+            lastUpdatedElement = document.createElement('div');
+            lastUpdatedElement.id = 'last-updated';
+            lastUpdatedElement.className = 'last-updated';
+            
+            // Insert after the hero section or before the comparison section
+            const heroSection = document.querySelector('.hero');
+            if (heroSection) {
+                heroSection.insertAdjacentElement('afterend', lastUpdatedElement);
+            }
+        }
+        
+        // Format the date
+        const date = new Date(lastUpdated);
+        const options = { 
+            year: 'numeric', 
+            month: 'long', 
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            timeZone: 'Europe/Copenhagen'
+        };
+        const formattedDate = date.toLocaleDateString('da-DK', options);
+        
+        lastUpdatedElement.innerHTML = `
+            <div class="container">
+                <p><i class="fas fa-clock"></i> Data opdateret: ${formattedDate}</p>
+            </div>
+        `;
     }
 }
 

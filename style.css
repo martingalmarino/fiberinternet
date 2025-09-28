@@ -575,6 +575,27 @@ body {
     font-weight: 600;
 }
 
+/* Last Updated Display */
+.last-updated {
+    background: linear-gradient(135deg, #0B3C49 0%, #1E3A8A 100%);
+    color: white;
+    padding: 1rem 0;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.last-updated p {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.last-updated i {
+    opacity: 0.8;
+}
+
 /* FAQ Section */
 .faq-section {
     background-color: #f8fafc;

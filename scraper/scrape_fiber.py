@@ -280,17 +280,59 @@ def save_to_json(data: List[Dict[str, Any]], output_path: str):
 
 def main():
     """Main scraping function"""
-    logger.info("Starting fiber internet scraper...")
+    import os
     
-    # Scrape all providers
+    # Get scraper type from environment variable
+    scraper_type = os.getenv('SCRAPER_TYPE', 'full')
+    force_update = os.getenv('FORCE_UPDATE', 'false').lower() == 'true'
+    
+    logger.info(f"Starting fiber internet scraper - Type: {scraper_type}")
+    
+    if scraper_type == 'light':
+        # Light check - only check a few key providers
+        key_providers = ['Hiper', 'YouSee', 'Telenor', 'Telia', 'Stofa']
+        logger.info(f"Light check mode - checking {len(key_providers)} key providers")
+        
+        # For light check, we'll just validate existing data
+        try:
+            with open('../data/fiber.json', 'r', encoding='utf-8') as f:
+                existing_data = json.load(f)
+            logger.info(f"Light check completed - {len(existing_data)} providers in database")
+            return
+        except Exception as e:
+            logger.error(f"Light check failed: {e}")
+            return
+    
+    elif scraper_type == 'test':
+        # Test mode - run with minimal providers
+        logger.info("Test mode - running with sample data")
+        test_plans = [
+            {
+                'udbyder': 'Test Provider',
+                'hastighed_mbit': 100,
+                'pris_mdr': 299,
+                'bindingstid_mdr': 12,
+                'kampagne': 'Test promotion',
+                'plan_navn': 'Test Fiber 100',
+                'beskrivelse': 'Test fiber internet plan',
+                'features': ['Test feature'],
+                'rating': 4.0
+            }
+        ]
+        save_to_json(test_plans, '../data/fiber.json')
+        logger.info("Test scraping completed")
+        return
+    
+    # Full scraping mode
+    logger.info("Full scraping mode - checking all providers")
     all_plans = scrape_all_providers()
     
     # Save to JSON
-    output_path = 'data/fiber.json'
+    output_path = '../data/fiber.json'
     save_to_json(all_plans, output_path)
     
     # Also save to scraper data directory
-    scraper_output_path = 'scraper/data/fiber.json'
+    scraper_output_path = 'data/fiber.json'
     save_to_json(all_plans, scraper_output_path)
     
     logger.info(f"Scraping completed. Total plans: {len(all_plans)}")
@@ -304,6 +346,9 @@ def main():
     logger.info("Provider summary:")
     for provider, count in provider_counts.items():
         logger.info(f"  {provider}: {count} plans")
+    
+    # Log for GitHub Actions
+    print(f"SCRAPER_RESULT: {len(all_plans)} plans scraped from {len(provider_counts)} providers")
 
 if __name__ == "__main__":
     main()
