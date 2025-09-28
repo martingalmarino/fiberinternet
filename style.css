@@ -526,6 +526,27 @@ body {
     overflow: hidden;
 }
 
+.provider-logo-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.provider-logo-fallback {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #00A86B 0%, #00C978 100%);
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 700;
+    border-radius: 8px;
+}
+
 .provider-logo::before {
     content: '';
     position: absolute;
@@ -1743,6 +1764,29 @@ body {
     color: white;
     flex-shrink: 0;
     box-shadow: 0 2px 8px rgba(0, 168, 107, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.mobile-card-logo-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 10px;
+    transition: all 0.2s ease;
+}
+
+.mobile-card-logo-fallback {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #00A86B 0%, #00C978 100%);
+    color: white;
+    font-size: 1.2rem;
+    font-weight: 700;
+    border-radius: 10px;
 }
 
 .mobile-card-info h3 {

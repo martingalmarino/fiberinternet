@@ -241,7 +241,13 @@ class TelecomComparison {
         
         row.innerHTML = `
             <td class="provider-cell">
-                <div class="provider-logo">${provider.provider.charAt(0)}</div>
+                <div class="provider-logo">
+                    <img src="${this.getProviderLogo(provider.provider)}" 
+                         alt="${provider.provider} logo" 
+                         class="provider-logo-img"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="provider-logo-fallback" style="display: none;">${provider.provider.charAt(0)}</div>
+                </div>
                 <div class="provider-info">
                     <h4>${provider.provider}</h4>
                     <p>${this.getCleanPlanName(provider.plan, provider.provider)}</p>
@@ -269,7 +275,13 @@ class TelecomComparison {
         
         card.innerHTML = `
             <div class="mobile-card-header">
-                <div class="mobile-card-logo">${provider.provider.charAt(0)}</div>
+                <div class="mobile-card-logo">
+                    <img src="${this.getProviderLogo(provider.provider)}" 
+                         alt="${provider.provider} logo" 
+                         class="mobile-card-logo-img"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="mobile-card-logo-fallback" style="display: none;">${provider.provider.charAt(0)}</div>
+                </div>
                 <div class="mobile-card-info">
                     <h3>${provider.provider}</h3>
                     <p>${this.getCleanPlanName(provider.plan, provider.provider)}</p>
@@ -354,6 +366,48 @@ class TelecomComparison {
         }
         
         return cleanPlan;
+    }
+    
+    getProviderLogo(providerName) {
+        // Map of provider names to logo file paths or SVG data URLs
+        const logoMap = {
+            'TDC': this.createLogoSVG('TDC', '#E60012'),
+            'YouSee': this.createLogoSVG('YS', '#FF6B35'),
+            'Telenor': this.createLogoSVG('T', '#22B573'),
+            'Telia': this.createLogoSVG('T', '#490094'),
+            'Stofa': this.createLogoSVG('S', '#1E3A8A'),
+            'Hiper': this.createLogoSVG('H', '#00A86B'),
+            'Hiper Pro': this.createLogoSVG('H', '#00A86B'),
+            'Waoo': this.createLogoSVG('W', '#FF4081'),
+            'Kviknet': this.createLogoSVG('K', '#3B82F6'),
+            'CBB': this.createLogoSVG('CBB', '#8B5CF6'),
+            'Fastspeed': this.createLogoSVG('F', '#F59E0B'),
+            'Ewii Fiber': this.createLogoSVG('E', '#10B981'),
+            'Norlys': this.createLogoSVG('N', '#EF4444'),
+            'Altibox': this.createLogoSVG('A', '#6366F1'),
+            'Fiberby': this.createLogoSVG('F', '#84CC16'),
+            'Fullrate': this.createLogoSVG('FR', '#F97316'),
+            'Energi Fyn': this.createLogoSVG('EF', '#06B6D4'),
+            'SEAS-NVE': this.createLogoSVG('SN', '#8B5A2B'),
+            'Fibia': this.createLogoSVG('F', '#EC4899')
+        };
+        
+        // Return logo or fallback to initials
+        return logoMap[providerName] || this.createLogoSVG(providerName.charAt(0), '#00A86B');
+    }
+    
+    createLogoSVG(text, color) {
+        // Create a simple SVG logo with the provider initial and brand color
+        const svg = `
+            <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="44" height="44" rx="10" fill="${color}"/>
+                <text x="22" y="28" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white" text-anchor="middle">${text}</text>
+            </svg>
+        `;
+        
+        // Convert to data URL
+        const encoded = btoa(unescape(encodeURIComponent(svg)));
+        return `data:image/svg+xml;base64,${encoded}`;
     }
     
     updateLastUpdatedDisplay(lastUpdated) {
