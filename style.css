@@ -1703,14 +1703,7 @@ body {
     display: none; /* Hidden by default, shown on mobile */
 }
 
-/* Force show mobile cards on mobile devices */
-@media (max-width: 768px) {
-    .mobile-cards-container {
-        display: block !important;
-        visibility: visible !important;
-        opacity: 1 !important;
-    }
-}
+/* Mobile cards are shown by media query above */
 
 .mobile-card {
     background: white;
