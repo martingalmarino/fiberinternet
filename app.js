@@ -707,7 +707,28 @@ class TelecomComparison {
             'Allente': 'https://www.allente.dk'
         };
         
-        return providerUrls[providerName] || `https://www.${providerName.toLowerCase().replace(/\s+/g, '')}.dk`;
+        // Get base URL
+        let url = providerUrls[providerName] || `https://www.${providerName.toLowerCase().replace(/\s+/g, '')}.dk`;
+        
+        // Add UTM parameters based on current page
+        const isMobilePage = window.location.pathname.includes('mobil.html') || window.location.pathname.includes('/mobil');
+        const isTvPage = window.location.pathname.includes('tv.html') || window.location.pathname.includes('/tv');
+        
+        let utmParams;
+        if (isMobilePage) {
+            utmParams = '?utm_source=smartvalg&utm_medium=mobile_comparison&utm_campaign=smartvalg';
+        } else if (isTvPage) {
+            utmParams = '?utm_source=smartvalg&utm_medium=tv_comparison&utm_campaign=smartvalg';
+        } else {
+            // Default to fiber UTM parameters
+            utmParams = '?utm_source=smartvalg&utm_medium=table_comparison&utm_campaign=smartvalg';
+        }
+        
+        // Add UTM parameters to URL
+        const separator = url.includes('?') ? '&' : '?';
+        url = url + separator + utmParams.substring(1); // Remove the ? from utmParams
+        
+        return url;
     }
     
     createLogoSVG(text, color) {
