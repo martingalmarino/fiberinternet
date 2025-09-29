@@ -5,6 +5,10 @@
     {
       "source": "/mobil",
       "destination": "/mobil.html"
+    },
+    {
+      "source": "/",
+      "destination": "/index.html"
     }
   ],
   "headers": [
