@@ -1,6 +1,18 @@
 {
   "buildCommand": "echo 'Static site - no build step required'",
   "outputDirectory": ".",
+  "redirects": [
+    {
+      "source": "/mobil.html",
+      "destination": "/mobil",
+      "permanent": true
+    },
+    {
+      "source": "/index.html",
+      "destination": "/",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     {
       "source": "/mobil",
