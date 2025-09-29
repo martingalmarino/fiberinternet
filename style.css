@@ -2807,6 +2807,25 @@ body {
     color: #374151;
 }
 
+/* Provider Links */
+.provider-link {
+    color: #1f2937;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.provider-link:hover {
+    color: #00A86B;
+    text-decoration: underline;
+}
+
+.provider-link:focus {
+    outline: 2px solid #00A86B;
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
 /* Mobile Card Styles for Mobile Plans */
 .mobile-card .mobile-card-details {
     display: grid;

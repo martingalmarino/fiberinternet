@@ -337,7 +337,7 @@ class TelecomComparison {
                         <div class="provider-logo-fallback" style="display: none;">${provider.udbyder.charAt(0)}</div>
                     </div>
                     <div class="provider-info">
-                        <h4>${provider.udbyder}</h4>
+                        <h4><a href="${this.getProviderUrl(provider.udbyder)}" target="_blank" rel="noopener noreferrer" class="provider-link">${provider.udbyder}</a></h4>
                         <p>${provider.pakke_navn}</p>
                     </div>
                 </td>
@@ -371,7 +371,7 @@ class TelecomComparison {
                         <div class="provider-logo-fallback" style="display: none;">${provider.udbyder.charAt(0)}</div>
                     </div>
                     <div class="provider-info">
-                        <h4>${provider.udbyder}</h4>
+                        <h4><a href="${this.getProviderUrl(provider.udbyder)}" target="_blank" rel="noopener noreferrer" class="provider-link">${provider.udbyder}</a></h4>
                         <p>${provider.data_GB} GB plan</p>
                     </div>
                 </td>
@@ -440,7 +440,7 @@ class TelecomComparison {
                         <div class="mobile-card-logo-fallback" style="display: none;">${provider.udbyder.charAt(0)}</div>
                     </div>
                     <div class="mobile-card-info">
-                        <h3>${provider.udbyder}</h3>
+                        <h3><a href="${this.getProviderUrl(provider.udbyder)}" target="_blank" rel="noopener noreferrer" class="provider-link">${provider.udbyder}</a></h3>
                         <p>${provider.pakke_navn}</p>
                     </div>
                     <div class="mobile-card-price">
@@ -489,7 +489,7 @@ class TelecomComparison {
                         <div class="mobile-card-logo-fallback" style="display: none;">${provider.udbyder.charAt(0)}</div>
                     </div>
                     <div class="mobile-card-info">
-                        <h3>${provider.udbyder}</h3>
+                        <h3><a href="${this.getProviderUrl(provider.udbyder)}" target="_blank" rel="noopener noreferrer" class="provider-link">${provider.udbyder}</a></h3>
                         <p>${provider.data_GB} GB plan</p>
                     </div>
                     <div class="mobile-card-price">
@@ -671,6 +671,43 @@ class TelecomComparison {
         };
         
         return iconMap[category] || '📺';
+    }
+    
+    getProviderUrl(providerName) {
+        // Map of provider names to their official websites
+        const providerUrls = {
+            // Fiber providers
+            'TDC': 'https://www.tdc.dk',
+            'YouSee': 'https://www.yousee.dk',
+            'Telenor': 'https://www.telenor.dk',
+            'Telia': 'https://www.telia.dk',
+            'Stofa': 'https://www.stofa.dk',
+            'Hiper': 'https://www.hiper.dk',
+            'Hiper Pro': 'https://www.hiper.dk',
+            'Waoo': 'https://www.waoo.dk',
+            'Kviknet': 'https://www.kviknet.dk',
+            'CBB': 'https://www.cbb.dk',
+            'Fastspeed': 'https://www.fastspeed.dk',
+            'Ewii Fiber': 'https://www.ewii.dk',
+            'Norlys': 'https://www.norlys.dk',
+            'Altibox': 'https://www.altibox.dk',
+            'Fiberby': 'https://www.fiberby.dk',
+            'Fullrate': 'https://www.fullrate.dk',
+            'Energi Fyn': 'https://www.energifyn.dk',
+            'SEAS-NVE': 'https://www.seas-nve.dk',
+            'Fibia': 'https://www.fibia.dk',
+            // Mobile providers
+            'Oister': 'https://www.oister.dk',
+            'Lebara': 'https://www.lebara.dk',
+            'Greentel': 'https://www.greentel.dk',
+            'Hallo Mobil': 'https://www.hallomobil.dk',
+            // TV providers
+            'Boxer': 'https://www.boxer.dk',
+            'Telia TV': 'https://www.telia.dk',
+            'Allente': 'https://www.allente.dk'
+        };
+        
+        return providerUrls[providerName] || `https://www.${providerName.toLowerCase().replace(/\s+/g, '')}.dk`;
     }
     
     createLogoSVG(text, color) {
