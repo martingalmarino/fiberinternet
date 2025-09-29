@@ -628,8 +628,16 @@ function populateCalculatorDropdowns() {
 function updateCalculatorOptions() {
     console.log('updateCalculatorOptions called');
     
-    if (!window.app || !window.app.data) {
-        console.error('App or data not available');
+    // Wait for app to be available
+    if (!window.app) {
+        console.log('App not ready, waiting...');
+        setTimeout(updateCalculatorOptions, 100);
+        return;
+    }
+    
+    if (!window.app.data) {
+        console.log('Data not ready, waiting...');
+        setTimeout(updateCalculatorOptions, 100);
         return;
     }
     
@@ -682,8 +690,16 @@ function updateCalculatorOptions() {
 function updateContractOptionsFromSpeed() {
     console.log('updateContractOptionsFromSpeed called');
     
-    if (!window.app || !window.app.data) {
-        console.error('App or data not available');
+    // Wait for app to be available
+    if (!window.app) {
+        console.log('App not ready, waiting...');
+        setTimeout(updateContractOptionsFromSpeed, 100);
+        return;
+    }
+    
+    if (!window.app.data) {
+        console.log('Data not ready, waiting...');
+        setTimeout(updateContractOptionsFromSpeed, 100);
         return;
     }
     
@@ -788,7 +804,20 @@ function updateContractOptions(provider, speed) {
 }
 
 function calculateFiberPrice() {
-    if (!window.app || !window.app.data) return;
+    console.log('calculateFiberPrice called');
+    
+    // Wait for app to be available
+    if (!window.app) {
+        console.log('App not ready, waiting...');
+        setTimeout(calculateFiberPrice, 100);
+        return;
+    }
+    
+    if (!window.app.data) {
+        console.log('Data not ready, waiting...');
+        setTimeout(calculateFiberPrice, 100);
+        return;
+    }
     
     const providerSelect = document.getElementById('calculator-provider');
     const speedSelect = document.getElementById('calculator-speed');
