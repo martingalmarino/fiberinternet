@@ -1,0 +1,134 @@
+[
+  {
+    "id": 1,
+    "udbyder": "YouSee",
+    "pakke_navn": "Bland Selv 10",
+    "kanaler": 40,
+    "pris_mdr": 399,
+    "bindingstid_mdr": 6,
+    "kampagne": "Første måned gratis + gratis startpakke",
+    "kategori": "Film & Serier",
+    "cta_url": "#"
+  },
+  {
+    "id": 2,
+    "udbyder": "YouSee",
+    "pakke_navn": "Bland Selv Sport",
+    "kanaler": 45,
+    "pris_mdr": 449,
+    "bindingstid_mdr": 6,
+    "kampagne": "Gratis Viaplay i 3 måneder",
+    "kategori": "Sport",
+    "cta_url": "#"
+  },
+  {
+    "id": 3,
+    "udbyder": "Waoo",
+    "pakke_navn": "Favoritpakken",
+    "kanaler": 50,
+    "pris_mdr": 429,
+    "bindingstid_mdr": 12,
+    "kampagne": "Gratis HBO Max i 6 måneder",
+    "kategori": "Film & Serier",
+    "cta_url": "#"
+  },
+  {
+    "id": 4,
+    "udbyder": "Waoo",
+    "pakke_navn": "Sportspakken",
+    "kanaler": 55,
+    "pris_mdr": 499,
+    "bindingstid_mdr": 12,
+    "kampagne": "Gratis installation",
+    "kategori": "Sport",
+    "cta_url": "#"
+  },
+  {
+    "id": 5,
+    "udbyder": "Stofa",
+    "pakke_navn": "Mellempakken",
+    "kanaler": 35,
+    "pris_mdr": 379,
+    "bindingstid_mdr": 6,
+    "kampagne": "Ingen oprettelsesgebyr",
+    "kategori": "Basis",
+    "cta_url": "#"
+  },
+  {
+    "id": 6,
+    "udbyder": "Stofa",
+    "pakke_navn": "Storpakken",
+    "kanaler": 65,
+    "pris_mdr": 549,
+    "bindingstid_mdr": 12,
+    "kampagne": "Halv pris første 2 måneder",
+    "kategori": "All Inclusive",
+    "cta_url": "#"
+  },
+  {
+    "id": 7,
+    "udbyder": "Boxer",
+    "pakke_navn": "Flex 8",
+    "kanaler": 30,
+    "pris_mdr": 299,
+    "bindingstid_mdr": 0,
+    "kampagne": "Ingen bindingstid",
+    "kategori": "Basis",
+    "cta_url": "#"
+  },
+  {
+    "id": 8,
+    "udbyder": "Boxer",
+    "pakke_navn": "Flex 20",
+    "kanaler": 50,
+    "pris_mdr": 429,
+    "bindingstid_mdr": 0,
+    "kampagne": "Første måned gratis",
+    "kategori": "Film & Serier",
+    "cta_url": "#"
+  },
+  {
+    "id": 9,
+    "udbyder": "Norlys",
+    "pakke_navn": "Grundpakken",
+    "kanaler": 25,
+    "pris_mdr": 279,
+    "bindingstid_mdr": 6,
+    "kampagne": "Gratis oprettelse",
+    "kategori": "Basis",
+    "cta_url": "#"
+  },
+  {
+    "id": 10,
+    "udbyder": "Norlys",
+    "pakke_navn": "Storpakken",
+    "kanaler": 60,
+    "pris_mdr": 529,
+    "bindingstid_mdr": 12,
+    "kampagne": "Gratis Viaplay i 3 måneder",
+    "kategori": "Sport & Film",
+    "cta_url": "#"
+  },
+  {
+    "id": 11,
+    "udbyder": "Telia TV",
+    "pakke_navn": "Telia TV Basis",
+    "kanaler": 25,
+    "pris_mdr": 299,
+    "bindingstid_mdr": 0,
+    "kampagne": "Ingen bindingstid",
+    "kategori": "Basis",
+    "cta_url": "#"
+  },
+  {
+    "id": 12,
+    "udbyder": "Allente",
+    "pakke_navn": "Vælg Selv Film & Sport",
+    "kanaler": 70,
+    "pris_mdr": 599,
+    "bindingstid_mdr": 12,
+    "kampagne": "Gratis Viaplay Total i 6 måneder",
+    "kategori": "All Inclusive",
+    "cta_url": "#"
+  }
+]

@@ -8,6 +8,11 @@
       "permanent": true
     },
     {
+      "source": "/tv.html",
+      "destination": "/tv",
+      "permanent": true
+    },
+    {
       "source": "/index.html",
       "destination": "/",
       "permanent": true
@@ -17,6 +22,10 @@
     {
       "source": "/mobil",
       "destination": "/mobil.html"
+    },
+    {
+      "source": "/tv",
+      "destination": "/tv.html"
     },
     {
       "source": "/",

@@ -2674,6 +2674,11 @@ body {
     background: linear-gradient(135deg, #1E3A8A 0%, #0B3C49 100%);
 }
 
+/* TV Page Specific Styles */
+.tv-hero {
+    background: linear-gradient(135deg, #1E3A8A 0%, #0B3C49 100%);
+}
+
 .mobil-hero .hero-title {
     background: linear-gradient(45deg, #ffffff, #e0f2fe);
     -webkit-background-clip: text;
@@ -2715,6 +2720,91 @@ body {
 .mobil-table .contract-cell {
     text-align: center;
     font-weight: 500;
+}
+
+/* TV Table Styles */
+.tv-table th,
+.tv-table td {
+    padding: 12px 8px;
+    text-align: left;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.tv-table .channels-cell {
+    font-weight: 600;
+    color: #1f2937;
+    text-align: center;
+}
+
+.tv-table .package-cell {
+    font-weight: 500;
+    color: #374151;
+}
+
+.tv-table .contract-cell {
+    text-align: center;
+    font-weight: 500;
+}
+
+.tv-table .category-cell {
+    text-align: center;
+}
+
+/* Category Badges */
+.category-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    text-align: center;
+}
+
+.category-basis {
+    background-color: #f3f4f6;
+    color: #374151;
+}
+
+.category-film-&-serier {
+    background-color: #fef3c7;
+    color: #92400e;
+}
+
+.category-sport {
+    background-color: #dbeafe;
+    color: #1e40af;
+}
+
+.category-all-inclusive {
+    background-color: #fce7f3;
+    color: #be185d;
+}
+
+.category-sport-&-film {
+    background-color: #e0e7ff;
+    color: #3730a3;
+}
+
+/* Package Calculator Styles */
+.package-calculator-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #6b7280;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.package-calculator-close:hover {
+    background-color: #f3f4f6;
+    color: #374151;
 }
 
 /* Mobile Card Styles for Mobile Plans */
@@ -2884,5 +2974,21 @@ body {
     .mobile-card .mobile-card-details {
         grid-template-columns: 1fr;
         gap: 8px;
+    }
+    
+    /* TV Table Responsive */
+    .tv-table th,
+    .tv-table td {
+        padding: 8px 6px;
+        font-size: 0.8rem;
+    }
+    
+    .tv-table .category-cell {
+        max-width: 120px;
+    }
+    
+    .category-badge {
+        font-size: 0.7rem;
+        padding: 3px 6px;
     }
 }

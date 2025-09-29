@@ -106,8 +106,15 @@ class TelecomComparison {
             if (errorState) errorState.style.display = 'none';
 
             // Determine which data file to load based on current page
-            const isMobilePage = window.location.pathname.includes('mobil.html');
-            const dataFile = isMobilePage ? './data/mobil.json' : './data/fiber.json';
+            const isMobilePage = window.location.pathname.includes('mobil.html') || window.location.pathname.includes('/mobil');
+            const isTvPage = window.location.pathname.includes('tv.html') || window.location.pathname.includes('/tv');
+            let dataFile = './data/fiber.json';
+            
+            if (isMobilePage) {
+                dataFile = './data/mobil.json';
+            } else if (isTvPage) {
+                dataFile = './data/tv.json';
+            }
 
             // Fetch data from JSON file
             const response = await fetch(dataFile);
@@ -181,6 +188,14 @@ class TelecomComparison {
                     aValue = parseInt(a.data_GB);
                     bValue = parseInt(b.data_GB);
                     break;
+                case 'channels':
+                    aValue = parseInt(a.kanaler);
+                    bValue = parseInt(b.kanaler);
+                    break;
+                case 'package':
+                    aValue = (a.pakke_navn || a.plan).toLowerCase();
+                    bValue = (b.pakke_navn || b.plan).toLowerCase();
+                    break;
                 case 'price':
                     aValue = parseInt(a.pris_mdr || a.price);
                     bValue = parseInt(b.pris_mdr || b.price);
@@ -214,12 +229,16 @@ class TelecomComparison {
             this.filteredData = [...this.data];
         } else {
             const threshold = parseInt(minValue);
-            // Check if we're on mobile page or fiber page
-            const isMobilePage = window.location.pathname.includes('mobil.html');
+            // Check if we're on mobile page, tv page, or fiber page
+            const isMobilePage = window.location.pathname.includes('mobil.html') || window.location.pathname.includes('/mobil');
+            const isTvPage = window.location.pathname.includes('tv.html') || window.location.pathname.includes('/tv');
             
             if (isMobilePage) {
                 // Filter by data GB for mobile
                 this.filteredData = this.data.filter(item => item.data_GB >= threshold);
+            } else if (isTvPage) {
+                // Filter by channels for TV
+                this.filteredData = this.data.filter(item => item.kanaler >= threshold);
             } else {
                 // Filter by speed for fiber
                 this.filteredData = this.data.filter(item => item.speed >= threshold);
@@ -303,9 +322,44 @@ class TelecomComparison {
 
     createTableRow(provider) {
         const row = document.createElement('tr');
-        const isMobilePage = window.location.pathname.includes('mobil.html');
+        const isMobilePage = window.location.pathname.includes('mobil.html') || window.location.pathname.includes('/mobil');
+        const isTvPage = window.location.pathname.includes('tv.html') || window.location.pathname.includes('/tv');
         
-        if (isMobilePage) {
+        if (isTvPage) {
+            // TV table row
+            row.innerHTML = `
+                <td class="provider-cell">
+                    <div class="provider-logo">
+                        <img src="${this.getProviderLogo(provider.udbyder)}" 
+                             alt="${provider.udbyder} logo" 
+                             class="provider-logo-img"
+                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="provider-logo-fallback" style="display: none;">${provider.udbyder.charAt(0)}</div>
+                    </div>
+                    <div class="provider-info">
+                        <h4>${provider.udbyder}</h4>
+                        <p>${provider.pakke_navn}</p>
+                    </div>
+                </td>
+                <td class="package-cell">${provider.pakke_navn}</td>
+                <td class="channels-cell">${provider.kanaler} kanaler</td>
+                <td class="price-cell">${provider.pris_mdr} kr./md.</td>
+                <td class="contract-cell">${provider.bindingstid_mdr} måneder</td>
+                <td class="promotion-cell">
+                    ${provider.kampagne ? `<span class="promotion-badge" title="${provider.kampagne}">${provider.kampagne}</span>` : '-'}
+                </td>
+                <td class="category-cell">
+                    <span class="category-badge category-${provider.kategori.toLowerCase().replace(/\s+/g, '-')}">
+                        ${this.getCategoryIcon(provider.kategori)} ${provider.kategori}
+                    </span>
+                </td>
+                <td class="action-cell">
+                    <button class="action-btn" onclick="handleTvProviderClick(${provider.id}, '${provider.udbyder}', '${provider.pakke_navn}', ${provider.pris_mdr})" data-provider="${provider.udbyder}" data-package="${provider.pakke_navn}" data-price="${provider.pris_mdr}">
+                        Vælg Tilbud
+                    </button>
+                </td>
+            `;
+        } else if (isMobilePage) {
             // Mobile table row
             row.innerHTML = `
                 <td class="provider-cell">
@@ -371,9 +425,59 @@ class TelecomComparison {
     createMobileCard(provider) {
         const card = document.createElement('div');
         card.className = 'mobile-card';
-        const isMobilePage = window.location.pathname.includes('mobil.html');
+        const isMobilePage = window.location.pathname.includes('mobil.html') || window.location.pathname.includes('/mobil');
+        const isTvPage = window.location.pathname.includes('tv.html') || window.location.pathname.includes('/tv');
         
-        if (isMobilePage) {
+        if (isTvPage) {
+            // Mobile card for TV plans
+            card.innerHTML = `
+                <div class="mobile-card-header">
+                    <div class="mobile-card-logo">
+                        <img src="${this.getProviderLogo(provider.udbyder)}" 
+                             alt="${provider.udbyder} logo" 
+                             class="mobile-card-logo-img"
+                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="mobile-card-logo-fallback" style="display: none;">${provider.udbyder.charAt(0)}</div>
+                    </div>
+                    <div class="mobile-card-info">
+                        <h3>${provider.udbyder}</h3>
+                        <p>${provider.pakke_navn}</p>
+                    </div>
+                    <div class="mobile-card-price">
+                        <p class="price">${provider.pris_mdr} kr.</p>
+                        <p class="period">per måned</p>
+                    </div>
+                </div>
+                <div class="mobile-card-body">
+                    <div class="mobile-card-details">
+                        <div class="mobile-card-detail">
+                            <span class="mobile-card-detail-label">Kanaler</span>
+                            <span class="mobile-card-detail-value">${provider.kanaler} kanaler</span>
+                        </div>
+                        <div class="mobile-card-detail">
+                            <span class="mobile-card-detail-label">Kategori</span>
+                            <span class="mobile-card-detail-value">
+                                <span class="category-badge category-${provider.kategori.toLowerCase().replace(/\s+/g, '-')}">
+                                    ${this.getCategoryIcon(provider.kategori)} ${provider.kategori}
+                                </span>
+                            </span>
+                        </div>
+                        <div class="mobile-card-detail">
+                            <span class="mobile-card-detail-label">Bindingstid</span>
+                            <span class="mobile-card-detail-value">${provider.bindingstid_mdr} måneder</span>
+                        </div>
+                    </div>
+                    ${provider.kampagne ? `
+                        <div class="mobile-card-promotion">
+                            <p class="promotion-text">🎁 ${provider.kampagne}</p>
+                        </div>
+                    ` : ''}
+                    <button class="mobile-card-action" onclick="handleTvProviderClick(${provider.id}, '${provider.udbyder}', '${provider.pakke_navn}', ${provider.pris_mdr})">
+                        Vælg Tilbud
+                    </button>
+                </div>
+            `;
+        } else if (isMobilePage) {
             // Mobile card for mobile plans
             card.innerHTML = `
                 <div class="mobile-card-header">
@@ -546,11 +650,27 @@ class TelecomComparison {
             'Oister': this.createLogoSVG('O', '#FF6B35'),
             'Lebara': this.createLogoSVG('L', '#00A86B'),
             'Greentel': this.createLogoSVG('G', '#10B981'),
-            'Hallo Mobil': this.createLogoSVG('H', '#3B82F6')
+            'Hallo Mobil': this.createLogoSVG('H', '#3B82F6'),
+            // TV providers
+            'Boxer': this.createLogoSVG('B', '#FF6B35'),
+            'Telia TV': this.createLogoSVG('TT', '#490094'),
+            'Allente': this.createLogoSVG('A', '#00A86B')
         };
         
         // Return logo or fallback to initials
         return logoMap[providerName] || this.createLogoSVG(providerName.charAt(0), '#00A86B');
+    }
+    
+    getCategoryIcon(category) {
+        const iconMap = {
+            'Basis': '📺',
+            'Film & Serier': '🎬',
+            'Sport': '⚽',
+            'All Inclusive': '🌟',
+            'Sport & Film': '⚽🎬'
+        };
+        
+        return iconMap[category] || '📺';
     }
     
     createLogoSVG(text, color) {
@@ -1355,6 +1475,169 @@ function trackMobilProviderRedirect(providerId, providerName, url, isFallbackUrl
 function loadMobilData() {
     if (window.app) {
         window.app.loadComparisonData();
+    }
+}
+
+// Global function for loading TV data (called from tv.html)
+function loadTvData() {
+    if (window.app) {
+        window.app.loadComparisonData();
+    }
+}
+
+// TV provider click handler
+function handleTvProviderClick(providerId, providerName, packageName, price) {
+    // Enhanced TV provider selection with tracking and confirmation
+    const provider = app.filteredData.find(p => p.id === providerId);
+    if (!provider) {
+        console.error('TV provider not found:', providerId);
+        return;
+    }
+
+    // Track the click for analytics
+    trackTvProviderClick(providerId, providerName, packageName, price);
+    
+    // Show confirmation modal before redirect
+    showTvProviderConfirmation(provider);
+}
+
+function trackTvProviderClick(providerId, providerName, packageName, price) {
+    // Analytics tracking for TV providers
+    const clickData = {
+        provider_id: providerId,
+        provider_name: providerName,
+        package_name: packageName,
+        price: price,
+        timestamp: new Date().toISOString(),
+        user_agent: navigator.userAgent,
+        screen_resolution: `${screen.width}x${screen.height}`,
+        referrer: document.referrer
+    };
+    
+    // Log for analytics (in production, send to your analytics service)
+    console.log('TV provider click tracked:', clickData);
+    
+    // Send to analytics service (Google Analytics, Mixpanel, etc.)
+    if (typeof gtag !== 'undefined') {
+        gtag('event', 'tv_provider_click', {
+            'provider_name': providerName,
+            'package_name': packageName,
+            'price': price,
+            'provider_id': providerId
+        });
+    }
+    
+    // Store in localStorage for conversion tracking
+    try {
+        const existingClicks = JSON.parse(localStorage.getItem('tv_provider_clicks') || '[]');
+        existingClicks.push(clickData);
+        localStorage.setItem('tv_provider_clicks', JSON.stringify(existingClicks.slice(-50))); // Keep last 50 clicks
+    } catch (e) {
+        console.warn('Could not store TV click data:', e);
+    }
+}
+
+function showTvProviderConfirmation(provider) {
+    // Create confirmation modal for TV providers
+    const modal = document.createElement('div');
+    modal.className = 'provider-modal';
+    modal.innerHTML = `
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Bekræft valg af ${provider.udbyder}</h3>
+                <button class="modal-close" onclick="closeProviderModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="provider-summary">
+                    <div class="provider-logo-large">${provider.udbyder.charAt(0)}</div>
+                    <div class="provider-details">
+                        <h4>${provider.udbyder}</h4>
+                        <p class="plan-name">${provider.pakke_navn}</p>
+                        <p class="price-highlight">${provider.pris_mdr} kr./md.</p>
+                        <p class="contract-info">Bindingstid: ${provider.bindingstid_mdr} måneder</p>
+                        <p class="channels-info">Kanaler: ${provider.kanaler} kanaler</p>
+                        <p class="category-info">Kategori: ${provider.kategori}</p>
+                        ${provider.kampagne ? `<p class="promotion-info">${provider.kampagne}</p>` : ''}
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <button class="btn-secondary" onclick="closeProviderModal()">Annuller</button>
+                    <button class="btn-primary" onclick="redirectToTvProvider('${provider.udbyder}', ${provider.id})">
+                        Fortsæt til ${provider.udbyder}
+                    </button>
+                </div>
+                <div class="modal-footer">
+                    <p><small>Du vil blive omdirigeret til ${provider.udbyder}'s officielle hjemmeside</small></p>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    document.body.appendChild(modal);
+    document.body.style.overflow = 'hidden';
+    
+    // Close modal on overlay click
+    modal.querySelector('.modal-overlay').addEventListener('click', closeProviderModal);
+    
+    // Close modal on Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeProviderModal();
+        }
+    });
+}
+
+function redirectToTvProvider(providerName, providerId) {
+    // Map of TV provider URLs
+    const providerUrls = {
+        'YouSee': 'https://www.yousee.dk',
+        'Waoo': 'https://www.waoo.dk',
+        'Stofa': 'https://www.stofa.dk',
+        'Boxer': 'https://www.boxer.dk',
+        'Norlys': 'https://www.norlys.dk',
+        'Telia TV': 'https://www.telia.dk',
+        'Allente': 'https://www.allente.dk'
+    };
+    
+    // Get URL or create fallback
+    let url = providerUrls[providerName];
+    
+    if (!url) {
+        // Create fallback URL by cleaning provider name
+        const cleanName = providerName.toLowerCase()
+            .replace(/\s+/g, '')
+            .replace(/[^a-z0-9]/g, '');
+        url = `https://www.${cleanName}.dk`;
+    }
+    
+    // Add UTM parameters for tracking
+    const utmParams = '?utm_source=smartvalg&utm_medium=tv_comparison&utm_campaign=smartvalg';
+    const separator = url.includes('?') ? '&' : '?';
+    url = url + separator + utmParams.substring(1); // Remove the ? from utmParams
+    
+    // Track redirect
+    const isFallbackUrl = !providerUrls[providerName];
+    trackTvProviderRedirect(providerId, providerName, url, isFallbackUrl);
+    
+    // Close modal and redirect
+    closeProviderModal();
+    
+    // Open in new tab to keep user on comparison site
+    window.open(url, '_blank', 'noopener,noreferrer');
+}
+
+function trackTvProviderRedirect(providerId, providerName, url, isFallbackUrl = false) {
+    console.log('Redirecting to TV provider:', providerName, url, isFallbackUrl ? '(fallback URL)' : '(direct URL)');
+    
+    // Track redirect event
+    if (typeof gtag !== 'undefined') {
+        gtag('event', 'tv_provider_redirect', {
+            'provider_name': providerName,
+            'provider_id': providerId,
+            'redirect_url': url,
+            'is_fallback_url': isFallbackUrl
+        });
     }
 }
 
