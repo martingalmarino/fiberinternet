@@ -1,4 +1,6 @@
 {
+  "buildCommand": "echo 'Static site - no build step required'",
+  "outputDirectory": ".",
   "rewrites": [
     {
       "source": "/mobil",
