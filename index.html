@@ -129,11 +129,11 @@
                         <div class="speedtest-alternatives">
                             <p>Eller prøv:</p>
                             <div class="alternative-links">
-                                <a href="https://fast.com/" target="_blank" rel="noopener noreferrer" class="alternative-link">
+                                <a href="https://fast.com/?utm_source=smartvalg&utm_medium=speed_test&utm_campaign=smartvalg" target="_blank" rel="noopener noreferrer" class="alternative-link">
                                     <i class="fas fa-bolt"></i>
                                     Fast.com
                                 </a>
-                                <a href="https://bredbåndstest.dk/" target="_blank" rel="noopener noreferrer" class="alternative-link">
+                                <a href="https://bredbåndstest.dk/?utm_source=smartvalg&utm_medium=speed_test&utm_campaign=smartvalg" target="_blank" rel="noopener noreferrer" class="alternative-link">
                                     <i class="fas fa-globe"></i>
                                     Bredbåndstest.dk
                                 </a>
@@ -487,8 +487,8 @@
         }
         
         function launchSpeedTest() {
-            // Open Speedtest.net in new window with Danish settings
-            const speedtestUrl = 'https://www.speedtest.net/?lang=da';
+            // Open Speedtest.net in new window with Danish settings and UTM tracking
+            const speedtestUrl = 'https://www.speedtest.net/?lang=da&utm_source=smartvalg&utm_medium=speed_test&utm_campaign=smartvalg';
             const newWindow = window.open(
                 speedtestUrl, 
                 'speedtest', 

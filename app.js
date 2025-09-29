@@ -1052,6 +1052,11 @@ function redirectToProvider(providerName, providerId) {
         url = `https://www.${cleanName}.dk`;
     }
     
+    // Add UTM parameters for tracking
+    const utmParams = '?utm_source=smartvalg&utm_medium=table_comparison&utm_campaign=smartvalg';
+    const separator = url.includes('?') ? '&' : '?';
+    url = url + separator + utmParams.substring(1); // Remove the ? from utmParams
+    
     // Track redirect
     const isFallbackUrl = !providerUrls[providerName];
     trackProviderRedirect(providerId, providerName, url, isFallbackUrl);
