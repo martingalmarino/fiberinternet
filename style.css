@@ -2252,3 +2252,189 @@ body {
         font-size: 1rem;
     }
 }
+
+/* Speed Test Section */
+.speed-test-section {
+    background: linear-gradient(135deg, #0B3C49 0%, #1E3A8A 100%);
+    color: white;
+    padding: 80px 0;
+    position: relative;
+}
+
+.speed-test-section .section-title {
+    color: white;
+    text-align: center;
+    margin-bottom: 16px;
+}
+
+.speed-test-section .section-description {
+    color: rgba(255, 255, 255, 0.9);
+    text-align: center;
+    margin-bottom: 48px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.speed-test-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: start;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.speedtest-widget {
+    background: white;
+    border-radius: 16px;
+    padding: 32px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.speedtest-loading {
+    text-align: center;
+    color: #6b7280;
+}
+
+.loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #e5e7eb;
+    border-top: 4px solid #00A86B;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 16px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.speed-test-info {
+    padding: 32px;
+}
+
+.speed-test-info h3 {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 24px;
+}
+
+.speed-test-info ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 32px;
+}
+
+.speed-test-info li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1rem;
+}
+
+.speed-test-info li i {
+    color: #00A86B;
+    font-size: 1.1rem;
+}
+
+.speed-test-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    transition: all 0.2s ease;
+}
+
+.speed-test-close:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
+}
+
+.speedtest-error {
+    text-align: center;
+    color: #6b7280;
+    padding: 32px;
+}
+
+.speedtest-error i {
+    font-size: 3rem;
+    color: #f59e0b;
+    margin-bottom: 16px;
+}
+
+.speedtest-error p {
+    margin-bottom: 24px;
+    font-size: 1.1rem;
+}
+
+/* Mobile Speed Test Responsive */
+@media (max-width: 768px) {
+    .speed-test-section {
+        padding: 40px 0;
+    }
+    
+    .speed-test-container {
+        grid-template-columns: 1fr;
+        gap: 32px;
+        padding: 0 16px;
+    }
+    
+    .speedtest-widget {
+        padding: 24px;
+        min-height: 300px;
+    }
+    
+    .speed-test-info {
+        padding: 24px;
+    }
+    
+    .speed-test-info h3 {
+        font-size: 1.3rem;
+    }
+    
+    .speed-test-close {
+        top: 15px;
+        right: 15px;
+        width: 35px;
+        height: 35px;
+    }
+}
+
+@media (max-width: 480px) {
+    .speed-test-section {
+        padding: 32px 0;
+    }
+    
+    .speed-test-container {
+        gap: 24px;
+    }
+    
+    .speedtest-widget {
+        padding: 20px;
+        min-height: 250px;
+    }
+    
+    .speed-test-info {
+        padding: 20px;
+    }
+}

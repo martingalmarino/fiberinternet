@@ -86,10 +86,42 @@
             <p class="hero-subtitle">Sammenlign priser og hastigheder fra alle store udbydere og spar penge på din internetforbindelse</p>
             <div class="hero-buttons">
                 <button class="btn btn-primary" onclick="scrollToComparison()">Sammenlign Nu</button>
-                <a href="https://www.speedtest.net/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">Test Din Hastighed</a>
+                <button class="btn btn-secondary" onclick="openSpeedTest()">Test Din Hastighed</button>
             </div>
         </div>
     </header>
+
+    <!-- Speed Test Section -->
+    <section id="speed-test" class="speed-test-section" style="display: none;">
+        <div class="container">
+            <h2 class="section-title">Test Din Internet Hastighed</h2>
+            <p class="section-description">Mål din nuværende internetforbindelse for at finde den bedste fiber internet løsning til dig</p>
+            
+            <div class="speed-test-container">
+                <div id="speedtest-widget" class="speedtest-widget">
+                    <div class="speedtest-loading">
+                        <div class="loading-spinner"></div>
+                        <p>Indlæser hastighedstest...</p>
+                    </div>
+                </div>
+                
+                <div class="speed-test-info">
+                    <h3>Hvorfor teste din hastighed?</h3>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Find ud af din nuværende internethastighed</li>
+                        <li><i class="fas fa-check"></i> Sammenlign med tilgængelige fiber tilbud</li>
+                        <li><i class="fas fa-check"></i> Find den perfekte hastighed til dine behov</li>
+                        <li><i class="fas fa-check"></i> Spar penge ved at vælge den rigtige hastighed</li>
+                    </ul>
+                    
+                    <button class="btn btn-primary" onclick="scrollToComparison()">
+                        <i class="fas fa-search"></i>
+                        Sammenlign Fiber Tilbud
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Main Content -->
     <main class="main-content">
@@ -408,5 +440,76 @@
     </footer>
 
     <script src="app.js"></script>
+    
+    <!-- Speedtest.net Widget Script -->
+    <script src="https://c.speedtest.net/speedtest.js"></script>
+    <script>
+        let speedtestWidget = null;
+        
+        function openSpeedTest() {
+            const speedTestSection = document.getElementById('speed-test');
+            speedTestSection.style.display = 'block';
+            speedTestSection.scrollIntoView({ behavior: 'smooth' });
+            
+            // Initialize Speedtest widget if not already done
+            if (!speedtestWidget) {
+                initializeSpeedTest();
+            }
+        }
+        
+        function initializeSpeedTest() {
+            const widgetContainer = document.getElementById('speedtest-widget');
+            
+            try {
+                speedtestWidget = new Speedtest({
+                    "server": "auto",
+                    "timeout": 10000,
+                    "delay": 0,
+                    "show_detailed_results": true,
+                    "container": widgetContainer,
+                    "onComplete": function(results) {
+                        console.log('Speed test completed:', results);
+                        // Optional: Store results for comparison
+                        localStorage.setItem('speedtest_results', JSON.stringify(results));
+                    }
+                });
+            } catch (error) {
+                console.error('Error initializing speedtest:', error);
+                widgetContainer.innerHTML = `
+                    <div class="speedtest-error">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <p>Der opstod en fejl ved indlæsning af hastighedstesten.</p>
+                        <a href="https://www.speedtest.net/" target="_blank" class="btn btn-primary">
+                            Åbn Speedtest.net
+                        </a>
+                    </div>
+                `;
+            }
+        }
+        
+        // Close speed test section
+        function closeSpeedTest() {
+            const speedTestSection = document.getElementById('speed-test');
+            speedTestSection.style.display = 'none';
+            
+            // Stop the test if running
+            if (speedtestWidget && speedtestWidget.stop) {
+                speedtestWidget.stop();
+            }
+        }
+        
+        // Add close button functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add close button to speed test section
+            const speedTestSection = document.getElementById('speed-test');
+            if (speedTestSection) {
+                const closeButton = document.createElement('button');
+                closeButton.innerHTML = '<i class="fas fa-times"></i>';
+                closeButton.className = 'speed-test-close';
+                closeButton.onclick = closeSpeedTest;
+                speedTestSection.querySelector('.container').appendChild(closeButton);
+            }
+        });
+    </script>
 </body>
 </html>
