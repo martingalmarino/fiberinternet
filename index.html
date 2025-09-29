@@ -99,9 +99,21 @@
             
             <div class="speed-test-container">
                 <div id="speedtest-widget" class="speedtest-widget">
-                    <div class="speedtest-loading">
-                        <div class="loading-spinner"></div>
-                        <p>Indlæser hastighedstest...</p>
+                    <iframe 
+                        id="speedtest-iframe"
+                        src="https://www.speedtest.net/embed" 
+                        width="100%" 
+                        height="400" 
+                        frameborder="0"
+                        scrolling="no"
+                        style="border-radius: 8px;"
+                        loading="lazy">
+                    </iframe>
+                    <div class="speedtest-fallback" style="display: none;">
+                        <div class="speedtest-loading">
+                            <div class="loading-spinner"></div>
+                            <p>Indlæser hastighedstest...</p>
+                        </div>
                     </div>
                 </div>
                 
@@ -441,49 +453,17 @@
 
     <script src="app.js"></script>
     
-    <!-- Speedtest.net Widget Script -->
-    <script src="https://c.speedtest.net/speedtest.js"></script>
+    <!-- Speed Test Script -->
     <script>
-        let speedtestWidget = null;
-        
         function openSpeedTest() {
             const speedTestSection = document.getElementById('speed-test');
             speedTestSection.style.display = 'block';
             speedTestSection.scrollIntoView({ behavior: 'smooth' });
             
-            // Initialize Speedtest widget if not already done
-            if (!speedtestWidget) {
-                initializeSpeedTest();
-            }
-        }
-        
-        function initializeSpeedTest() {
-            const widgetContainer = document.getElementById('speedtest-widget');
-            
-            try {
-                speedtestWidget = new Speedtest({
-                    "server": "auto",
-                    "timeout": 10000,
-                    "delay": 0,
-                    "show_detailed_results": true,
-                    "container": widgetContainer,
-                    "onComplete": function(results) {
-                        console.log('Speed test completed:', results);
-                        // Optional: Store results for comparison
-                        localStorage.setItem('speedtest_results', JSON.stringify(results));
-                    }
-                });
-            } catch (error) {
-                console.error('Error initializing speedtest:', error);
-                widgetContainer.innerHTML = `
-                    <div class="speedtest-error">
-                        <i class="fas fa-exclamation-triangle"></i>
-                        <p>Der opstod en fejl ved indlæsning af hastighedstesten.</p>
-                        <a href="https://www.speedtest.net/" target="_blank" class="btn btn-primary">
-                            Åbn Speedtest.net
-                        </a>
-                    </div>
-                `;
+            // Reload iframe to ensure fresh test
+            const iframe = document.getElementById('speedtest-iframe');
+            if (iframe) {
+                iframe.src = iframe.src;
             }
         }
         
@@ -491,11 +471,6 @@
         function closeSpeedTest() {
             const speedTestSection = document.getElementById('speed-test');
             speedTestSection.style.display = 'none';
-            
-            // Stop the test if running
-            if (speedtestWidget && speedtestWidget.stop) {
-                speedtestWidget.stop();
-            }
         }
         
         // Add close button functionality
@@ -508,6 +483,25 @@
                 closeButton.className = 'speed-test-close';
                 closeButton.onclick = closeSpeedTest;
                 speedTestSection.querySelector('.container').appendChild(closeButton);
+            }
+            
+            // Handle iframe load errors
+            const iframe = document.getElementById('speedtest-iframe');
+            if (iframe) {
+                iframe.addEventListener('error', function() {
+                    const fallback = document.querySelector('.speedtest-fallback');
+                    const errorDiv = document.createElement('div');
+                    errorDiv.className = 'speedtest-error';
+                    errorDiv.innerHTML = `
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <p>Der opstod en fejl ved indlæsning af hastighedstesten.</p>
+                        <a href="https://www.speedtest.net/" target="_blank" class="btn btn-primary">
+                            Åbn Speedtest.net
+                        </a>
+                    `;
+                    document.getElementById('speedtest-widget').innerHTML = '';
+                    document.getElementById('speedtest-widget').appendChild(errorDiv);
+                });
             }
         });
     </script>
