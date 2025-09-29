@@ -99,20 +99,45 @@
             
             <div class="speed-test-container">
                 <div id="speedtest-widget" class="speedtest-widget">
-                    <iframe 
-                        id="speedtest-iframe"
-                        src="https://www.speedtest.net/embed" 
-                        width="100%" 
-                        height="400" 
-                        frameborder="0"
-                        scrolling="no"
-                        style="border-radius: 8px;"
-                        loading="lazy">
-                    </iframe>
-                    <div class="speedtest-fallback" style="display: none;">
-                        <div class="speedtest-loading">
-                            <div class="loading-spinner"></div>
-                            <p>Indlæser hastighedstest...</p>
+                    <div class="speedtest-card">
+                        <div class="speedtest-icon">
+                            <i class="fas fa-tachometer-alt"></i>
+                        </div>
+                        <h3>Test Din Internet Hastighed</h3>
+                        <p>Mål din nuværende forbindelse med den mest pålidelige hastighedstest i verden</p>
+                        
+                        <div class="speedtest-features">
+                            <div class="feature-item">
+                                <i class="fas fa-check"></i>
+                                <span>Automatisk server-valg i Danmark</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check"></i>
+                                <span>Præcise resultater på få sekunder</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check"></i>
+                                <span>Gratis og uden registrering</span>
+                            </div>
+                        </div>
+                        
+                        <button class="btn btn-primary speedtest-launch-btn" onclick="launchSpeedTest()">
+                            <i class="fas fa-play"></i>
+                            Start Hastighedstest
+                        </button>
+                        
+                        <div class="speedtest-alternatives">
+                            <p>Eller prøv:</p>
+                            <div class="alternative-links">
+                                <a href="https://fast.com/" target="_blank" rel="noopener noreferrer" class="alternative-link">
+                                    <i class="fas fa-bolt"></i>
+                                    Fast.com
+                                </a>
+                                <a href="https://bredbåndstest.dk/" target="_blank" rel="noopener noreferrer" class="alternative-link">
+                                    <i class="fas fa-globe"></i>
+                                    Bredbåndstest.dk
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -459,12 +484,48 @@
             const speedTestSection = document.getElementById('speed-test');
             speedTestSection.style.display = 'block';
             speedTestSection.scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        function launchSpeedTest() {
+            // Open Speedtest.net in new window with Danish settings
+            const speedtestUrl = 'https://www.speedtest.net/?lang=da';
+            const newWindow = window.open(
+                speedtestUrl, 
+                'speedtest', 
+                'width=800,height=600,scrollbars=yes,resizable=yes'
+            );
             
-            // Reload iframe to ensure fresh test
-            const iframe = document.getElementById('speedtest-iframe');
-            if (iframe) {
-                iframe.src = iframe.src;
+            // Focus the new window
+            if (newWindow) {
+                newWindow.focus();
             }
+            
+            // Track the action
+            console.log('Speed test launched');
+            
+            // Optional: Show a message
+            showSpeedTestMessage();
+        }
+        
+        function showSpeedTestMessage() {
+            // Create a temporary message
+            const message = document.createElement('div');
+            message.className = 'speedtest-message';
+            message.innerHTML = `
+                <div class="message-content">
+                    <i class="fas fa-info-circle"></i>
+                    <p>Hastighedstest åbnet i ny fane. Efter testen kan du vende tilbage her for at sammenligne fiber tilbud.</p>
+                    <button onclick="this.parentElement.parentElement.remove()">OK</button>
+                </div>
+            `;
+            document.body.appendChild(message);
+            
+            // Auto remove after 5 seconds
+            setTimeout(() => {
+                if (message.parentElement) {
+                    message.remove();
+                }
+            }, 5000);
         }
         
         // Close speed test section
@@ -483,25 +544,6 @@
                 closeButton.className = 'speed-test-close';
                 closeButton.onclick = closeSpeedTest;
                 speedTestSection.querySelector('.container').appendChild(closeButton);
-            }
-            
-            // Handle iframe load errors
-            const iframe = document.getElementById('speedtest-iframe');
-            if (iframe) {
-                iframe.addEventListener('error', function() {
-                    const fallback = document.querySelector('.speedtest-fallback');
-                    const errorDiv = document.createElement('div');
-                    errorDiv.className = 'speedtest-error';
-                    errorDiv.innerHTML = `
-                        <i class="fas fa-exclamation-triangle"></i>
-                        <p>Der opstod en fejl ved indlæsning af hastighedstesten.</p>
-                        <a href="https://www.speedtest.net/" target="_blank" class="btn btn-primary">
-                            Åbn Speedtest.net
-                        </a>
-                    `;
-                    document.getElementById('speedtest-widget').innerHTML = '';
-                    document.getElementById('speedtest-widget').appendChild(errorDiv);
-                });
             }
         });
     </script>
