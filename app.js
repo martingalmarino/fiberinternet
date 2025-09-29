@@ -1082,7 +1082,7 @@ let app;
 
 document.addEventListener('DOMContentLoaded', () => {
     app = new TelecomComparison();
+    // Make app globally available for debugging
+    window.app = app;
+    console.log('App initialized and available globally:', window.app);
 });
-
-// Make app globally available for debugging
-window.app = app;
