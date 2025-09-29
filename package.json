@@ -1,0 +1,35 @@
+{
+  "name": "smartvalg-telecom-comparison",
+  "version": "1.0.0",
+  "description": "SmartValg - Telecom & Home Digital DK comparison platform for fiber internet and mobile plans",
+  "main": "index.html",
+  "scripts": {
+    "dev": "vercel dev",
+    "build": "echo 'Static site - no build step required'",
+    "deploy": "vercel --prod",
+    "preview": "vercel"
+  },
+  "keywords": [
+    "telecom",
+    "fiber",
+    "mobile",
+    "comparison",
+    "denmark",
+    "internet",
+    "mobilabonnement",
+    "sammenligning"
+  ],
+  "author": "SmartValg Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/smartvalg/telecom-comparison"
+  },
+  "homepage": "https://smartvalg.net",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "devDependencies": {
+    "vercel": "^32.0.0"
+  }
+}

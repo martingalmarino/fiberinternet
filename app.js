@@ -105,8 +105,12 @@ class TelecomComparison {
             if (comparisonContainer) comparisonContainer.style.display = 'none';
             if (errorState) errorState.style.display = 'none';
 
+            // Determine which data file to load based on current page
+            const isMobilePage = window.location.pathname.includes('mobil.html');
+            const dataFile = isMobilePage ? './data/mobil.json' : './data/fiber.json';
+
             // Fetch data from JSON file
-            const response = await fetch('./data/fiber.json');
+            const response = await fetch(dataFile);
             
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
@@ -166,20 +170,28 @@ class TelecomComparison {
 
             switch (this.sortColumn) {
                 case 'provider':
-                    aValue = a.provider.toLowerCase();
-                    bValue = b.provider.toLowerCase();
+                    aValue = (a.udbyder || a.provider).toLowerCase();
+                    bValue = (b.udbyder || b.provider).toLowerCase();
                     break;
                 case 'speed':
                     aValue = parseInt(a.speed);
                     bValue = parseInt(b.speed);
                     break;
+                case 'data':
+                    aValue = parseInt(a.data_GB);
+                    bValue = parseInt(b.data_GB);
+                    break;
                 case 'price':
-                    aValue = parseInt(a.price);
-                    bValue = parseInt(b.price);
+                    aValue = parseInt(a.pris_mdr || a.price);
+                    bValue = parseInt(b.pris_mdr || b.price);
                     break;
                 case 'contract':
-                    aValue = parseInt(a.contractLength);
-                    bValue = parseInt(b.contractLength);
+                    aValue = parseInt(a.bindingstid_mdr || a.contractLength);
+                    bValue = parseInt(b.bindingstid_mdr || b.contractLength);
+                    break;
+                case 'roaming':
+                    aValue = a.roaming_EU ? 1 : 0;
+                    bValue = b.roaming_EU ? 1 : 0;
                     break;
                 default:
                     return 0;
@@ -195,14 +207,23 @@ class TelecomComparison {
         });
     }
 
-    handleFilter(minSpeed) {
-        this.currentFilter = minSpeed;
+    handleFilter(minValue) {
+        this.currentFilter = minValue;
         
-        if (minSpeed === 'all') {
+        if (minValue === 'all') {
             this.filteredData = [...this.data];
         } else {
-            const speedThreshold = parseInt(minSpeed);
-            this.filteredData = this.data.filter(item => item.speed >= speedThreshold);
+            const threshold = parseInt(minValue);
+            // Check if we're on mobile page or fiber page
+            const isMobilePage = window.location.pathname.includes('mobil.html');
+            
+            if (isMobilePage) {
+                // Filter by data GB for mobile
+                this.filteredData = this.data.filter(item => item.data_GB >= threshold);
+            } else {
+                // Filter by speed for fiber
+                this.filteredData = this.data.filter(item => item.speed >= threshold);
+            }
         }
 
         // Reapply current sorting
@@ -282,33 +303,67 @@ class TelecomComparison {
 
     createTableRow(provider) {
         const row = document.createElement('tr');
+        const isMobilePage = window.location.pathname.includes('mobil.html');
         
-        row.innerHTML = `
-            <td class="provider-cell">
-                <div class="provider-logo">
-                    <img src="${this.getProviderLogo(provider.provider)}" 
-                         alt="${provider.provider} logo" 
-                         class="provider-logo-img"
-                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                    <div class="provider-logo-fallback" style="display: none;">${provider.provider.charAt(0)}</div>
-                </div>
-                <div class="provider-info">
-                    <h4>${provider.provider}</h4>
-                    <p>${this.getCleanPlanName(provider.plan, provider.provider)}</p>
-                </div>
-            </td>
-            <td class="speed-cell">${provider.speed} Mbit/s</td>
-            <td class="price-cell">${provider.price} kr./md.</td>
-            <td class="contract-cell">${provider.contractLength} måneder</td>
-            <td class="promotion-cell">
-                ${provider.promotion ? `<span class="promotion-badge" title="${provider.promotion}">${provider.promotion}</span>` : '-'}
-            </td>
-            <td class="action-cell">
-                <button class="action-btn" onclick="handleProviderClick(${provider.id}, '${provider.provider}', '${provider.plan}', ${provider.price})" data-provider="${provider.provider}" data-plan="${provider.plan}" data-price="${provider.price}">
-                    Vælg Tilbud
-                </button>
-            </td>
-        `;
+        if (isMobilePage) {
+            // Mobile table row
+            row.innerHTML = `
+                <td class="provider-cell">
+                    <div class="provider-logo">
+                        <img src="${this.getProviderLogo(provider.udbyder)}" 
+                             alt="${provider.udbyder} logo" 
+                             class="provider-logo-img"
+                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="provider-logo-fallback" style="display: none;">${provider.udbyder.charAt(0)}</div>
+                    </div>
+                    <div class="provider-info">
+                        <h4>${provider.udbyder}</h4>
+                        <p>${provider.data_GB} GB plan</p>
+                    </div>
+                </td>
+                <td class="data-cell">${provider.data_GB} GB</td>
+                <td class="price-cell">${provider.pris_mdr} kr./md.</td>
+                <td class="roaming-cell">${provider.roaming_EU ? '<i class="fas fa-check text-success"></i>' : '<i class="fas fa-times text-danger"></i>'}</td>
+                <td class="family-cell">${provider.familierabat}</td>
+                <td class="contract-cell">${provider.bindingstid_mdr} måneder</td>
+                <td class="promotion-cell">
+                    ${provider.kampagne ? `<span class="promotion-badge" title="${provider.kampagne}">${provider.kampagne}</span>` : '-'}
+                </td>
+                <td class="action-cell">
+                    <button class="action-btn" onclick="handleMobilProviderClick(${provider.id}, '${provider.udbyder}', ${provider.data_GB}, ${provider.pris_mdr})" data-provider="${provider.udbyder}" data-data="${provider.data_GB}" data-price="${provider.pris_mdr}">
+                        Vælg Tilbud
+                    </button>
+                </td>
+            `;
+        } else {
+            // Fiber table row
+            row.innerHTML = `
+                <td class="provider-cell">
+                    <div class="provider-logo">
+                        <img src="${this.getProviderLogo(provider.provider)}" 
+                             alt="${provider.provider} logo" 
+                             class="provider-logo-img"
+                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="provider-logo-fallback" style="display: none;">${provider.provider.charAt(0)}</div>
+                    </div>
+                    <div class="provider-info">
+                        <h4>${provider.provider}</h4>
+                        <p>${this.getCleanPlanName(provider.plan, provider.provider)}</p>
+                    </div>
+                </td>
+                <td class="speed-cell">${provider.speed} Mbit/s</td>
+                <td class="price-cell">${provider.price} kr./md.</td>
+                <td class="contract-cell">${provider.contractLength} måneder</td>
+                <td class="promotion-cell">
+                    ${provider.promotion ? `<span class="promotion-badge" title="${provider.promotion}">${provider.promotion}</span>` : '-'}
+                </td>
+                <td class="action-cell">
+                    <button class="action-btn" onclick="handleProviderClick(${provider.id}, '${provider.provider}', '${provider.plan}', ${provider.price})" data-provider="${provider.provider}" data-plan="${provider.plan}" data-price="${provider.price}">
+                        Vælg Tilbud
+                    </button>
+                </td>
+            `;
+        }
 
         return row;
     }
@@ -316,46 +371,99 @@ class TelecomComparison {
     createMobileCard(provider) {
         const card = document.createElement('div');
         card.className = 'mobile-card';
+        const isMobilePage = window.location.pathname.includes('mobil.html');
         
-        card.innerHTML = `
-            <div class="mobile-card-header">
-                <div class="mobile-card-logo">
-                    <img src="${this.getProviderLogo(provider.provider)}" 
-                         alt="${provider.provider} logo" 
-                         class="mobile-card-logo-img"
-                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                    <div class="mobile-card-logo-fallback" style="display: none;">${provider.provider.charAt(0)}</div>
-                </div>
-                <div class="mobile-card-info">
-                    <h3>${provider.provider}</h3>
-                    <p>${this.getCleanPlanName(provider.plan, provider.provider)}</p>
-                </div>
-                <div class="mobile-card-price">
-                    <p class="price">${provider.price} kr.</p>
-                    <p class="period">per måned</p>
-                </div>
-            </div>
-            <div class="mobile-card-body">
-                <div class="mobile-card-details">
-                    <div class="mobile-card-detail">
-                        <span class="mobile-card-detail-label">Hastighed</span>
-                        <span class="mobile-card-detail-value">${provider.speed} Mbit/s</span>
+        if (isMobilePage) {
+            // Mobile card for mobile plans
+            card.innerHTML = `
+                <div class="mobile-card-header">
+                    <div class="mobile-card-logo">
+                        <img src="${this.getProviderLogo(provider.udbyder)}" 
+                             alt="${provider.udbyder} logo" 
+                             class="mobile-card-logo-img"
+                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="mobile-card-logo-fallback" style="display: none;">${provider.udbyder.charAt(0)}</div>
                     </div>
-                    <div class="mobile-card-detail">
-                        <span class="mobile-card-detail-label">Kontrakt</span>
-                        <span class="mobile-card-detail-value">${provider.contractLength} måneder</span>
+                    <div class="mobile-card-info">
+                        <h3>${provider.udbyder}</h3>
+                        <p>${provider.data_GB} GB plan</p>
+                    </div>
+                    <div class="mobile-card-price">
+                        <p class="price">${provider.pris_mdr} kr.</p>
+                        <p class="period">per måned</p>
                     </div>
                 </div>
-                ${provider.promotion ? `
-                    <div class="mobile-card-promotion">
-                        <p class="promotion-text">🎁 ${provider.promotion}</p>
+                <div class="mobile-card-body">
+                    <div class="mobile-card-details">
+                        <div class="mobile-card-detail">
+                            <span class="mobile-card-detail-label">Data</span>
+                            <span class="mobile-card-detail-value">${provider.data_GB} GB</span>
+                        </div>
+                        <div class="mobile-card-detail">
+                            <span class="mobile-card-detail-label">Roaming EU</span>
+                            <span class="mobile-card-detail-value">${provider.roaming_EU ? '<i class="fas fa-check text-success"></i> Ja' : '<i class="fas fa-times text-danger"></i> Nej'}</span>
+                        </div>
+                        <div class="mobile-card-detail">
+                            <span class="mobile-card-detail-label">Bindingstid</span>
+                            <span class="mobile-card-detail-value">${provider.bindingstid_mdr} måneder</span>
+                        </div>
+                        <div class="mobile-card-detail">
+                            <span class="mobile-card-detail-label">Familierabat</span>
+                            <span class="mobile-card-detail-value">${provider.familierabat}</span>
+                        </div>
                     </div>
-                ` : ''}
-                <button class="mobile-card-action" onclick="handleProviderClick(${provider.id}, '${provider.provider}', '${provider.plan}', ${provider.price})">
-                    Vælg Tilbud
-                </button>
-            </div>
-        `;
+                    ${provider.kampagne ? `
+                        <div class="mobile-card-promotion">
+                            <p class="promotion-text">🎁 ${provider.kampagne}</p>
+                        </div>
+                    ` : ''}
+                    <button class="mobile-card-action" onclick="handleMobilProviderClick(${provider.id}, '${provider.udbyder}', ${provider.data_GB}, ${provider.pris_mdr})">
+                        Vælg Tilbud
+                    </button>
+                </div>
+            `;
+        } else {
+            // Mobile card for fiber plans
+            card.innerHTML = `
+                <div class="mobile-card-header">
+                    <div class="mobile-card-logo">
+                        <img src="${this.getProviderLogo(provider.provider)}" 
+                             alt="${provider.provider} logo" 
+                             class="mobile-card-logo-img"
+                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="mobile-card-logo-fallback" style="display: none;">${provider.provider.charAt(0)}</div>
+                    </div>
+                    <div class="mobile-card-info">
+                        <h3>${provider.provider}</h3>
+                        <p>${this.getCleanPlanName(provider.plan, provider.provider)}</p>
+                    </div>
+                    <div class="mobile-card-price">
+                        <p class="price">${provider.price} kr.</p>
+                        <p class="period">per måned</p>
+                    </div>
+                </div>
+                <div class="mobile-card-body">
+                    <div class="mobile-card-details">
+                        <div class="mobile-card-detail">
+                            <span class="mobile-card-detail-label">Hastighed</span>
+                            <span class="mobile-card-detail-value">${provider.speed} Mbit/s</span>
+                        </div>
+                        <div class="mobile-card-detail">
+                            <span class="mobile-card-detail-label">Kontrakt</span>
+                            <span class="mobile-card-detail-value">${provider.contractLength} måneder</span>
+                        </div>
+                    </div>
+                    ${provider.promotion ? `
+                        <div class="mobile-card-promotion">
+                            <p class="promotion-text">🎁 ${provider.promotion}</p>
+                        </div>
+                    ` : ''}
+                    <button class="mobile-card-action" onclick="handleProviderClick(${provider.id}, '${provider.provider}', '${provider.plan}', ${provider.price})">
+                        Vælg Tilbud
+                    </button>
+                </div>
+            `;
+        }
         
         return card;
     }
@@ -433,7 +541,12 @@ class TelecomComparison {
             'Fullrate': this.createLogoSVG('FR', '#F97316'),
             'Energi Fyn': this.createLogoSVG('EF', '#06B6D4'),
             'SEAS-NVE': this.createLogoSVG('SN', '#8B5A2B'),
-            'Fibia': this.createLogoSVG('F', '#EC4899')
+            'Fibia': this.createLogoSVG('F', '#EC4899'),
+            // Mobile providers
+            'Oister': this.createLogoSVG('O', '#FF6B35'),
+            'Lebara': this.createLogoSVG('L', '#00A86B'),
+            'Greentel': this.createLogoSVG('G', '#10B981'),
+            'Hallo Mobil': this.createLogoSVG('H', '#3B82F6')
         };
         
         // Return logo or fallback to initials
@@ -1079,6 +1192,169 @@ function trackProviderRedirect(providerId, providerName, url, isFallbackUrl = fa
             'redirect_url': url,
             'is_fallback_url': isFallbackUrl
         });
+    }
+}
+
+// Mobile provider click handler
+function handleMobilProviderClick(providerId, providerName, dataGB, price) {
+    // Enhanced mobile provider selection with tracking and confirmation
+    const provider = app.filteredData.find(p => p.id === providerId);
+    if (!provider) {
+        console.error('Mobile provider not found:', providerId);
+        return;
+    }
+
+    // Track the click for analytics
+    trackMobilProviderClick(providerId, providerName, dataGB, price);
+    
+    // Show confirmation modal before redirect
+    showMobilProviderConfirmation(provider);
+}
+
+function trackMobilProviderClick(providerId, providerName, dataGB, price) {
+    // Analytics tracking for mobile providers
+    const clickData = {
+        provider_id: providerId,
+        provider_name: providerName,
+        data_gb: dataGB,
+        price: price,
+        timestamp: new Date().toISOString(),
+        user_agent: navigator.userAgent,
+        screen_resolution: `${screen.width}x${screen.height}`,
+        referrer: document.referrer
+    };
+    
+    // Log for analytics (in production, send to your analytics service)
+    console.log('Mobile provider click tracked:', clickData);
+    
+    // Send to analytics service (Google Analytics, Mixpanel, etc.)
+    if (typeof gtag !== 'undefined') {
+        gtag('event', 'mobile_provider_click', {
+            'provider_name': providerName,
+            'data_gb': dataGB,
+            'price': price,
+            'provider_id': providerId
+        });
+    }
+    
+    // Store in localStorage for conversion tracking
+    try {
+        const existingClicks = JSON.parse(localStorage.getItem('mobile_provider_clicks') || '[]');
+        existingClicks.push(clickData);
+        localStorage.setItem('mobile_provider_clicks', JSON.stringify(existingClicks.slice(-50))); // Keep last 50 clicks
+    } catch (e) {
+        console.warn('Could not store mobile click data:', e);
+    }
+}
+
+function showMobilProviderConfirmation(provider) {
+    // Create confirmation modal for mobile providers
+    const modal = document.createElement('div');
+    modal.className = 'provider-modal';
+    modal.innerHTML = `
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Bekræft valg af ${provider.udbyder}</h3>
+                <button class="modal-close" onclick="closeProviderModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="provider-summary">
+                    <div class="provider-logo-large">${provider.udbyder.charAt(0)}</div>
+                    <div class="provider-details">
+                        <h4>${provider.udbyder}</h4>
+                        <p class="plan-name">${provider.data_GB} GB plan</p>
+                        <p class="price-highlight">${provider.pris_mdr} kr./md.</p>
+                        <p class="contract-info">Bindingstid: ${provider.bindingstid_mdr} måneder</p>
+                        <p class="roaming-info">Roaming EU: ${provider.roaming_EU ? 'Ja' : 'Nej'}</p>
+                        <p class="family-info">Familierabat: ${provider.familierabat}</p>
+                        ${provider.kampagne ? `<p class="promotion-info">${provider.kampagne}</p>` : ''}
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <button class="btn-secondary" onclick="closeProviderModal()">Annuller</button>
+                    <button class="btn-primary" onclick="redirectToMobilProvider('${provider.udbyder}', ${provider.id})">
+                        Fortsæt til ${provider.udbyder}
+                    </button>
+                </div>
+                <div class="modal-footer">
+                    <p><small>Du vil blive omdirigeret til ${provider.udbyder}'s officielle hjemmeside</small></p>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    document.body.appendChild(modal);
+    document.body.style.overflow = 'hidden';
+    
+    // Close modal on overlay click
+    modal.querySelector('.modal-overlay').addEventListener('click', closeProviderModal);
+    
+    // Close modal on Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeProviderModal();
+        }
+    });
+}
+
+function redirectToMobilProvider(providerName, providerId) {
+    // Map of mobile provider URLs
+    const providerUrls = {
+        'Telia': 'https://www.telia.dk',
+        'Telenor': 'https://www.telenor.dk',
+        'CBB': 'https://www.cbb.dk',
+        'Oister': 'https://www.oister.dk',
+        'Lebara': 'https://www.lebara.dk',
+        'Greentel': 'https://www.greentel.dk',
+        'Hallo Mobil': 'https://www.hallomobil.dk'
+    };
+    
+    // Get URL or create fallback
+    let url = providerUrls[providerName];
+    
+    if (!url) {
+        // Create fallback URL by cleaning provider name
+        const cleanName = providerName.toLowerCase()
+            .replace(/\s+/g, '')
+            .replace(/[^a-z0-9]/g, '');
+        url = `https://www.${cleanName}.dk`;
+    }
+    
+    // Add UTM parameters for tracking
+    const utmParams = '?utm_source=smartvalg&utm_medium=mobile_comparison&utm_campaign=smartvalg';
+    const separator = url.includes('?') ? '&' : '?';
+    url = url + separator + utmParams.substring(1); // Remove the ? from utmParams
+    
+    // Track redirect
+    const isFallbackUrl = !providerUrls[providerName];
+    trackMobilProviderRedirect(providerId, providerName, url, isFallbackUrl);
+    
+    // Close modal and redirect
+    closeProviderModal();
+    
+    // Open in new tab to keep user on comparison site
+    window.open(url, '_blank', 'noopener,noreferrer');
+}
+
+function trackMobilProviderRedirect(providerId, providerName, url, isFallbackUrl = false) {
+    console.log('Redirecting to mobile provider:', providerName, url, isFallbackUrl ? '(fallback URL)' : '(direct URL)');
+    
+    // Track redirect event
+    if (typeof gtag !== 'undefined') {
+        gtag('event', 'mobile_provider_redirect', {
+            'provider_name': providerName,
+            'provider_id': providerId,
+            'redirect_url': url,
+            'is_fallback_url': isFallbackUrl
+        });
+    }
+}
+
+// Global function for loading mobile data (called from mobil.html)
+function loadMobilData() {
+    if (window.app) {
+        window.app.loadComparisonData();
     }
 }
 

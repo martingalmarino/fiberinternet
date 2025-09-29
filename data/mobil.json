@@ -1,0 +1,134 @@
+[
+  {
+    "id": 1,
+    "udbyder": "Telia",
+    "data_GB": 50,
+    "pris_mdr": 199,
+    "roaming_EU": true,
+    "familierabat": "Ja, -50 kr. pr. ekstra linje",
+    "bindingstid_mdr": 6,
+    "kampagne": "Første måned gratis",
+    "cta_url": "#"
+  },
+  {
+    "id": 2,
+    "udbyder": "Telia",
+    "data_GB": 200,
+    "pris_mdr": 299,
+    "roaming_EU": true,
+    "familierabat": "Ja, -100 kr. pr. familiepakke",
+    "bindingstid_mdr": 12,
+    "kampagne": "Gratis oprettelse",
+    "cta_url": "#"
+  },
+  {
+    "id": 3,
+    "udbyder": "Telenor",
+    "data_GB": 20,
+    "pris_mdr": 149,
+    "roaming_EU": true,
+    "familierabat": "Ja, -30 kr. pr. ekstra linje",
+    "bindingstid_mdr": 6,
+    "kampagne": "Halv pris de første 2 måneder",
+    "cta_url": "#"
+  },
+  {
+    "id": 4,
+    "udbyder": "Telenor",
+    "data_GB": 100,
+    "pris_mdr": 249,
+    "roaming_EU": true,
+    "familierabat": "Ja, -100 kr. pr. familiepakke",
+    "bindingstid_mdr": 12,
+    "kampagne": "Gratis SIM-kort",
+    "cta_url": "#"
+  },
+  {
+    "id": 5,
+    "udbyder": "CBB",
+    "data_GB": 30,
+    "pris_mdr": 129,
+    "roaming_EU": true,
+    "familierabat": "Nej",
+    "bindingstid_mdr": 0,
+    "kampagne": "Gratis oprettelse",
+    "cta_url": "#"
+  },
+  {
+    "id": 6,
+    "udbyder": "CBB",
+    "data_GB": 100,
+    "pris_mdr": 149,
+    "roaming_EU": true,
+    "familierabat": "Nej",
+    "bindingstid_mdr": 0,
+    "kampagne": "Ingen bindingstid",
+    "cta_url": "#"
+  },
+  {
+    "id": 7,
+    "udbyder": "Oister",
+    "data_GB": 20,
+    "pris_mdr": 89,
+    "roaming_EU": true,
+    "familierabat": "Nej",
+    "bindingstid_mdr": 0,
+    "kampagne": "Billigste basisplan",
+    "cta_url": "#"
+  },
+  {
+    "id": 8,
+    "udbyder": "Oister",
+    "data_GB": 200,
+    "pris_mdr": 179,
+    "roaming_EU": true,
+    "familierabat": "Nej",
+    "bindingstid_mdr": 0,
+    "kampagne": "Dobbel data første 3 måneder",
+    "cta_url": "#"
+  },
+  {
+    "id": 9,
+    "udbyder": "Lebara",
+    "data_GB": 10,
+    "pris_mdr": 79,
+    "roaming_EU": true,
+    "familierabat": "Nej",
+    "bindingstid_mdr": 0,
+    "kampagne": "Gratis opkald til udvalgte lande",
+    "cta_url": "#"
+  },
+  {
+    "id": 10,
+    "udbyder": "Lebara",
+    "data_GB": 50,
+    "pris_mdr": 129,
+    "roaming_EU": true,
+    "familierabat": "Nej",
+    "bindingstid_mdr": 0,
+    "kampagne": "Første måned gratis",
+    "cta_url": "#"
+  },
+  {
+    "id": 11,
+    "udbyder": "Greentel",
+    "data_GB": 40,
+    "pris_mdr": 109,
+    "roaming_EU": true,
+    "familierabat": "Ja, 2. simkort til halv pris",
+    "bindingstid_mdr": 0,
+    "kampagne": "Klimaneutral udbyder",
+    "cta_url": "#"
+  },
+  {
+    "id": 12,
+    "udbyder": "Hallo Mobil",
+    "data_GB": 20,
+    "pris_mdr": 99,
+    "roaming_EU": true,
+    "familierabat": "Nej",
+    "bindingstid_mdr": 0,
+    "kampagne": "Gratis SIM-kort",
+    "cta_url": "#"
+  }
+]

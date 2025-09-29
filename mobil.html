@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bedste Mobilabonnement 2025 - Sammenlign Billigste Mobil Med Roaming | SmartValg</title>
+    <meta name="description" content="Sammenlign de bedste mobilabonnementer i Danmark 2025. Find billigste mobil med roaming EU, familierabat og ingen bindingstid. Opdaterede priser og tilbud.">
+    <meta name="keywords" content="mobilabonnement sammenligning, bedste mobilabonnement 2025, billigste mobil med roaming, mobilabonnement danmark, familierabat mobil">
+    
+    <!-- Google Search Console Verification -->
+    <meta name="google-site-verification" content="JcxoaE_R0at8b-3IG6Amct-QZV-qWw1iwO0SnaBLGl0" />
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="manifest" href="site.webmanifest">
+    
+    <!-- JSON-LD Schema for Mobile Plans -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Hvad er det billigste mobilabonnement i Danmark?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Det billigste mobilabonnement starter fra 79 kr./md. med 10 GB data. Priserne varierer afhængigt af dataforbrug, roaming og bindingstid. Vores sammenligning viser de aktuelle tilbud fra alle store udbydere."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Hvilke mobilabonnementer har gratis roaming i EU?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "De fleste danske mobilabonnementer inkluderer gratis roaming i EU som standard. Dette betyder, at du kan bruge din data, ringe og sende SMS i EU-lande uden ekstra omkostninger."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Er der familierabat på mobilabonnementer?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ja, mange udbydere tilbyder familierabat på 30-100 kr. pr. ekstra linje. Telia og Telenor har særligt gode familiepakker, mens CBB og Oister typisk ikke tilbyder familierabat."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Hvor meget data har jeg brug for?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "For almindelig brug (surfning, sociale medier, e-mail) er 20-50 GB tilstrækkeligt. For streaming, gaming eller hvis flere personer deler abonnementet, anbefales 100+ GB. Vores beregner hjælper dig med at finde det rigtige dataforbrug."
+          }
+        }
+      ]
+    }
+    </script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="main-nav">
+        <div class="container">
+            <div class="nav-content">
+                <div class="nav-logo">
+                    <a href="index.html">
+                        <img src="favicon.svg" alt="SmartValg Logo" class="logo-img">
+                        <span class="logo-text">SmartValg</span>
+                    </a>
+                </div>
+                <div class="nav-links">
+                    <a href="index.html" class="nav-link">Fiber</a>
+                    <a href="mobil.html" class="nav-link active">Mobil</a>
+                    <a href="#" class="nav-link">TV</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero mobil-hero">
+        <div class="hero-content">
+            <h1 class="hero-title">Find Danmarks Bedste Mobilabonnement</h1>
+            <p class="hero-subtitle">Sammenlign priser, data og roaming fra alle store udbydere og spar penge på dit mobilabonnement</p>
+            <div class="hero-buttons">
+                <button class="btn btn-primary" onclick="scrollToComparison()">Sammenlign Nu</button>
+                <button class="btn btn-secondary" onclick="openDataCalculator()">Beregn Dataforbrug</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <section class="comparison-section">
+            <div class="container">
+                <h2 class="section-title">Mobilabonnement Sammenligning</h2>
+                <p class="section-description">Se alle tilgængelige mobilabonnementer i Danmark og find det bedste til dig</p>
+                
+                <!-- Loading State -->
+                <div id="loading" class="loading">
+                    <div class="spinner"></div>
+                    <p>Indlæser tilbud...</p>
+                </div>
+
+                <!-- Comparison Table -->
+                <div id="comparison-container" class="comparison-container" style="display: none;">
+                    <div class="table-controls">
+                        <div class="filter-controls">
+                            <label for="data-filter">Minimum data:</label>
+                            <select id="data-filter">
+                                <option value="all">Alle data</option>
+                                <option value="20">20+ GB</option>
+                                <option value="50">50+ GB</option>
+                                <option value="100">100+ GB</option>
+                                <option value="200">200+ GB</option>
+                            </select>
+                        </div>
+                        <div class="sort-controls">
+                            <span>Sorter efter:</span>
+                            <div class="sort-buttons-container">
+                                <button class="sort-btn active" data-sort="price">Pris</button>
+                                <button class="sort-btn" data-sort="data">Data</button>
+                                <button class="sort-btn" data-sort="contract">Bindingstid</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Desktop Table -->
+                    <div class="table-responsive">
+                        <div class="table-wrapper">
+                            <table id="comparison-table" class="comparison-table mobil-table">
+                                <thead>
+                                    <tr>
+                                        <th class="sortable" data-sort="provider">Udbyder</th>
+                                        <th class="sortable" data-sort="data">Data (GB)</th>
+                                        <th class="sortable" data-sort="price">Pris pr. måned (DKK)</th>
+                                        <th class="sortable" data-sort="roaming">Roaming EU</th>
+                                        <th>Familierabat</th>
+                                        <th class="sortable" data-sort="contract">Bindingstid</th>
+                                        <th>Kampagne</th>
+                                        <th>Handling</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="table-body">
+                                    <!-- Data will be populated by JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Mobile Cards -->
+                    <div class="mobile-cards-container" id="mobile-cards-container">
+                        <!-- Mobile cards will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Error State -->
+                <div id="error-state" class="error-state" style="display: none;">
+                    <p>Der opstod en fejl ved indlæsning af data. Prøv igen senere.</p>
+                    <button class="btn btn-primary" onclick="loadMobilData()">Prøv Igen</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Data Calculator Section -->
+        <section id="data-calculator" class="calculator-section" style="display: none;">
+            <div class="container">
+                <h2 class="section-title">Dataforbrug Beregner</h2>
+                <p class="section-description">Beregn hvor meget data du har brug for baseret på din brug</p>
+                
+                <div class="calculator-card">
+                    <div class="calculator-form">
+                        <div class="calculator-inputs">
+                            <div class="input-group">
+                                <label for="calculator-streaming">Streaming (timer/måned):</label>
+                                <input type="number" id="calculator-streaming" value="20" min="0">
+                            </div>
+                            
+                            <div class="input-group">
+                                <label for="calculator-social">Sociale medier (timer/måned):</label>
+                                <input type="number" id="calculator-social" value="30" min="0">
+                            </div>
+                            
+                            <div class="input-group">
+                                <label for="calculator-gaming">Gaming (timer/måned):</label>
+                                <input type="number" id="calculator-gaming" value="10" min="0">
+                            </div>
+                            
+                            <div class="input-group">
+                                <label for="calculator-work">Arbejde/skole (timer/måned):</label>
+                                <input type="number" id="calculator-work" value="40" min="0">
+                            </div>
+                        </div>
+                        
+                        <div class="calculator-actions">
+                            <button class="btn btn-primary calculator-btn" onclick="calculateDataUsage()">
+                                <i class="fas fa-calculator"></i>
+                                Beregn Dataforbrug
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="calculator-results" id="data-calculator-results" style="display: none;">
+                        <div class="results-header">
+                            <h3>Dit Anbefalede Dataforbrug</h3>
+                        </div>
+                        
+                        <div class="results-content">
+                            <div class="result-item">
+                                <span class="result-label">Estimeret forbrug:</span>
+                                <span class="result-value" id="result-data-usage">-</span>
+                            </div>
+                            
+                            <div class="result-item">
+                                <span class="result-label">Anbefalet plan:</span>
+                                <span class="result-value result-recommended" id="result-recommended-plan">-</span>
+                            </div>
+                        </div>
+                        
+                        <div class="results-footer">
+                            <p class="disclaimer">
+                                <i class="fas fa-info-circle"></i>
+                                Beregningen er vejledende. Dit faktiske forbrug kan variere.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEO Editorial Content -->
+        <section class="seo-content">
+            <div class="container">
+                <h2>Sådan Vælger Du Det Bedste Mobilabonnement i Danmark 2025</h2>
+                <p>
+                    Mobilabonnementer er blevet mere komplekse med forskellige dataforbrug, roaming-omkostninger og familiepakker.
+                    I Danmark tilbyder flere store udbydere forskellige priser og funktioner. Det kan være svært at finde 
+                    den løsning, der passer bedst til både dit behov og din økonomi – derfor gør vores sammenligning det nemt 
+                    at se priser, data og bindingstider ét sted.
+                </p>
+
+                <h3>Hvad Påvirker Prisen på Mobilabonnementer?</h3>
+                <ul>
+                    <li><strong>Dataforbrug (GB):</strong> Jo mere data, jo højere pris – men også mere frihed til streaming og gaming.</li>
+                    <li><strong>Roaming:</strong> Gratis roaming i EU er standard, men tjek altid vilkårene for rejser uden for EU.</li>
+                    <li><strong>Familierabat:</strong> Mange udbydere tilbyder rabat på 30-100 kr. pr. ekstra linje i familiepakker.</li>
+                    <li><strong>Bindingstid:</strong> Abonnementer uden bindingstid er fleksible, men kan koste mere pr. måned.</li>
+                </ul>
+
+                <h3>Mobilabonnementer med Roaming EU</h3>
+                <p>
+                    Alle danske mobilabonnementer inkluderer gratis roaming i EU som standard. Dette betyder, at du kan bruge 
+                    din data, ringe og sende SMS i EU-lande uden ekstra omkostninger. Tjek altid vilkårene for rejser uden for EU, 
+                    da disse kan være dyre.
+                </p>
+
+                <h3>Kom I Gang med at Sammenligne Nu</h3>
+                <p>
+                    Med vores opdaterede 2025-data kan du nemt finde den bedste mobilabonnement løsning på få minutter. 
+                    Klik på <strong>"Vælg Tilbud"</strong> for at komme direkte til udbyderens side og afslutte bestillingen.
+                </p>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="faq-section">
+            <div class="container">
+                <h2 class="section-title">Ofte Stillede Spørgsmål om Mobilabonnementer</h2>
+                <div class="faq-container">
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false">
+                            <span>Hvad er det billigste mobilabonnement i Danmark?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Det billigste mobilabonnement starter fra 79 kr./md. med 10 GB data. Priserne varierer afhængigt af dataforbrug, roaming og bindingstid. Vores sammenligning viser de aktuelle tilbud fra alle store udbydere.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false">
+                            <span>Hvilke mobilabonnementer har gratis roaming i EU?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>De fleste danske mobilabonnementer inkluderer gratis roaming i EU som standard. Dette betyder, at du kan bruge din data, ringe og sende SMS i EU-lande uden ekstra omkostninger.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false">
+                            <span>Er der familierabat på mobilabonnementer?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Ja, mange udbydere tilbyder familierabat på 30-100 kr. pr. ekstra linje. Telia og Telenor har særligt gode familiepakker, mens CBB og Oister typisk ikke tilbyder familierabat.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false">
+                            <span>Hvor meget data har jeg brug for?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>For almindelig brug (surfning, sociale medier, e-mail) er 20-50 GB tilstrækkeligt. For streaming, gaming eller hvis flere personer deler abonnementet, anbefales 100+ GB. Vores beregner hjælper dig med at finde det rigtige dataforbrug.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false">
+                            <span>Kan jeg skifte udbyder uden bindingstid?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Ja, abonnementer uden bindingstid giver dig frihed til at skifte udbyder når som helst. Dette er især praktisk, hvis du finder et bedre tilbud eller flytter til et område med bedre dækning.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false">
+                            <span>Hvad er forskellen mellem 4G og 5G?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>5G er den nyeste generation af mobilnetværk og giver hurtigere hastigheder og lavere latency end 4G. 5G er stadig i udrulning i Danmark, så 4G er stadig den mest stabile løsning i de fleste områder.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features-section">
+            <div class="container">
+                <h2 class="section-title">Hvorfor Vælge Os?</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-mobile-alt"></i></div>
+                        <h3>Hurtig Sammenligning</h3>
+                        <p>Find de bedste mobilabonnementer på få sekunder med vores nemme sammenligningstool</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-piggy-bank"></i></div>
+                        <h3>Spar Penge</h3>
+                        <p>Vi hjælper dig med at finde de billigste tilbud og sparer dig for dyre abonnementer</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-globe-europe"></i></div>
+                        <h3>Roaming Inkluderet</h3>
+                        <p>Alle vores anbefalede abonnementer inkluderer gratis roaming i EU</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Telecom & Home Digital DK</h3>
+                    <p>Danmarks mest pålidelige platform til sammenligning af telekommunikationstjenester</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Produkter</h4>
+                    <ul>
+                        <li><a href="index.html">Fiber Internet</a></li>
+                        <li><a href="mobil.html">Mobilabonnement</a></li>
+                        <li><a href="#">TV Pakker</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Værktøjer</h4>
+                    <ul>
+                        <li><a href="https://www.speedtest.net/" target="_blank" rel="noopener noreferrer">Hastighedstest</a></li>
+                        <li><a href="#" onclick="openDataCalculator()">Dataforbrug Beregner</a></li>
+                        <li><a href="#">Dækning efter Postnummer</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Telecom & Home Digital DK. Alle rettigheder forbeholdes.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+    
+    <!-- Mobile-specific JavaScript -->
+    <script>
+        function openDataCalculator() {
+            const dataCalculatorSection = document.getElementById('data-calculator');
+            dataCalculatorSection.style.display = 'block';
+            dataCalculatorSection.scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        function calculateDataUsage() {
+            const streaming = parseInt(document.getElementById('calculator-streaming').value) || 0;
+            const social = parseInt(document.getElementById('calculator-social').value) || 0;
+            const gaming = parseInt(document.getElementById('calculator-gaming').value) || 0;
+            const work = parseInt(document.getElementById('calculator-work').value) || 0;
+            
+            // Data usage estimates (GB per hour)
+            const streamingGB = streaming * 1.5; // Netflix HD uses ~1.5GB/hour
+            const socialGB = social * 0.1; // Social media uses ~0.1GB/hour
+            const gamingGB = gaming * 0.2; // Mobile gaming uses ~0.2GB/hour
+            const workGB = work * 0.3; // Work/school uses ~0.3GB/hour
+            
+            const totalGB = Math.ceil(streamingGB + socialGB + gamingGB + workGB);
+            
+            // Recommend plan based on usage
+            let recommendedPlan = '';
+            if (totalGB <= 20) {
+                recommendedPlan = '20-30 GB plan';
+            } else if (totalGB <= 50) {
+                recommendedPlan = '50-100 GB plan';
+            } else if (totalGB <= 100) {
+                recommendedPlan = '100-200 GB plan';
+            } else {
+                recommendedPlan = '200+ GB plan';
+            }
+            
+            // Display results
+            document.getElementById('result-data-usage').textContent = `${totalGB} GB/måned`;
+            document.getElementById('result-recommended-plan').textContent = recommendedPlan;
+            
+            // Show results
+            const resultsDiv = document.getElementById('data-calculator-results');
+            resultsDiv.style.display = 'block';
+            resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+        
+        function scrollToComparison() {
+            const comparisonSection = document.querySelector('.comparison-section');
+            if (comparisonSection) {
+                comparisonSection.scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        }
+        
+        // Close data calculator section
+        function closeDataCalculator() {
+            const dataCalculatorSection = document.getElementById('data-calculator');
+            dataCalculatorSection.style.display = 'none';
+        }
+        
+        // Add close button functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add close button to data calculator section
+            const dataCalculatorSection = document.getElementById('data-calculator');
+            if (dataCalculatorSection) {
+                const closeButton = document.createElement('button');
+                closeButton.innerHTML = '<i class="fas fa-times"></i>';
+                closeButton.className = 'data-calculator-close';
+                closeButton.onclick = closeDataCalculator;
+                dataCalculatorSection.querySelector('.container').appendChild(closeButton);
+            }
+        });
+    </script>
+</body>
+</html>
