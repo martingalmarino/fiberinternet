@@ -789,12 +789,15 @@ class TelecomComparison {
         // Determine which page we're on and get the appropriate element
         const isMobilePage = window.location.pathname.includes('mobil.html') || window.location.pathname.includes('/mobil');
         const isTvPage = window.location.pathname.includes('tv.html') || window.location.pathname.includes('/tv');
+        const isFiberPage = window.location.pathname.includes('index.html') || window.location.pathname === '/' || window.location.pathname === '';
         
         let updateDateElement;
         if (isMobilePage) {
             updateDateElement = document.getElementById('mobil-update-date');
         } else if (isTvPage) {
             updateDateElement = document.getElementById('tv-update-date');
+        } else if (isFiberPage) {
+            updateDateElement = document.getElementById('fiber-update-date');
         }
         
         if (updateDateElement) {
