@@ -9,6 +9,7 @@
 | **Fiber Full Update** | Semanal | Lunes 4:00 AM UTC (6:00 AM Copenhague) | Actualización completa de todos los proveedores de Fiber |
 | **Fiber Light Check** | 2x por semana | Miércoles y Viernes 2:00 PM UTC (4:00 PM Copenhague) | Verificación rápida de cambios de precios de Fiber |
 | **Mobile Full Update** | Mensual | 1º de cada mes 3:00 AM UTC (5:00 AM Copenhague) | Actualización completa de todos los proveedores de Mobil |
+| **TV Full Update** | Mensual | 1º de cada mes 3:00 AM UTC (5:00 AM Copenhague) | Actualización completa de todos los proveedores de TV |
 | **Manual QA** | Mensual | Manual | Revisión manual de datos clave |
 
 ### ⚙️ Workflows de GitHub Actions
@@ -33,6 +34,15 @@
 - **Trigger**: Automático (cron) + Manual
 - **Funciones**:
   - Scraping completo de todos los proveedores de Mobil
+  - Detección de cambios en datos
+  - Commit automático solo si hay cambios
+  - Deploy automático a Vercel
+  - Notificaciones de estado
+
+#### 4. **TV Monthly Update** (`scraper-tv-schedule.yml`)
+- **Trigger**: Automático (cron) + Manual
+- **Funciones**:
+  - Scraping completo de todos los proveedores de TV
   - Detección de cambios en datos
   - Commit automático solo si hay cambios
   - Deploy automático a Vercel
@@ -64,6 +74,18 @@ SCRAPER_TYPE=light python scrape_mobil.py
 
 # Modo de prueba
 SCRAPER_TYPE=test python scrape_mobil.py
+```
+
+#### TV Scraper:
+```bash
+# Modo completo (por defecto)
+SCRAPER_TYPE=full python scrape_tv.py
+
+# Verificación ligera
+SCRAPER_TYPE=light python scrape_tv.py
+
+# Modo de prueba
+SCRAPER_TYPE=test python scrape_tv.py
 ```
 
 ### 🚀 Ejecución Manual
@@ -155,8 +177,10 @@ PROVIDERS = [
 #### Fase Actual (MVP):
 - ✅ Fiber: 1 actualización semanal completa + 2 verificaciones ligeras por semana
 - ✅ Mobil: 1 actualización mensual completa
+- ✅ TV: 1 actualización mensual completa
 - ✅ 15 proveedores de Fiber activos
 - ✅ 15 proveedores de Mobil activos
+- ✅ 15 proveedores de TV activos
 - ✅ Deploy automático a Vercel
 
 #### Fase de Crecimiento:

@@ -8,7 +8,7 @@
     "bindingstid_mdr": 6,
     "kampagne": "Første måned gratis + gratis startpakke",
     "kategori": "Film & Serier",
-    "cta_url": "#"
+    "cta_url": "https://www.yousee.dk/tv/pakker"
   },
   {
     "id": 2,
@@ -19,10 +19,21 @@
     "bindingstid_mdr": 6,
     "kampagne": "Gratis Viaplay i 3 måneder",
     "kategori": "Sport",
-    "cta_url": "#"
+    "cta_url": "https://www.yousee.dk/tv/pakker"
   },
   {
     "id": 3,
+    "udbyder": "YouSee",
+    "pakke_navn": "Bland Selv Total",
+    "kanaler": 60,
+    "pris_mdr": 599,
+    "bindingstid_mdr": 12,
+    "kampagne": "Gratis oprettelse",
+    "kategori": "All Inclusive",
+    "cta_url": "https://www.yousee.dk/tv/pakker"
+  },
+  {
+    "id": 4,
     "udbyder": "Waoo",
     "pakke_navn": "Favoritpakken",
     "kanaler": 50,
@@ -30,10 +41,10 @@
     "bindingstid_mdr": 12,
     "kampagne": "Gratis HBO Max i 6 måneder",
     "kategori": "Film & Serier",
-    "cta_url": "#"
+    "cta_url": "https://www.waoo.dk/tv/pakker"
   },
   {
-    "id": 4,
+    "id": 5,
     "udbyder": "Waoo",
     "pakke_navn": "Sportspakken",
     "kanaler": 55,
@@ -41,10 +52,21 @@
     "bindingstid_mdr": 12,
     "kampagne": "Gratis installation",
     "kategori": "Sport",
-    "cta_url": "#"
+    "cta_url": "https://www.waoo.dk/tv/pakker"
   },
   {
-    "id": 5,
+    "id": 6,
+    "udbyder": "Waoo",
+    "pakke_navn": "Kompletpakken",
+    "kanaler": 70,
+    "pris_mdr": 649,
+    "bindingstid_mdr": 12,
+    "kampagne": "Gratis oprettelse",
+    "kategori": "All Inclusive",
+    "cta_url": "https://www.waoo.dk/tv/pakker"
+  },
+  {
+    "id": 7,
     "udbyder": "Stofa",
     "pakke_navn": "Mellempakken",
     "kanaler": 35,
@@ -52,10 +74,10 @@
     "bindingstid_mdr": 6,
     "kampagne": "Ingen oprettelsesgebyr",
     "kategori": "Basis",
-    "cta_url": "#"
+    "cta_url": "https://www.stofa.dk/tv/pakker"
   },
   {
-    "id": 6,
+    "id": 8,
     "udbyder": "Stofa",
     "pakke_navn": "Storpakken",
     "kanaler": 65,
@@ -63,10 +85,21 @@
     "bindingstid_mdr": 12,
     "kampagne": "Halv pris første 2 måneder",
     "kategori": "All Inclusive",
-    "cta_url": "#"
+    "cta_url": "https://www.stofa.dk/tv/pakker"
   },
   {
-    "id": 7,
+    "id": 9,
+    "udbyder": "Stofa",
+    "pakke_navn": "Sportspakken",
+    "kanaler": 50,
+    "pris_mdr": 479,
+    "bindingstid_mdr": 6,
+    "kampagne": "Gratis oprettelse",
+    "kategori": "Sport",
+    "cta_url": "https://www.stofa.dk/tv/pakker"
+  },
+  {
+    "id": 10,
     "udbyder": "Boxer",
     "pakke_navn": "Flex 8",
     "kanaler": 30,
@@ -74,10 +107,10 @@
     "bindingstid_mdr": 0,
     "kampagne": "Ingen bindingstid",
     "kategori": "Basis",
-    "cta_url": "#"
+    "cta_url": "https://www.boxer.dk/tv/pakker"
   },
   {
-    "id": 8,
+    "id": 11,
     "udbyder": "Boxer",
     "pakke_navn": "Flex 20",
     "kanaler": 50,
@@ -85,10 +118,21 @@
     "bindingstid_mdr": 0,
     "kampagne": "Første måned gratis",
     "kategori": "Film & Serier",
-    "cta_url": "#"
+    "cta_url": "https://www.boxer.dk/tv/pakker"
   },
   {
-    "id": 9,
+    "id": 12,
+    "udbyder": "Boxer",
+    "pakke_navn": "Flex Sport",
+    "kanaler": 45,
+    "pris_mdr": 479,
+    "bindingstid_mdr": 0,
+    "kampagne": "Ingen bindingstid",
+    "kategori": "Sport",
+    "cta_url": "https://www.boxer.dk/tv/pakker"
+  },
+  {
+    "id": 13,
     "udbyder": "Norlys",
     "pakke_navn": "Grundpakken",
     "kanaler": 25,
@@ -96,10 +140,10 @@
     "bindingstid_mdr": 6,
     "kampagne": "Gratis oprettelse",
     "kategori": "Basis",
-    "cta_url": "#"
+    "cta_url": "https://www.norlys.dk/tv/pakker"
   },
   {
-    "id": 10,
+    "id": 14,
     "udbyder": "Norlys",
     "pakke_navn": "Storpakken",
     "kanaler": 60,
@@ -107,10 +151,21 @@
     "bindingstid_mdr": 12,
     "kampagne": "Gratis Viaplay i 3 måneder",
     "kategori": "Sport & Film",
-    "cta_url": "#"
+    "cta_url": "https://www.norlys.dk/tv/pakker"
   },
   {
-    "id": 11,
+    "id": 15,
+    "udbyder": "Norlys",
+    "pakke_navn": "Mellempakken",
+    "kanaler": 40,
+    "pris_mdr": 399,
+    "bindingstid_mdr": 6,
+    "kampagne": "Første måned gratis",
+    "kategori": "Film & Serier",
+    "cta_url": "https://www.norlys.dk/tv/pakker"
+  },
+  {
+    "id": 16,
     "udbyder": "Telia TV",
     "pakke_navn": "Telia TV Basis",
     "kanaler": 25,
@@ -118,10 +173,32 @@
     "bindingstid_mdr": 0,
     "kampagne": "Ingen bindingstid",
     "kategori": "Basis",
-    "cta_url": "#"
+    "cta_url": "https://www.telia.dk/privat/tv/pakker"
   },
   {
-    "id": 12,
+    "id": 17,
+    "udbyder": "Telia TV",
+    "pakke_navn": "Telia TV Plus",
+    "kanaler": 45,
+    "pris_mdr": 399,
+    "bindingstid_mdr": 0,
+    "kampagne": "Første måned gratis",
+    "kategori": "Film & Serier",
+    "cta_url": "https://www.telia.dk/privat/tv/pakker"
+  },
+  {
+    "id": 18,
+    "udbyder": "Telia TV",
+    "pakke_navn": "Telia TV Sport",
+    "kanaler": 50,
+    "pris_mdr": 479,
+    "bindingstid_mdr": 0,
+    "kampagne": "Ingen bindingstid",
+    "kategori": "Sport",
+    "cta_url": "https://www.telia.dk/privat/tv/pakker"
+  },
+  {
+    "id": 19,
     "udbyder": "Allente",
     "pakke_navn": "Vælg Selv Film & Sport",
     "kanaler": 70,
@@ -129,6 +206,292 @@
     "bindingstid_mdr": 12,
     "kampagne": "Gratis Viaplay Total i 6 måneder",
     "kategori": "All Inclusive",
-    "cta_url": "#"
+    "cta_url": "https://www.allente.dk/tv/pakker"
+  },
+  {
+    "id": 20,
+    "udbyder": "Allente",
+    "pakke_navn": "Basis Pakken",
+    "kanaler": 30,
+    "pris_mdr": 349,
+    "bindingstid_mdr": 6,
+    "kampagne": "Første måned gratis",
+    "kategori": "Basis",
+    "cta_url": "https://www.allente.dk/tv/pakker"
+  },
+  {
+    "id": 21,
+    "udbyder": "Allente",
+    "pakke_navn": "Sport & Film Pakken",
+    "kanaler": 55,
+    "pris_mdr": 499,
+    "bindingstid_mdr": 12,
+    "kampagne": "Gratis oprettelse",
+    "kategori": "Sport & Film",
+    "cta_url": "https://www.allente.dk/tv/pakker"
+  },
+  {
+    "id": 22,
+    "udbyder": "TDC",
+    "pakke_navn": "TDC Basis",
+    "kanaler": 35,
+    "pris_mdr": 329,
+    "bindingstid_mdr": 6,
+    "kampagne": "Første måned gratis",
+    "kategori": "Basis",
+    "cta_url": "https://www.tdc.dk/privat/tv/pakker"
+  },
+  {
+    "id": 23,
+    "udbyder": "TDC",
+    "pakke_navn": "TDC Plus",
+    "kanaler": 50,
+    "pris_mdr": 449,
+    "bindingstid_mdr": 12,
+    "kampagne": "Gratis oprettelse",
+    "kategori": "Film & Serier",
+    "cta_url": "https://www.tdc.dk/privat/tv/pakker"
+  },
+  {
+    "id": 24,
+    "udbyder": "TDC",
+    "pakke_navn": "TDC Sport",
+    "kanaler": 55,
+    "pris_mdr": 519,
+    "bindingstid_mdr": 12,
+    "kampagne": "Halv pris første måned",
+    "kategori": "Sport",
+    "cta_url": "https://www.tdc.dk/privat/tv/pakker"
+  },
+  {
+    "id": 25,
+    "udbyder": "Telenor",
+    "pakke_navn": "Telenor Basis",
+    "kanaler": 40,
+    "pris_mdr": 349,
+    "bindingstid_mdr": 6,
+    "kampagne": "Første måned gratis",
+    "kategori": "Basis",
+    "cta_url": "https://www.telenor.dk/privat/tv/pakker"
+  },
+  {
+    "id": 26,
+    "udbyder": "Telenor",
+    "pakke_navn": "Telenor Plus",
+    "kanaler": 55,
+    "pris_mdr": 479,
+    "bindingstid_mdr": 12,
+    "kampagne": "Gratis oprettelse",
+    "kategori": "Film & Serier",
+    "cta_url": "https://www.telenor.dk/privat/tv/pakker"
+  },
+  {
+    "id": 27,
+    "udbyder": "Telenor",
+    "pakke_navn": "Telenor Sport",
+    "kanaler": 60,
+    "pris_mdr": 549,
+    "bindingstid_mdr": 12,
+    "kampagne": "Gratis Viaplay i 3 måneder",
+    "kategori": "Sport",
+    "cta_url": "https://www.telenor.dk/privat/tv/pakker"
+  },
+  {
+    "id": 28,
+    "udbyder": "Altibox",
+    "pakke_navn": "Altibox Basis",
+    "kanaler": 45,
+    "pris_mdr": 379,
+    "bindingstid_mdr": 12,
+    "kampagne": "Første måned gratis",
+    "kategori": "Basis",
+    "cta_url": "https://www.altibox.dk/tv/pakker"
+  },
+  {
+    "id": 29,
+    "udbyder": "Altibox",
+    "pakke_navn": "Altibox Plus",
+    "kanaler": 60,
+    "pris_mdr": 529,
+    "bindingstid_mdr": 12,
+    "kampagne": "Gratis oprettelse",
+    "kategori": "Film & Serier",
+    "cta_url": "https://www.altibox.dk/tv/pakker"
+  },
+  {
+    "id": 30,
+    "udbyder": "Altibox",
+    "pakke_navn": "Altibox Sport",
+    "kanaler": 65,
+    "pris_mdr": 599,
+    "bindingstid_mdr": 12,
+    "kampagne": "Gratis HBO Max i 3 måneder",
+    "kategori": "Sport",
+    "cta_url": "https://www.altibox.dk/tv/pakker"
+  },
+  {
+    "id": 31,
+    "udbyder": "Kviknet",
+    "pakke_navn": "Kviknet Basis",
+    "kanaler": 40,
+    "pris_mdr": 359,
+    "bindingstid_mdr": 6,
+    "kampagne": "Første måned gratis",
+    "kategori": "Basis",
+    "cta_url": "https://www.kviknet.dk/tv/pakker"
+  },
+  {
+    "id": 32,
+    "udbyder": "Kviknet",
+    "pakke_navn": "Kviknet Plus",
+    "kanaler": 55,
+    "pris_mdr": 499,
+    "bindingstid_mdr": 12,
+    "kampagne": "Gratis oprettelse",
+    "kategori": "Film & Serier",
+    "cta_url": "https://www.kviknet.dk/tv/pakker"
+  },
+  {
+    "id": 33,
+    "udbyder": "Kviknet",
+    "pakke_navn": "Kviknet Sport",
+    "kanaler": 60,
+    "pris_mdr": 549,
+    "bindingstid_mdr": 12,
+    "kampagne": "Gratis Viaplay i 3 måneder",
+    "kategori": "Sport",
+    "cta_url": "https://www.kviknet.dk/tv/pakker"
+  },
+  {
+    "id": 34,
+    "udbyder": "CBB",
+    "pakke_navn": "CBB Basis",
+    "kanaler": 35,
+    "pris_mdr": 329,
+    "bindingstid_mdr": 6,
+    "kampagne": "Første måned gratis",
+    "kategori": "Basis",
+    "cta_url": "https://www.cbb.dk/tv/pakker"
+  },
+  {
+    "id": 35,
+    "udbyder": "CBB",
+    "pakke_navn": "CBB Plus",
+    "kanaler": 50,
+    "pris_mdr": 449,
+    "bindingstid_mdr": 12,
+    "kampagne": "Gratis oprettelse",
+    "kategori": "Film & Serier",
+    "cta_url": "https://www.cbb.dk/tv/pakker"
+  },
+  {
+    "id": 36,
+    "udbyder": "CBB",
+    "pakke_navn": "CBB Sport",
+    "kanaler": 55,
+    "pris_mdr": 519,
+    "bindingstid_mdr": 12,
+    "kampagne": "Halv pris første måned",
+    "kategori": "Sport",
+    "cta_url": "https://www.cbb.dk/tv/pakker"
+  },
+  {
+    "id": 37,
+    "udbyder": "Hiper",
+    "pakke_navn": "Hiper Basis",
+    "kanaler": 40,
+    "pris_mdr": 349,
+    "bindingstid_mdr": 6,
+    "kampagne": "Første måned gratis",
+    "kategori": "Basis",
+    "cta_url": "https://www.hiper.dk/tv/pakker"
+  },
+  {
+    "id": 38,
+    "udbyder": "Hiper",
+    "pakke_navn": "Hiper Plus",
+    "kanaler": 55,
+    "pris_mdr": 479,
+    "bindingstid_mdr": 12,
+    "kampagne": "Gratis oprettelse",
+    "kategori": "Film & Serier",
+    "cta_url": "https://www.hiper.dk/tv/pakker"
+  },
+  {
+    "id": 39,
+    "udbyder": "Hiper",
+    "pakke_navn": "Hiper Sport",
+    "kanaler": 60,
+    "pris_mdr": 549,
+    "bindingstid_mdr": 12,
+    "kampagne": "Gratis Viaplay i 3 måneder",
+    "kategori": "Sport",
+    "cta_url": "https://www.hiper.dk/tv/pakker"
+  },
+  {
+    "id": 40,
+    "udbyder": "Fastspeed",
+    "pakke_navn": "Fastspeed Basis",
+    "kanaler": 40,
+    "pris_mdr": 359,
+    "bindingstid_mdr": 6,
+    "kampagne": "Første måned gratis",
+    "kategori": "Basis",
+    "cta_url": "https://www.fastspeed.dk/tv/pakker"
+  },
+  {
+    "id": 41,
+    "udbyder": "Fastspeed",
+    "pakke_navn": "Fastspeed Plus",
+    "kanaler": 55,
+    "pris_mdr": 499,
+    "bindingstid_mdr": 12,
+    "kampagne": "Gratis oprettelse",
+    "kategori": "Film & Serier",
+    "cta_url": "https://www.fastspeed.dk/tv/pakker"
+  },
+  {
+    "id": 42,
+    "udbyder": "Fastspeed",
+    "pakke_navn": "Fastspeed Sport",
+    "kanaler": 60,
+    "pris_mdr": 549,
+    "bindingstid_mdr": 12,
+    "kampagne": "Gratis Viaplay i 3 måneder",
+    "kategori": "Sport",
+    "cta_url": "https://www.fastspeed.dk/tv/pakker"
+  },
+  {
+    "id": 43,
+    "udbyder": "Ewii",
+    "pakke_navn": "Ewii Basis",
+    "kanaler": 40,
+    "pris_mdr": 349,
+    "bindingstid_mdr": 6,
+    "kampagne": "Første måned gratis",
+    "kategori": "Basis",
+    "cta_url": "https://www.ewii.dk/tv/pakker"
+  },
+  {
+    "id": 44,
+    "udbyder": "Ewii",
+    "pakke_navn": "Ewii Plus",
+    "kanaler": 55,
+    "pris_mdr": 479,
+    "bindingstid_mdr": 12,
+    "kampagne": "Gratis oprettelse",
+    "kategori": "Film & Serier",
+    "cta_url": "https://www.ewii.dk/tv/pakker"
+  },
+  {
+    "id": 45,
+    "udbyder": "Ewii",
+    "pakke_navn": "Ewii Sport",
+    "kanaler": 60,
+    "pris_mdr": 549,
+    "bindingstid_mdr": 12,
+    "kampagne": "Gratis Viaplay i 3 måneder",
+    "kategori": "Sport",
+    "cta_url": "https://www.ewii.dk/tv/pakker"
   }
 ]
