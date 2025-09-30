@@ -116,8 +116,9 @@ class TelecomComparison {
                 dataFile = './data/tv.json';
             }
 
-            // Fetch data from JSON file
-            const response = await fetch(dataFile);
+            // Fetch data from JSON file with cache busting
+            const cacheBuster = new Date().getTime();
+            const response = await fetch(`${dataFile}?v=${cacheBuster}`);
             
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
