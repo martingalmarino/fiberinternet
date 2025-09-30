@@ -138,6 +138,9 @@ class TelecomComparison {
             
             this.filteredData = [...this.data];
 
+            // Update the data update date display
+            this.updateDataUpdateDate();
+
             // Render the table
             this.renderTable();
             this.updateSortButtons();
@@ -780,6 +783,32 @@ class TelecomComparison {
                 <p><i class="fas fa-clock"></i> Data opdateret: ${formattedDate}</p>
             </div>
         `;
+    }
+    
+    updateDataUpdateDate() {
+        // Determine which page we're on and get the appropriate element
+        const isMobilePage = window.location.pathname.includes('mobil.html') || window.location.pathname.includes('/mobil');
+        const isTvPage = window.location.pathname.includes('tv.html') || window.location.pathname.includes('/tv');
+        
+        let updateDateElement;
+        if (isMobilePage) {
+            updateDateElement = document.getElementById('mobil-update-date');
+        } else if (isTvPage) {
+            updateDateElement = document.getElementById('tv-update-date');
+        }
+        
+        if (updateDateElement) {
+            // Get the current date and format it
+            const now = new Date();
+            const options = { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric',
+                timeZone: 'Europe/Copenhagen'
+            };
+            const formattedDate = now.toLocaleDateString('da-DK', options);
+            updateDateElement.textContent = formattedDate;
+        }
     }
     
     setupMobileScrollEnhancements() {

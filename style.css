@@ -3011,3 +3011,55 @@ body {
         padding: 3px 6px;
     }
 }
+
+/* Data Update Info Styles */
+.data-update-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0;
+    padding: 12px 20px;
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    color: #64748b;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.update-label {
+    font-weight: 500;
+    margin-right: 8px;
+    color: #475569;
+}
+
+.update-date {
+    font-weight: 600;
+    color: #1e40af;
+    background: rgba(30, 64, 175, 0.1);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+}
+
+/* Mobile responsive for data update info */
+@media (max-width: 768px) {
+    .data-update-info {
+        margin: 15px 0;
+        padding: 10px 15px;
+        font-size: 0.8rem;
+        flex-direction: column;
+        text-align: center;
+        gap: 4px;
+    }
+    
+    .update-label {
+        margin-right: 0;
+        margin-bottom: 2px;
+    }
+    
+    .update-date {
+        font-size: 0.8rem;
+        padding: 3px 6px;
+    }
+}
