@@ -8,7 +8,7 @@
     "familierabat": "Ja, -50 kr. pr. ekstra linje",
     "bindingstid_mdr": 6,
     "kampagne": "Første måned gratis",
-    "cta_url": "#"
+    "cta_url": "https://www.telia.dk/privat/mobil/abonnementer"
   },
   {
     "id": 2,
@@ -19,10 +19,21 @@
     "familierabat": "Ja, -100 kr. pr. familiepakke",
     "bindingstid_mdr": 12,
     "kampagne": "Gratis oprettelse",
-    "cta_url": "#"
+    "cta_url": "https://www.telia.dk/privat/mobil/abonnementer"
   },
   {
     "id": 3,
+    "udbyder": "Telia",
+    "data_GB": 100,
+    "pris_mdr": 249,
+    "roaming_EU": true,
+    "familierabat": "Ja, -75 kr. pr. familiepakke",
+    "bindingstid_mdr": 6,
+    "kampagne": "Halv pris første måned",
+    "cta_url": "https://www.telia.dk/privat/mobil/abonnementer"
+  },
+  {
+    "id": 4,
     "udbyder": "Telenor",
     "data_GB": 20,
     "pris_mdr": 149,
@@ -30,10 +41,10 @@
     "familierabat": "Ja, -30 kr. pr. ekstra linje",
     "bindingstid_mdr": 6,
     "kampagne": "Halv pris de første 2 måneder",
-    "cta_url": "#"
+    "cta_url": "https://www.telenor.dk/privat/mobil/abonnementer"
   },
   {
-    "id": 4,
+    "id": 5,
     "udbyder": "Telenor",
     "data_GB": 100,
     "pris_mdr": 249,
@@ -41,10 +52,43 @@
     "familierabat": "Ja, -100 kr. pr. familiepakke",
     "bindingstid_mdr": 12,
     "kampagne": "Gratis SIM-kort",
-    "cta_url": "#"
+    "cta_url": "https://www.telenor.dk/privat/mobil/abonnementer"
   },
   {
-    "id": 5,
+    "id": 6,
+    "udbyder": "Telenor",
+    "data_GB": 60,
+    "pris_mdr": 199,
+    "roaming_EU": true,
+    "familierabat": "Ja, -50 kr. pr. ekstra linje",
+    "bindingstid_mdr": 6,
+    "kampagne": "Første måned gratis",
+    "cta_url": "https://www.telenor.dk/privat/mobil/abonnementer"
+  },
+  {
+    "id": 7,
+    "udbyder": "YouSee",
+    "data_GB": 30,
+    "pris_mdr": 179,
+    "roaming_EU": true,
+    "familierabat": "Ja, -40 kr. pr. ekstra linje",
+    "bindingstid_mdr": 6,
+    "kampagne": "Første måned gratis",
+    "cta_url": "https://www.yousee.dk/mobil/abonnementer"
+  },
+  {
+    "id": 8,
+    "udbyder": "YouSee",
+    "data_GB": 80,
+    "pris_mdr": 229,
+    "roaming_EU": true,
+    "familierabat": "Ja, -60 kr. pr. ekstra linje",
+    "bindingstid_mdr": 12,
+    "kampagne": "Gratis oprettelse",
+    "cta_url": "https://www.yousee.dk/mobil/abonnementer"
+  },
+  {
+    "id": 9,
     "udbyder": "CBB",
     "data_GB": 30,
     "pris_mdr": 129,
@@ -52,10 +96,10 @@
     "familierabat": "Nej",
     "bindingstid_mdr": 0,
     "kampagne": "Gratis oprettelse",
-    "cta_url": "#"
+    "cta_url": "https://www.cbb.dk/mobil/abonnementer"
   },
   {
-    "id": 6,
+    "id": 10,
     "udbyder": "CBB",
     "data_GB": 100,
     "pris_mdr": 149,
@@ -63,10 +107,21 @@
     "familierabat": "Nej",
     "bindingstid_mdr": 0,
     "kampagne": "Ingen bindingstid",
-    "cta_url": "#"
+    "cta_url": "https://www.cbb.dk/mobil/abonnementer"
   },
   {
-    "id": 7,
+    "id": 11,
+    "udbyder": "CBB",
+    "data_GB": 50,
+    "pris_mdr": 139,
+    "roaming_EU": true,
+    "familierabat": "Nej",
+    "bindingstid_mdr": 0,
+    "kampagne": "Ingen bindingstid",
+    "cta_url": "https://www.cbb.dk/mobil/abonnementer"
+  },
+  {
+    "id": 12,
     "udbyder": "Oister",
     "data_GB": 20,
     "pris_mdr": 89,
@@ -74,10 +129,10 @@
     "familierabat": "Nej",
     "bindingstid_mdr": 0,
     "kampagne": "Billigste basisplan",
-    "cta_url": "#"
+    "cta_url": "https://www.oister.dk/mobil/abonnementer"
   },
   {
-    "id": 8,
+    "id": 13,
     "udbyder": "Oister",
     "data_GB": 200,
     "pris_mdr": 179,
@@ -85,10 +140,21 @@
     "familierabat": "Nej",
     "bindingstid_mdr": 0,
     "kampagne": "Dobbel data første 3 måneder",
-    "cta_url": "#"
+    "cta_url": "https://www.oister.dk/mobil/abonnementer"
   },
   {
-    "id": 9,
+    "id": 14,
+    "udbyder": "Oister",
+    "data_GB": 100,
+    "pris_mdr": 139,
+    "roaming_EU": true,
+    "familierabat": "Nej",
+    "bindingstid_mdr": 0,
+    "kampagne": "Ingen bindingstid",
+    "cta_url": "https://www.oister.dk/mobil/abonnementer"
+  },
+  {
+    "id": 15,
     "udbyder": "Lebara",
     "data_GB": 10,
     "pris_mdr": 79,
@@ -96,10 +162,10 @@
     "familierabat": "Nej",
     "bindingstid_mdr": 0,
     "kampagne": "Gratis opkald til udvalgte lande",
-    "cta_url": "#"
+    "cta_url": "https://www.lebara.dk/dk/mobile-plans"
   },
   {
-    "id": 10,
+    "id": 16,
     "udbyder": "Lebara",
     "data_GB": 50,
     "pris_mdr": 129,
@@ -107,10 +173,21 @@
     "familierabat": "Nej",
     "bindingstid_mdr": 0,
     "kampagne": "Første måned gratis",
-    "cta_url": "#"
+    "cta_url": "https://www.lebara.dk/dk/mobile-plans"
   },
   {
-    "id": 11,
+    "id": 17,
+    "udbyder": "Lebara",
+    "data_GB": 30,
+    "pris_mdr": 99,
+    "roaming_EU": true,
+    "familierabat": "Nej",
+    "bindingstid_mdr": 0,
+    "kampagne": "Gratis opkald til udlandet",
+    "cta_url": "https://www.lebara.dk/dk/mobile-plans"
+  },
+  {
+    "id": 18,
     "udbyder": "Greentel",
     "data_GB": 40,
     "pris_mdr": 109,
@@ -118,10 +195,21 @@
     "familierabat": "Ja, 2. simkort til halv pris",
     "bindingstid_mdr": 0,
     "kampagne": "Klimaneutral udbyder",
-    "cta_url": "#"
+    "cta_url": "https://www.greentel.dk/mobil/abonnementer"
   },
   {
-    "id": 12,
+    "id": 19,
+    "udbyder": "Greentel",
+    "data_GB": 80,
+    "pris_mdr": 149,
+    "roaming_EU": true,
+    "familierabat": "Ja, 2. simkort til halv pris",
+    "bindingstid_mdr": 0,
+    "kampagne": "Grøn energi - Klimaneutral",
+    "cta_url": "https://www.greentel.dk/mobil/abonnementer"
+  },
+  {
+    "id": 20,
     "udbyder": "Hallo Mobil",
     "data_GB": 20,
     "pris_mdr": 99,
@@ -129,6 +217,171 @@
     "familierabat": "Nej",
     "bindingstid_mdr": 0,
     "kampagne": "Gratis SIM-kort",
-    "cta_url": "#"
+    "cta_url": "https://www.hallomobil.dk/mobil/abonnementer"
+  },
+  {
+    "id": 21,
+    "udbyder": "Hallo Mobil",
+    "data_GB": 50,
+    "pris_mdr": 139,
+    "roaming_EU": true,
+    "familierabat": "Nej",
+    "bindingstid_mdr": 0,
+    "kampagne": "Ingen bindingstid",
+    "cta_url": "https://www.hallomobil.dk/mobil/abonnementer"
+  },
+  {
+    "id": 22,
+    "udbyder": "Stofa",
+    "data_GB": 25,
+    "pris_mdr": 159,
+    "roaming_EU": true,
+    "familierabat": "Ja, -35 kr. pr. ekstra linje",
+    "bindingstid_mdr": 6,
+    "kampagne": "Første måned gratis",
+    "cta_url": "https://www.stofa.dk/mobil/abonnementer"
+  },
+  {
+    "id": 23,
+    "udbyder": "Stofa",
+    "data_GB": 60,
+    "pris_mdr": 199,
+    "roaming_EU": true,
+    "familierabat": "Ja, -50 kr. pr. ekstra linje",
+    "bindingstid_mdr": 12,
+    "kampagne": "Gratis oprettelse",
+    "cta_url": "https://www.stofa.dk/mobil/abonnementer"
+  },
+  {
+    "id": 24,
+    "udbyder": "Waoo",
+    "data_GB": 40,
+    "pris_mdr": 169,
+    "roaming_EU": true,
+    "familierabat": "Ja, -45 kr. pr. ekstra linje",
+    "bindingstid_mdr": 6,
+    "kampagne": "Første måned gratis",
+    "cta_url": "https://www.waoo.dk/mobil/abonnementer"
+  },
+  {
+    "id": 25,
+    "udbyder": "Waoo",
+    "data_GB": 100,
+    "pris_mdr": 229,
+    "roaming_EU": true,
+    "familierabat": "Ja, -70 kr. pr. ekstra linje",
+    "bindingstid_mdr": 12,
+    "kampagne": "Gratis oprettelse",
+    "cta_url": "https://www.waoo.dk/mobil/abonnementer"
+  },
+  {
+    "id": 26,
+    "udbyder": "Norlys",
+    "data_GB": 35,
+    "pris_mdr": 149,
+    "roaming_EU": true,
+    "familierabat": "Ja, -40 kr. pr. ekstra linje",
+    "bindingstid_mdr": 6,
+    "kampagne": "Første måned gratis",
+    "cta_url": "https://www.norlys.dk/mobil/abonnementer"
+  },
+  {
+    "id": 27,
+    "udbyder": "Norlys",
+    "data_GB": 75,
+    "pris_mdr": 199,
+    "roaming_EU": true,
+    "familierabat": "Ja, -60 kr. pr. ekstra linje",
+    "bindingstid_mdr": 12,
+    "kampagne": "Gratis oprettelse",
+    "cta_url": "https://www.norlys.dk/mobil/abonnementer"
+  },
+  {
+    "id": 28,
+    "udbyder": "Boxer",
+    "data_GB": 25,
+    "pris_mdr": 99,
+    "roaming_EU": true,
+    "familierabat": "Nej",
+    "bindingstid_mdr": 0,
+    "kampagne": "Ingen bindingstid",
+    "cta_url": "https://www.boxer.dk/mobil/abonnementer"
+  },
+  {
+    "id": 29,
+    "udbyder": "Boxer",
+    "data_GB": 60,
+    "pris_mdr": 149,
+    "roaming_EU": true,
+    "familierabat": "Nej",
+    "bindingstid_mdr": 0,
+    "kampagne": "Første måned gratis",
+    "cta_url": "https://www.boxer.dk/mobil/abonnementer"
+  },
+  {
+    "id": 30,
+    "udbyder": "Callme",
+    "data_GB": 30,
+    "pris_mdr": 119,
+    "roaming_EU": true,
+    "familierabat": "Nej",
+    "bindingstid_mdr": 0,
+    "kampagne": "Første måned gratis",
+    "cta_url": "https://www.callme.dk/mobil/abonnementer"
+  },
+  {
+    "id": 31,
+    "udbyder": "Callme",
+    "data_GB": 70,
+    "pris_mdr": 159,
+    "roaming_EU": true,
+    "familierabat": "Nej",
+    "bindingstid_mdr": 0,
+    "kampagne": "Ingen bindingstid",
+    "cta_url": "https://www.callme.dk/mobil/abonnementer"
+  },
+  {
+    "id": 32,
+    "udbyder": "Lycamobile",
+    "data_GB": 25,
+    "pris_mdr": 99,
+    "roaming_EU": true,
+    "familierabat": "Nej",
+    "bindingstid_mdr": 0,
+    "kampagne": "Gratis opkald til udlandet",
+    "cta_url": "https://www.lycamobile.dk/dk/mobile-plans"
+  },
+  {
+    "id": 33,
+    "udbyder": "Lycamobile",
+    "data_GB": 50,
+    "pris_mdr": 139,
+    "roaming_EU": true,
+    "familierabat": "Nej",
+    "bindingstid_mdr": 0,
+    "kampagne": "International opkald inkluderet",
+    "cta_url": "https://www.lycamobile.dk/dk/mobile-plans"
+  },
+  {
+    "id": 34,
+    "udbyder": "Gomore",
+    "data_GB": 35,
+    "pris_mdr": 139,
+    "roaming_EU": true,
+    "familierabat": "Nej",
+    "bindingstid_mdr": 0,
+    "kampagne": "Gratis SIM-kort",
+    "cta_url": "https://www.gomore.dk/mobil/abonnementer"
+  },
+  {
+    "id": 35,
+    "udbyder": "Gomore",
+    "data_GB": 80,
+    "pris_mdr": 179,
+    "roaming_EU": true,
+    "familierabat": "Nej",
+    "bindingstid_mdr": 0,
+    "kampagne": "Ingen bindingstid",
+    "cta_url": "https://www.gomore.dk/mobil/abonnementer"
   }
 ]

@@ -6,8 +6,9 @@
 
 | Tipo | Frecuencia | Horario | Descripción |
 |------|------------|---------|-------------|
-| **Full Update** | Semanal | Lunes 4:00 AM UTC (6:00 AM Copenhague) | Actualización completa de todos los proveedores |
-| **Light Check** | 2x por semana | Miércoles y Viernes 2:00 PM UTC (4:00 PM Copenhague) | Verificación rápida de cambios de precios |
+| **Fiber Full Update** | Semanal | Lunes 4:00 AM UTC (6:00 AM Copenhague) | Actualización completa de todos los proveedores de Fiber |
+| **Fiber Light Check** | 2x por semana | Miércoles y Viernes 2:00 PM UTC (4:00 PM Copenhague) | Verificación rápida de cambios de precios de Fiber |
+| **Mobile Full Update** | Mensual | 1º de cada mes 3:00 AM UTC (5:00 AM Copenhague) | Actualización completa de todos los proveedores de Mobil |
 | **Manual QA** | Mensual | Manual | Revisión manual de datos clave |
 
 ### ⚙️ Workflows de GitHub Actions
@@ -24,14 +25,24 @@
 #### 2. **Light Check** (`scraper-light-check.yml`)
 - **Trigger**: Automático (cron) + Manual
 - **Funciones**:
-  - Verificación rápida de proveedores clave
+  - Verificación rápida de proveedores clave de Fiber
   - Detección de cambios de promociones
   - Reporte de estado sin commit automático
+
+#### 3. **Mobile Monthly Update** (`scraper-mobil-schedule.yml`)
+- **Trigger**: Automático (cron) + Manual
+- **Funciones**:
+  - Scraping completo de todos los proveedores de Mobil
+  - Detección de cambios en datos
+  - Commit automático solo si hay cambios
+  - Deploy automático a Vercel
+  - Notificaciones de estado
 
 ### 🎛️ Modos de Scraping
 
 El scraper soporta 3 modos diferentes:
 
+#### Fiber Scraper:
 ```bash
 # Modo completo (por defecto)
 SCRAPER_TYPE=full python scrape_fiber.py
@@ -41,6 +52,18 @@ SCRAPER_TYPE=light python scrape_fiber.py
 
 # Modo de prueba
 SCRAPER_TYPE=test python scrape_fiber.py
+```
+
+#### Mobile Scraper:
+```bash
+# Modo completo (por defecto)
+SCRAPER_TYPE=full python scrape_mobil.py
+
+# Verificación ligera
+SCRAPER_TYPE=light python scrape_mobil.py
+
+# Modo de prueba
+SCRAPER_TYPE=test python scrape_mobil.py
 ```
 
 ### 🚀 Ejecución Manual
@@ -130,9 +153,10 @@ PROVIDERS = [
 ### 🔄 Evolución del Sistema
 
 #### Fase Actual (MVP):
-- ✅ 1 actualización semanal completa
-- ✅ 2 verificaciones ligeras por semana
-- ✅ 15 proveedores activos
+- ✅ Fiber: 1 actualización semanal completa + 2 verificaciones ligeras por semana
+- ✅ Mobil: 1 actualización mensual completa
+- ✅ 15 proveedores de Fiber activos
+- ✅ 15 proveedores de Mobil activos
 - ✅ Deploy automático a Vercel
 
 #### Fase de Crecimiento:
